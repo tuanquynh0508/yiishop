@@ -95,3 +95,113 @@ the installed application. You only need to do these once for all.
 
 To login into the application, you need to first sign up, with any of your email address, username and password.
 Then, you can login into the application with same email address and password at any time.
+
+### VIRTUAL HOST CONFIG
+```
+<VirtualHost *:80>
+    #SSLEngine on
+    #SSLCertificateFile "conf/ssl.crt/server.crt"
+    #SSLCertificateKeyFile "conf/ssl.key/server.key"
+    #DirectoryIndex  app.php
+
+    ServerAdmin tuanquynh0508@gmail.com
+    ServerName yiishop.local
+    ServerAlias *.yiishop.local
+
+    DocumentRoot "/home/nntuan/Gits/yiishop/frontend/web"
+    SetEnv yiiEnv dev_tuan
+    <Directory "/home/nntuan/Gits/yiishop/frontend/web">
+        Options Indexes FollowSymLinks
+        AllowOverride all
+        Require all granted
+    </Directory>
+
+    #BACKEND
+    Alias /backend "/home/nntuan/Gits/yiishop/backend/web"
+
+    <Directory "/home/nntuan/Gits/yiishop/backend/web">
+        Options Indexes FollowSymLinks
+        AllowOverride all
+        Require all granted
+    </Directory>
+
+    #ProxyPass /backend http://api-dev.securitoo.com/api/V8
+        #ProxyPassReverse /backend http://api-dev.securitoo.com/api/V8
+
+    #For Ubuntu apache config
+    ErrorLog ${APACHE_LOG_DIR}/error-yiishop.log
+    CustomLog ${APACHE_LOG_DIR}/access-yiishop.log combined
+
+    #For Xampp windows config
+    #ErrorLog "logs/api-news-error.log"
+    #CustomLog "logs/api-news-access.log" combined
+</VirtualHost>
+```
+
+### HTACCESS FOR BASIC
+```
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+
+# if request dosn't start with web add it
+RewriteCond %{REQUEST_URI} !^/(web)
+RewriteRule (.*) /web/$1
+
+# if file or directory dosn't exists go to /web/index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /web/index.php
+```
+
+### HTACCESS FOR ADVANCED
+```
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+
+
+
+# if request begins with /admin remove admin and ad /backend/web/
+RewriteCond %{REQUEST_URI} ^/admin
+RewriteRule ^admin\/?(.*) /backend/web/$1
+
+# other requests add /frontend/web/$1
+RewriteCond %{REQUEST_URI} !^/(frontend/web|backend/web|admin)
+RewriteRule (.*) /frontend/web/$1
+
+# if frontend request
+RewriteCond %{REQUEST_URI} ^/frontend/web
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /frontend/web/index.php
+
+# if backend request
+RewriteCond %{REQUEST_URI} ^/backend/web
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /backend/web/index.php
+```
+
+### HTACCESS MINIMUM FOR FRONTEND
+```
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php
+```
+
+### HTACCESS MINIMUM FOR BACKEND
+```
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+RewriteBase /backend/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php
+```
