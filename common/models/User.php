@@ -14,11 +14,14 @@ use yii\web\IdentityInterface;
  * @property string $username
  * @property string $password_hash
  * @property string $password_reset_token
+ * @property string $first_name
+ * @property string $last_name
  * @property string $email
  * @property string $auth_key
  * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
+ * @property datetime $last_login
+ * @property datetime $created_at
+ * @property datetime $updated_at
  * @property string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -52,6 +55,27 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'username' => 'Username',
+            'auth_key' => 'Auth Key',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'first_name' => 'First name',
+            'last_name' => 'Last name',
+            'email' => 'Email',
+            'status' => 'Status',
+            'last_login' => 'Last Login',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 

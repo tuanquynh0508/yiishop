@@ -1,10 +1,19 @@
 <?php
 
 $config = [
+    'language' => 'vi-VN',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '',
+            'enableCsrfValidation' => true,
+        ],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource'
+                ],
+            ],
         ],
     ],
 ];
