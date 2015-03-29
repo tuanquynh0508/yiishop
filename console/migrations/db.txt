@@ -1,0 +1,246 @@
+// tbl_category
+$this->createTable('{{%category}}', [
+    'id' => Schema::TYPE_PK,
+    'parent_id' => Schema::TYPE_INTEGER . "(11) NULL",
+    'title' => Schema::TYPE_STRING . "(255) NOT NULL",
+    'description' => Schema::TYPE_TEXT . " NULL",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+], $this->tableOptions);
+
+// tbl_category_product
+$this->createTable('{{%category_product}}', [
+    'category_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+    'product_id' => Schema::TYPE_BIGINT . "(20) NOT NULL",
+    'PRIMARY KEY (category_id, product_id)',
+], $this->tableOptions);
+
+// tbl_customer
+$this->createTable('{{%customer}}', [
+    'id' => Schema::TYPE_PK,
+    'first_name' => Schema::TYPE_STRING . "(50) NOT NULL",
+    'last_name' => Schema::TYPE_STRING . "(50) NOT NULL",
+    'sex' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+    'email' => Schema::TYPE_STRING . "(255) NOT NULL",
+    'tel' => Schema::TYPE_STRING . "(30) NULL",
+    'district_id' => Schema::TYPE_INTEGER . "(11) NULL",
+    'address' => Schema::TYPE_TEXT . " NULL",
+    'customer_pwd' => Schema::TYPE_STRING . "(255) NULL",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+], $this->tableOptions);
+
+// tbl_firm
+$this->createTable('{{%firm}}', [
+    'id' => Schema::TYPE_PK,
+    'title' => Schema::TYPE_STRING . "(255) NOT NULL",
+    'logo' => Schema::TYPE_STRING . "(255) NULL",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+], $this->tableOptions);
+
+// tbl_migration
+$this->createTable('{{%migration}}', [
+    'version' => Schema::TYPE_STRING . "(180) NOT NULL",
+    'apply_time' => Schema::TYPE_INTEGER . "(11) NULL",
+    'PRIMARY KEY (version)',
+], $this->tableOptions);
+
+// tbl_news
+$this->createTable('{{%news}}', [
+    'id' => Schema::TYPE_PK,
+    'slug' => Schema::TYPE_STRING . "(255) NOT NULL",
+    'title' => Schema::TYPE_STRING . "(255) NOT NULL",
+    'content' => Schema::TYPE_TEXT . " NULL",
+    'views' => Schema::TYPE_INTEGER . "(11) NULL",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+], $this->tableOptions);
+
+// tbl_option
+$this->createTable('{{%option}}', [
+    'id' => Schema::TYPE_PK,
+    'option_group_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+    'title' => Schema::TYPE_STRING . "(255) NULL",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+], $this->tableOptions);
+
+// tbl_option_group
+$this->createTable('{{%option_group}}', [
+    'id' => Schema::TYPE_PK,
+    'title' => Schema::TYPE_STRING . "(255) NULL",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+], $this->tableOptions);
+
+// tbl_order
+$this->createTable('{{%order}}', [
+    'id' => Schema::TYPE_BIGPK,
+    'customer_id' => Schema::TYPE_INTEGER . "(11) NULL",
+    'fullname' => Schema::TYPE_STRING . "(255) NULL",
+    'email' => Schema::TYPE_STRING . "(255) NULL",
+    'tel' => Schema::TYPE_STRING . "(30) NULL",
+    'address' => Schema::TYPE_TEXT . " NULL",
+    'order_code' => Schema::TYPE_STRING . "(50) NOT NULL",
+    'note' => Schema::TYPE_TEXT . " NULL",
+    'payment_method' => Schema::TYPE_STRING . "(10) NOT NULL DEFAULT 'money' COMMENT 'money|bank'",
+    'shipment_method' => Schema::TYPE_STRING . "(10) NOT NULL DEFAULT 'self' COMMENT 'self|city|outskirt'",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+], $this->tableOptions);
+
+// tbl_page
+$this->createTable('{{%page}}', [
+    'id' => Schema::TYPE_PK,
+    'slug' => Schema::TYPE_STRING . "(255) NOT NULL",
+    'title' => Schema::TYPE_STRING . "(255) NULL",
+    'content' => Schema::TYPE_TEXT . " NULL",
+    'views' => Schema::TYPE_INTEGER . "(11) NULL",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+], $this->tableOptions);
+
+// tbl_product
+$this->createTable('{{%product}}', [
+    'id' => Schema::TYPE_BIGPK,
+    'firm_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+    'upc' => Schema::TYPE_STRING . "(255) NOT NULL",
+    'title' => Schema::TYPE_STRING . "(255) NOT NULL",
+    'description' => Schema::TYPE_TEXT . " NULL",
+    'wholesale_prices' => Schema::TYPE_FLOAT . " NULL",
+    'retail_price' => Schema::TYPE_FLOAT . " NULL",
+    'cost' => Schema::TYPE_FLOAT . " NULL DEFAULT '0'",
+    'made' => Schema::TYPE_STRING . "(2) NULL DEFAULT 'vn'",
+    'quantity' => Schema::TYPE_INTEGER . "(11) NULL DEFAULT '0'",
+    'out_of_stock' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+    'is_new' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+    'is_special' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+    'views' => Schema::TYPE_INTEGER . "(11) NULL",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+], $this->tableOptions);
+
+// tbl_product_img
+$this->createTable('{{%product_img}}', [
+    'id' => Schema::TYPE_BIGPK,
+    'product_id' => Schema::TYPE_BIGINT . "(20) NOT NULL",
+    'file' => Schema::TYPE_STRING . "(255) NULL",
+    'width' => Schema::TYPE_FLOAT . " NULL",
+    'height' => Schema::TYPE_FLOAT . " NULL",
+    'size' => Schema::TYPE_FLOAT . " NULL",
+    'ext' => Schema::TYPE_STRING . "(5) NULL",
+    'is_default' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+], $this->tableOptions);
+
+// tbl_product_option
+$this->createTable('{{%product_option}}', [
+    'product_id' => Schema::TYPE_BIGINT . "(20) NOT NULL",
+    'option_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+    'PRIMARY KEY (product_id, option_id)',
+], $this->tableOptions);
+
+// tbl_product_order
+$this->createTable('{{%product_order}}', [
+    'order_id' => Schema::TYPE_BIGINT . "(20) NOT NULL",
+    'product_id' => Schema::TYPE_BIGINT . "(20) NOT NULL",
+    'cost' => Schema::TYPE_FLOAT . " NOT NULL",
+    'quantity' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+    'upc' => Schema::TYPE_STRING . "(255) NOT NULL",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'PRIMARY KEY (order_id, product_id)',
+], $this->tableOptions);
+
+// tbl_product_review
+$this->createTable('{{%product_review}}', [
+    'id' => Schema::TYPE_BIGPK,
+    'product_id' => Schema::TYPE_BIGINT . "(20) NOT NULL",
+    'fullname' => Schema::TYPE_STRING . "(255) NULL",
+    'email' => Schema::TYPE_STRING . "(255) NULL",
+    'content' => Schema::TYPE_TEXT . " NULL",
+    'rate' => Schema::TYPE_SMALLINT . "(6) NULL",
+    'ip' => Schema::TYPE_STRING . "(50) NULL",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+], $this->tableOptions);
+
+// tbl_product_sale
+$this->createTable('{{%product_sale}}', [
+    'sale_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+    'product_id' => Schema::TYPE_BIGINT . "(20) NOT NULL",
+    'PRIMARY KEY (sale_id, product_id)',
+], $this->tableOptions);
+
+// tbl_sale
+$this->createTable('{{%sale}}', [
+    'id' => Schema::TYPE_PK,
+    'title' => Schema::TYPE_STRING . "(255) NOT NULL",
+    'sale' => Schema::TYPE_FLOAT . " NOT NULL",
+    'start_date' => Schema::TYPE_DATETIME . " NULL",
+    'end_date' => Schema::TYPE_DATETIME . " NULL",
+    'created_at' => Schema::TYPE_DATETIME . " NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NULL DEFAULT '0'",
+], $this->tableOptions);
+
+// tbl_user
+$this->createTable('{{%user}}', [
+    'id' => Schema::TYPE_PK,
+    'username' => Schema::TYPE_STRING . "(255) NOT NULL",
+    'auth_key' => Schema::TYPE_STRING . "(32) NOT NULL",
+    'password_hash' => Schema::TYPE_STRING . "(255) NOT NULL",
+    'password_reset_token' => Schema::TYPE_STRING . "(255) NULL",
+    'first_name' => Schema::TYPE_STRING . "(50) NOT NULL",
+    'last_name' => Schema::TYPE_STRING . "(50) NOT NULL",
+    'email' => Schema::TYPE_STRING . "(255) NOT NULL",
+    'status' => Schema::TYPE_SMALLINT . "(6) NOT NULL DEFAULT '10'",
+    'last_login' => Schema::TYPE_DATETIME . " NULL",
+    'created_at' => Schema::TYPE_DATETIME . " NOT NULL",
+    'updated_at' => Schema::TYPE_DATETIME . " NULL",
+    'del_flg' => Schema::TYPE_SMALLINT . "(1) NOT NULL DEFAULT '0'",
+], $this->tableOptions);
+
+// fk: tbl_category_product
+$this->addForeignKey('fk_tbl_category_product_category_id', '{{%category_product}}', 'category_id', '{{%category}}', 'id');
+$this->addForeignKey('fk_tbl_category_product_product_id', '{{%category_product}}', 'product_id', '{{%product}}', 'id');
+
+// fk: tbl_option
+$this->addForeignKey('fk_tbl_option_option_group_id', '{{%option}}', 'option_group_id', '{{%option_group}}', 'id');
+
+// fk: tbl_product
+$this->addForeignKey('fk_tbl_product_firm_id', '{{%product}}', 'firm_id', '{{%firm}}', 'id');
+
+// fk: tbl_product_img
+$this->addForeignKey('fk_tbl_product_img_product_id', '{{%product_img}}', 'product_id', '{{%product}}', 'id');
+
+// fk: tbl_product_option
+$this->addForeignKey('fk_tbl_product_option_product_id', '{{%product_option}}', 'product_id', '{{%product}}', 'id');
+$this->addForeignKey('fk_tbl_product_option_option_id', '{{%product_option}}', 'option_id', '{{%option}}', 'id');
+
+// fk: tbl_product_order
+$this->addForeignKey('fk_tbl_product_order_order_id', '{{%product_order}}', 'order_id', '{{%order}}', 'id');
+$this->addForeignKey('fk_tbl_product_order_product_id', '{{%product_order}}', 'product_id', '{{%product}}', 'id');
+
+// fk: tbl_product_review
+$this->addForeignKey('fk_tbl_product_review_product_id', '{{%product_review}}', 'product_id', '{{%product}}', 'id');
+
+// fk: tbl_product_sale
+$this->addForeignKey('fk_tbl_product_sale_sale_id', '{{%product_sale}}', 'sale_id', '{{%sale}}', 'id');
+$this->addForeignKey('fk_tbl_product_sale_product_id', '{{%product_sale}}', 'product_id', '{{%product}}', 'id');

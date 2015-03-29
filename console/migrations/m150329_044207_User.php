@@ -56,6 +56,8 @@ class m150329_044207_User extends Migration
 
     public function down()
     {
+        $this->dropIndex('username_idx', '{{%user}}');
+        $this->dropIndex('email_idx', '{{%user}}');
         $this->dropTable('{{%user}}');
     }
 

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cea7d8284021060550e1fd14b9fa178d",
+    "hash": "dce4238dcffb82d1ba8077f044b19a1c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -677,6 +677,51 @@
                 "fixtures"
             ],
             "time": "2014-06-04 14:43:02"
+        },
+        {
+            "name": "jamband/yii2-schemadump",
+            "version": "v0.9.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jamband/yii2-schemadump.git",
+                "reference": "ee38293d002dd094c9dc61dde8ad1e618200ac6b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jamband/yii2-schemadump/zipball/ee38293d002dd094c9dc61dde8ad1e618200ac6b",
+                "reference": "ee38293d002dd094c9dc61dde8ad1e618200ac6b",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "jamband\\schemadump\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tomoki Morita",
+                    "email": "tmsongbooks215@gmail.com",
+                    "homepage": "http://jamband.github.io/"
+                }
+            ],
+            "description": "Generate the schema from an existing database",
+            "homepage": "https://github.com/jamband/yii2-schemadump",
+            "keywords": [
+                "command",
+                "extesion",
+                "generator",
+                "migration",
+                "yii2"
+            ],
+            "time": "2014-12-08 22:03:06"
         },
         {
             "name": "phpspec/php-diff",

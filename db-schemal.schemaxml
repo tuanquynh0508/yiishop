@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8" collation="utf8_general_ci">yiishop</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="tbl_category" view="colnames">
+<left>18</left>
+<top>2</top>
+<width>112</width>
+<height>174</height>
+<sql_create_table>CREATE TABLE `tbl_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` tinytext,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_category_product" view="colnames">
+<left>194</left>
+<top>17</top>
+<width>112</width>
+<height>94</height>
+<sql_create_table>CREATE TABLE `tbl_category_product` (
+  `category_id` int(11) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`category_id`,`product_id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `tbl_category_product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `tbl_category` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `tbl_category_product_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `tbl_product` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_customer" view="colnames">
+<left>949</left>
+<top>14</top>
+<width>112</width>
+<height>254</height>
+<sql_create_table>CREATE TABLE `tbl_customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `sex` smallint(1) DEFAULT '0',
+  `email` varchar(255) NOT NULL,
+  `tel` varchar(30) DEFAULT NULL,
+  `district_id` int(11) DEFAULT NULL,
+  `address` text,
+  `customer_pwd` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_idx` (`email`),
+  KEY `tel_idx` (`tel`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_migration" view="colnames">
+<left>970</left>
+<top>540</top>
+<width>112</width>
+<height>94</height>
+<sql_create_table>CREATE TABLE `tbl_migration` (
+  `version` varchar(180) NOT NULL,
+  `apply_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_firm" view="colnames">
+<left>672</left>
+<top>6</top>
+<width>112</width>
+<height>158</height>
+<sql_create_table>CREATE TABLE `tbl_firm` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_news" view="colnames">
+<left>853</left>
+<top>317</top>
+<width>112</width>
+<height>190</height>
+<sql_create_table>CREATE TABLE `tbl_news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` longtext,
+  `views` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug_idx` (`slug`),
+  KEY `title_idx` (`title`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_option" view="colnames">
+<left>161</left>
+<top>202</top>
+<width>112</width>
+<height>158</height>
+<sql_create_table>CREATE TABLE `tbl_option` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `option_group_id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `option_group_id` (`option_group_id`),
+  CONSTRAINT `tbl_option_ibfk_1` FOREIGN KEY (`option_group_id`) REFERENCES `tbl_option_group` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_option_group" view="colnames">
+<left>14</left>
+<top>205</top>
+<width>112</width>
+<height>142</height>
+<sql_create_table>CREATE TABLE `tbl_option_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_order" view="colnames">
+<left>54</left>
+<top>394</top>
+<width>118</width>
+<height>270</height>
+<sql_create_table>CREATE TABLE `tbl_order` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) DEFAULT NULL,
+  `fullname` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `tel` varchar(30) DEFAULT NULL,
+  `address` text,
+  `order_code` varchar(50) NOT NULL,
+  `note` text,
+  `payment_method` varchar(10) NOT NULL DEFAULT 'money' COMMENT 'money|bank',
+  `shipment_method` varchar(10) NOT NULL DEFAULT 'self' COMMENT 'self|city|outskirt',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `fullname_idx` (`fullname`),
+  KEY `email_idx` (`email`),
+  KEY `tel_idx` (`tel`),
+  KEY `order_code_idx` (`order_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_page" view="colnames">
+<left>974</left>
+<top>334</top>
+<width>112</width>
+<height>190</height>
+<sql_create_table>CREATE TABLE `tbl_page` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(255) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` longtext,
+  `views` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug_idx` (`slug`),
+  KEY `title_idx` (`title`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_product" view="colnames">
+<left>495</left>
+<top>75</top>
+<width>120</width>
+<height>280</height>
+<sql_create_table>CREATE TABLE `tbl_product` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `firm_id` int(11) NOT NULL,
+  `upc` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text,
+  `wholesale_prices` float DEFAULT NULL,
+  `retail_price` float DEFAULT NULL,
+  `cost` float DEFAULT '0',
+  `made` varchar(2) DEFAULT 'vn',
+  `quantity` int(11) DEFAULT '0',
+  `out_of_stock` smallint(1) DEFAULT '0',
+  `is_new` smallint(1) DEFAULT '0',
+  `is_special` smallint(1) DEFAULT '0',
+  `views` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `upc_idx` (`upc`),
+  KEY `firm_id` (`firm_id`),
+  KEY `title_idx` (`title`),
+  KEY `cost_idx` (`cost`),
+  KEY `made_idx` (`made`),
+  CONSTRAINT `tbl_product_ibfk_1` FOREIGN KEY (`firm_id`) REFERENCES `tbl_firm` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_product_img" view="colnames">
+<left>667</left>
+<top>251</top>
+<width>112</width>
+<height>238</height>
+<sql_create_table>CREATE TABLE `tbl_product_img` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) NOT NULL,
+  `file` varchar(255) DEFAULT NULL,
+  `width` float DEFAULT NULL,
+  `height` float DEFAULT NULL,
+  `size` float DEFAULT NULL,
+  `ext` varchar(5) DEFAULT NULL,
+  `is_default` smallint(1) DEFAULT '0',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `tbl_product_img_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `tbl_product` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_product_option" view="colnames">
+<left>307</left>
+<top>128</top>
+<width>112</width>
+<height>142</height>
+<sql_create_table>CREATE TABLE `tbl_product_option` (
+  `product_id` bigint(20) NOT NULL,
+  `option_id` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) DEFAULT '0',
+  PRIMARY KEY (`product_id`,`option_id`),
+  KEY `option_id` (`option_id`),
+  CONSTRAINT `tbl_product_option_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `tbl_product` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `tbl_product_option_ibfk_2` FOREIGN KEY (`option_id`) REFERENCES `tbl_option` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_product_order" view="colnames">
+<left>214</left>
+<top>396</top>
+<width>112</width>
+<height>174</height>
+<sql_create_table>CREATE TABLE `tbl_product_order` (
+  `order_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  `cost` float NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `upc` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`order_id`,`product_id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `tbl_product_order_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `tbl_order` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `tbl_product_order_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `tbl_product` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_product_review" view="colnames">
+<left>821</left>
+<top>64</top>
+<width>112</width>
+<height>222</height>
+<sql_create_table>CREATE TABLE `tbl_product_review` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) NOT NULL,
+  `fullname` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `content` text,
+  `rate` smallint(6) DEFAULT NULL,
+  `ip` varchar(50) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `tbl_product_review_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `tbl_product` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_sale" view="colnames">
+<left>523</left>
+<top>410</top>
+<width>112</width>
+<height>190</height>
+<sql_create_table>CREATE TABLE `tbl_sale` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `sale` float NOT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tbl_user" view="colnames">
+<left>803</left>
+<top>516</top>
+<width>147</width>
+<height>270</height>
+<sql_create_table>CREATE TABLE `tbl_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `first_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `status` smallint(6) NOT NULL DEFAULT '10',
+  `last_login` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `del_flg` smallint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username_idx` (`username`),
+  UNIQUE KEY `email_idx` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="tbl_product_sale" view="colnames">
+<left>360</left>
+<top>459</top>
+<width>112</width>
+<height>94</height>
+<sql_create_table>CREATE TABLE `tbl_product_sale` (
+  `sale_id` int(11) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`sale_id`,`product_id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `tbl_product_sale_ibfk_1` FOREIGN KEY (`sale_id`) REFERENCES `tbl_sale` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `tbl_product_sale_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `tbl_product` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
