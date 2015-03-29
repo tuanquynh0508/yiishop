@@ -3,8 +3,14 @@
 use yii\db\Schema;
 use yii\db\Migration;
 
-class m130524_201442_init extends Migration
+class m150329_044207_User extends Migration
 {
+    // public function init()
+    // {
+    //     $this->db = 'db2';
+    //     parent::init();
+    // }
+    
     public function up()
     {
         $tableOptions = null;
@@ -25,6 +31,8 @@ class m130524_201442_init extends Migration
             'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
         ], $tableOptions);
+
+        
     }
 
     public function down()
