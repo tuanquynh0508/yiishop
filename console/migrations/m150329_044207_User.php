@@ -32,6 +32,7 @@ class m150329_044207_User extends Migration
             'last_login' => Schema::TYPE_DATETIME,
             'created_at' => Schema::TYPE_DATETIME . ' NOT NULL',
             'updated_at' => Schema::TYPE_DATETIME,
+            'del_flg' => Schema::TYPE_SMALLINT . '(1) NOT NULL DEFAULT 0',
         ], $tableOptions);
 
         $this->createIndex('username_idx', '{{%user}}', 'username', true);
@@ -48,7 +49,8 @@ class m150329_044207_User extends Migration
             'last_name',
             'email',
             'status',
-            'created_at'
+            'created_at',
+            'del_flg'
         ], $users);
     }
 
@@ -69,7 +71,8 @@ class m150329_044207_User extends Migration
                 'Tuan',
                 'tuanquynh0508@gmail.com',
                 10,
-                date('Y-m-d H:i:s')
+                date('Y-m-d H:i:s'),
+                0
             ),
         );
     }

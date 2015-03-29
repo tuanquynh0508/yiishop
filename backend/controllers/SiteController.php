@@ -2,11 +2,12 @@
 namespace backend\controllers;
 
 use yii\web\Controller;
+use backend\components\MyController;
 
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends MyController
 {
 
     /**

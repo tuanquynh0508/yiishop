@@ -3,9 +3,10 @@ namespace common\models;
 
 use Yii;
 use yii\base\NotSupportedException;
-use yii\behaviors\TimestampBehavior;
+//use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use common\components\MyActiveRecord;
 
 /**
  * User model
@@ -24,10 +25,12 @@ use yii\web\IdentityInterface;
  * @property datetime $updated_at
  * @property string $password write-only password
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends MyActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
+
+    public $password;
 
     /**
      * @inheritdoc
@@ -40,12 +43,12 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }
+    // public function behaviors()
+    // {
+    //     return [
+    //         TimestampBehavior::className(),
+    //     ];
+    // }
 
     /**
      * @inheritdoc
@@ -53,8 +56,15 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['username', 'password_hash', 'first_name', 'last_name', 'email'], 'required'],
+            [['status', 'del_flg'], 'integer'],
+            [['last_login', 'created_at', 'updated_at', 'password'], 'safe'],
+            [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
+            [['first_name', 'last_name'], 'string', 'max' => 50],
+            [['auth_key'], 'string', 'max' => 32],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['email'], 'email'],
         ];
     }
 
@@ -64,19 +74,35 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'username' => 'Username',
-            'auth_key' => 'Auth Key',
-            'password_hash' => 'Password Hash',
-            'password_reset_token' => 'Password Reset Token',
-            'first_name' => 'First name',
-            'last_name' => 'Last name',
-            'email' => 'Email',
-            'status' => 'Status',
-            'last_login' => 'Last Login',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'id' => Yii::t('backend', 'ID'),
+            'username' => Yii::t('user', 'Username'),
+            'auth_key' => Yii::t('user', 'Auth Key'),
+            'password_hash' => Yii::t('user', 'Password Hash'),
+            'password_reset_token' => Yii::t('user', 'Password Reset Token'),
+            'first_name' => Yii::t('user', 'First Name'),
+            'last_name' => Yii::t('user', 'Last Name'),
+            'email' => Yii::t('user', 'Email'),
+            'status' => Yii::t('user', 'Status'),
+            'last_login' => Yii::t('user', 'Last Login'),
+            'created_at' => Yii::t('backend', 'Created At'),
+            'updated_at' => Yii::t('backend', 'Updated At'),
+            'del_flg' => Yii::t('backend', 'Del Flg'),
         ];
+    }
+
+    public function beforeSave($insert) {
+        if(!empty($this->password)) {
+            $this->setPassword($this->password);
+        }
+        return parent::beforeSave($insert);
+    }
+
+    public function getFullname() {
+        return $this->first_name.' '.$this->last_name;
+    }
+
+    public function toString() {
+        return $this->getFullname();
     }
 
     /**
