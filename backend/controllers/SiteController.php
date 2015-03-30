@@ -24,6 +24,7 @@ class SiteController extends MyController
 
     public function actionIndex()
     {
+        $this->layout = 'adminlte';
         return $this->render('index');
     }
 

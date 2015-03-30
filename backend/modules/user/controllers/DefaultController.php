@@ -33,6 +33,8 @@ class DefaultController extends MyController
 
     public function actionLogin()
     {
+        $this->layout = '//adminlte_login';
+
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
