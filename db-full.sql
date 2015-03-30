@@ -1,5 +1,5 @@
 /*
-SQLyog Ultimate v11.11 (32 bit)
+SQLyog Ultimate v11.11 (64 bit)
 MySQL - 5.5.41-0ubuntu0.14.04.1 : Database - yiishop
 *********************************************************************
 */
@@ -23,12 +23,14 @@ DROP TABLE IF EXISTS `tbl_category`;
 CREATE TABLE `tbl_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) DEFAULT NULL,
+  `slug` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` tinytext,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `del_flg` smallint(1) DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug_idx` (`slug`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `tbl_category` */

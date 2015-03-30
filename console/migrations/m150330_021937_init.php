@@ -1,7 +1,22 @@
-$tableOptions = null;
+<?php
+use yii\db\Schema;
+use jamband\schemadump\Migration;
+
+class m150330_021937_init extends Migration
+{
+
+  // public function init()
+  // {
+  //     $this->db = 'db2';
+  //     parent::init();
+  // }
+
+  public function up()
+  {
+    $tableOptions = null;
     if ($this->db->driverName === 'mysql') {
       // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
-      $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+      $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
     }
 
     // tbl_category
@@ -282,3 +297,10 @@ $tableOptions = null;
     // index: tbl_user
     $this->createIndex('username_idx', '{{%user}}', 'username', true);
     $this->createIndex('email_idx', '{{%user}}', 'email', true);
+  }
+
+  public function down()
+  {
+    //$this->dropTable('{{%user}}');
+  }
+}
