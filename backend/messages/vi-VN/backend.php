@@ -3,9 +3,12 @@ return [
     //Label
     'ID' => 'Mã',
     'Title' => 'Tiêu đề',
+	'Slug' => 'Slug',
+    'Description' => 'Chú thích',
     'Created At' => 'Ngày tạo',
     'Updated At' => 'Ngày sửa',
     'Del Flg' => 'Xóa',
+	'Parent ID' => 'Danh mục cha',
 
     //Buttons
     'Add New' => 'Tạo mới',
