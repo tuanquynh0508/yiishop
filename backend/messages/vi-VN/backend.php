@@ -9,6 +9,8 @@ return [
     'Updated At' => 'Ngày sửa',
     'Del Flg' => 'Xóa',
 	'Parent ID' => 'Danh mục cha',
+    'Member' => 'Thành viên',
+    'Main navigation'  => 'Danh mục chính',
 
     //Buttons
     'Add New' => 'Tạo mới',
