@@ -8,6 +8,8 @@ use yii\filters\VerbFilter;
 
 class MyController extends Controller
 {
+    public $layout = '//adminlte';
+
     public function MyBehaviors(){}
 
     public function behaviors()

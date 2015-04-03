@@ -15,6 +15,9 @@ return [
         'user' => [
             'class' => 'backend\modules\user\User',
         ],
+        'category' => [
+            'class' => 'backend\modules\category\Category',
+        ]
     ],
     'components' => [
         'user' => [
