@@ -6,7 +6,7 @@ use yii\base\NotSupportedException;
 //use yii\behaviors\TimestampBehavior;
 //use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-use common\components\MyActiveRecord;
+use common\components\CActiveRecord;
 
 /**
  * User model
@@ -25,7 +25,7 @@ use common\components\MyActiveRecord;
  * @property datetime $updated_at
  * @property string $password write-only password
  */
-class User extends MyActiveRecord implements IdentityInterface
+class User extends CActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
