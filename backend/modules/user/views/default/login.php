@@ -26,6 +26,7 @@ $(function () {
 
 $this->registerCss("
 body { background: url(".$baseUrl."/adminlte/dist/img/bg-login.jpg) !important; }
+.checkbox label { padding-left: 0px; }
 ");
 ?>
 
@@ -53,6 +54,8 @@ body { background: url(".$baseUrl."/adminlte/dist/img/bg-login.jpg) !important; 
         </div><!-- /.col -->
       </div>
     <?php ActiveForm::end(); ?>
+    <hr  style="padding: 0px;margin: 0px;"/>
+    <p class="text-center" style="padding: 10px 0px;margin: 0px;">Copyright © <?php echo date('Y'); ?> <a href="http://i-designer.net">I-Designer</a>.</strong> All rights reserved.</p>
   </div><!-- /.login-box-body -->
 </div><!-- /.login-box -->
 
