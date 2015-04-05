@@ -10,12 +10,11 @@ $this->title = Yii::t('backend', 'Create Category');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="category-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<!-- Content Wrapper. Contains page content -->
+<section class="content">
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
 
-</div>
+</section><!-- /.content -->
