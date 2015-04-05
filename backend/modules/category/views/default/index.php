@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-header">
 			<h3 class="box-title">Danh mục</h3>
 			<div class="box-tools">
-				<a href="#" class="btn btn-block btn-success btn-sm"><i class="fa fa-plus"></i> Thêm mới</a>
+				<a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/category/default/create']); ?>" class="btn btn-block btn-success btn-sm"><i class="fa fa-plus"></i> Thêm mới</a>
 			</div><!-- /.box-tools -->
         </div><!-- /.box-header -->
         <div class="box-body no-padding">

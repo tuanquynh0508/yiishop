@@ -4,7 +4,7 @@ namespace common\models;
 
 use Yii;
 
-use common\components\MyActiveRecord;
+use common\components\CActiveRecord;
 
 /**
  * This is the model class for table "{{%category}}".
@@ -21,7 +21,7 @@ use common\components\MyActiveRecord;
  * @property CategoryProduct[] $categoryProducts
  * @property Product[] $products
  */
-class Category extends MyActiveRecord
+class Category extends CActiveRecord
 {
     /**
      * @inheritdoc

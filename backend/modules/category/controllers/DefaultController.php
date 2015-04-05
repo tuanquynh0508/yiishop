@@ -2,8 +2,10 @@
 
 namespace backend\modules\category\controllers;
 
+use Yii;
 //use yii\web\Controller;
 use backend\components\CController;
+use common\models\Category;
 
 class DefaultController extends CController {
 
