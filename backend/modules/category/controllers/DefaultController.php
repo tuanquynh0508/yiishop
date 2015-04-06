@@ -24,6 +24,8 @@ class DefaultController extends CController {
 
 	public function actionCreate() {
 		$model = new Category();
+		echo "xxx";
+		var_dump($model->getTreeCategory());
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);

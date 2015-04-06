@@ -9,20 +9,12 @@ $this->title = 'Danh mục sản phẩm';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<!-- Content Header (Page header) -->
-<section class="content-header">
-	<h1>
-		Danh mục sản phẩm
-		<small>Danh sách</small>
-	</h1>
-</section>
-
 <!-- Main content -->
 <section class="content">
 	<!-- ====================================== -->
     <div class="box box-primary">
         <div class="box-header">
-			<!--			<h3 class="box-title">Danh mục</h3>-->
+			<h3 class="box-title"><?= Html::encode($this->title) ?></h3>
 			<div class="box-tools">
 				<a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/category/default/create']); ?>" class="btn btn-block btn-success btn-sm"><i class="fa fa-plus"></i> Thêm mới</a>
 			</div><!-- /.box-tools -->
