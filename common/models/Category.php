@@ -94,7 +94,7 @@ class Category extends CActiveRecord {
 		foreach ($categories as $category) {
 			$item = new \stdClass();
 			$item->id = $category->id;
-			$item->title = str_pad($category->title, ($level - 1), $suffix, STR_PAD_LEFT);
+			$item->title = str_pad($category->title, 3*($level - 1) + strlen($category->title), $suffix, STR_PAD_LEFT);
 			$item->parent_id = $category->parent_id;
 			$item->slug = $category->slug;
 			$item->level = $level;
