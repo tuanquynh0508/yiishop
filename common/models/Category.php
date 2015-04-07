@@ -82,21 +82,29 @@ class Category extends CActiveRecord {
 		return $model ? $model->categoryname : '';
 	}
 
-	public function getTreeCategory($parentId = null, $level = 1) {
+	public function getTreeCategory($parentId = 0, $level = 1, $suffix = "", $recursive = false, $skipId = 0) {
 		$list = array();
 		$categories = Category::find()
-				->where(['parent_id' => $parentId, 'del_flg' => 0])
+				->where('IFNULL(parent_id,0) = :parentId AND id != :skipId', [
+					':parentId' => $parentId,
+					':skipId' => $skipId,
+				])
 				->orderBy('title')
 				->all();
 		foreach ($categories as $category) {
 			$item = new \stdClass();
 			$item->id = $category->id;
-			$item->title = $category->title;
+			$item->title = str_pad($category->title, ($level - 1), $suffix, STR_PAD_LEFT);
 			$item->parent_id = $category->parent_id;
 			$item->slug = $category->slug;
 			$item->level = $level;
-			$item->childrent = $this->getTreeCategory($category->id, $level + 1);
-			$list[] = $item;
+			if ($recursive) {
+				$item->childrent = $this->getTreeCategory($category->id, $level + 1);
+				$list[] = $item;
+			} else {
+				$list[] = $item;
+				$list = array_merge($list, $this->getTreeCategory($category->id, $level + 1, $suffix, $recursive, $skipId));
+			}
 		}
 		return $list;
 	}
