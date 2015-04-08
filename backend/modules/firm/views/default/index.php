@@ -6,7 +6,7 @@ use backend\components\CGridView;
 //use yii\bootstrap\ActiveForm;
 use yii\web\View;
 
-$this->title = 'Danh mục sản phẩm';
+$this->title = 'Hãng sản xuất';
 $this->params['breadcrumbs'][] = $this->title;
 
 $baseUrl = Yii::$app->request->baseUrl;
@@ -16,11 +16,13 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
 <!-- Main content -->
 <section class="content">
 	<!-- ====================================== -->
+	<?php echo yii\base\View::render('//partials/flashMessage', array()); ?>
+
     <div class="box box-primary">
         <div class="box-header">
 			<h3 class="box-title"><?= Html::encode($this->title) ?></h3>
 			<div class="box-tools">
-				<a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/category/default/create']); ?>" class="btn btn-block btn-success btn-sm"><i class="fa fa-plus"></i> Thêm mới</a>
+				<a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/firm/default/create']); ?>" class="btn btn-block btn-success btn-sm"><i class="fa fa-plus"></i> Thêm mới</a>
 			</div><!-- /.box-tools -->
         </div><!-- /.box-header -->
         <div class="box-body no-padding">
@@ -34,17 +36,8 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
 				'columns' => [
 					['class' => 'yii\grid\SerialColumn'],
 					'id',
-					//'parent_id',
-//					[
-//						'attribute' => 'parentName',
-//						'format' => 'raw',
-//						'value' => function ($data) {
-//							return $data->parentName;
-//						},
-//					],
-					'parentName',
-					'slug',
 					'title',
+					'logo',
 					['class' => 'yii\grid\ActionColumn'],
 				],
 			]);

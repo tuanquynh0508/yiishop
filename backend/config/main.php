@@ -17,7 +17,10 @@ return [
         ],
         'category' => [
             'class' => 'backend\modules\category\Category',
-        ]
+        ],
+		'firm' => [
+            'class' => 'backend\modules\firm\Firm',
+        ],
     ],
     'components' => [
         'user' => [

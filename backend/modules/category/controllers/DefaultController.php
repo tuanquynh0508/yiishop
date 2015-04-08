@@ -12,12 +12,14 @@ use yii\web\NotFoundHttpException;
 class DefaultController extends CController {
 
 	public function actionIndex() {
-		$searchModel = new CategorySearch();
-		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		$model = new Category();
+		//$searchModel = new CategorySearch();
+		//$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
 		return $this->render('index', [
-					'searchModel' => $searchModel,
-					'dataProvider' => $dataProvider,
+//					'searchModel' => $searchModel,
+//					'dataProvider' => $dataProvider,
+					'list' => $model->getTreeCategory(0, 1, '&nbsp;&nbsp;&nbsp;')
 		]);
 		//return $this->render('index');
 	}

@@ -56,6 +56,7 @@ class Category extends CActiveRecord {
 			'created_at' => Yii::t('backend', 'Created At'),
 			'updated_at' => Yii::t('backend', 'Updated At'),
 			'del_flg' => Yii::t('backend', 'Del Flg'),
+			'parentName' => 'Danh mục cha',
 		];
 	}
 
@@ -74,12 +75,12 @@ class Category extends CActiveRecord {
 	}
 
 	public function getParent() {
-		return $this->hasOne(Category::className(), ['parent_id' => 'id']);
+		return $this->hasOne(Category::className(), ['id' => 'parent_id']);
 	}
 
 	public function getParentName() {
 		$model = $this->parent;
-		return $model ? $model->categoryname : '';
+		return $model ? $model->title : '';
 	}
 
 	public function getTreeCategory($parentId = 0, $level = 1, $suffix = "", $recursive = false, $skipId = 0) {
@@ -94,7 +95,7 @@ class Category extends CActiveRecord {
 		foreach ($categories as $category) {
 			$item = new \stdClass();
 			$item->id = $category->id;
-			$item->title = str_pad($category->title, 3*($level - 1) + strlen($category->title), $suffix, STR_PAD_LEFT);
+			$item->title = str_pad($category->title, 3 * $level + strlen($category->title), $suffix, STR_PAD_LEFT);
 			$item->parent_id = $category->parent_id;
 			$item->slug = $category->slug;
 			$item->level = $level;

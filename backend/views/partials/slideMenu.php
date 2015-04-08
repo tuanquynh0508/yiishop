@@ -1,4 +1,4 @@
-<?php 
+<?php
 use yii\widgets\Menu;
 
 $baseUrl = Yii::$app->request->baseUrl;
@@ -24,12 +24,13 @@ $baseUrl = Yii::$app->request->baseUrl;
         'items' => [
             ['label' => '<i class="fa fa-home"></i> <span>Trang chủ</span>', 'url' => ['/site/index'],
               'options' => [
-                'class' => 'treeview',                
+                'class' => 'treeview',
               ],
             ],
             ['label' => '<i class="fa fa-cube"></i> <span>Sản phẩm</span>', 'url' => ['product/index'], 'items' => [
+				['label' => '<i class="fa fa-caret-right"></i> Sản phẩm', 'url' => ['product/index']],
                 ['label' => '<i class="fa fa-caret-right"></i> Danh mục sản phẩm', 'url' => ['/category/default/index']],
-                ['label' => '<i class="fa fa-caret-right"></i> Sản phẩm', 'url' => ['product/index']],
+				['label' => '<i class="fa fa-caret-right"></i> Hãng sản xuất', 'url' => ['/firm/default/index']],
               ],
               'options' => [
                 'class' => 'treeview',
@@ -49,7 +50,7 @@ $baseUrl = Yii::$app->request->baseUrl;
               'template' => '<a href="{url}">{label} <i class="fa fa-angle-left pull-right"></i></a>',
             ],
             ['label' => '<i class="fa fa-newspaper-o"></i> <span>Trang tin</span>', 'url' => ['product/index']],
-        ],        
+        ],
         'options' => [
           'class' => 'sidebar-menu',
           'data-tag'=>'yii2-menu',
