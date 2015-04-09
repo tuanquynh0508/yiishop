@@ -74,7 +74,7 @@ class User extends CActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('backend', 'ID'),
+            'id' => Yii::t('app', 'ID'),
             'username' => Yii::t('user', 'Username'),
             'auth_key' => Yii::t('user', 'Auth Key'),
             'password_hash' => Yii::t('user', 'Password Hash'),
@@ -84,9 +84,9 @@ class User extends CActiveRecord implements IdentityInterface
             'email' => Yii::t('user', 'Email'),
             'status' => Yii::t('user', 'Status'),
             'last_login' => Yii::t('user', 'Last Login'),
-            'created_at' => Yii::t('backend', 'Created At'),
-            'updated_at' => Yii::t('backend', 'Updated At'),
-            'del_flg' => Yii::t('backend', 'Del Flg'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+            'del_flg' => Yii::t('app', 'Del Flg'),
         ];
     }
 

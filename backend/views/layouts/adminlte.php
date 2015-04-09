@@ -52,7 +52,7 @@ $baseUrl = Yii::$app->request->baseUrl;
                     <img src="<?php echo $baseUrl; ?>/adminlte/dist/img/user.png" class="img-circle" alt="User Image" />
                     <p>
                       <?php echo Yii::$app->user->identity->fullname; ?>
-                      <small><?php echo Yii::t('backend', 'Member'); ?></small>
+                      <small><?php echo Yii::t('app', 'Member'); ?></small>
                     </p>
                   </li>
                   <!-- Menu Footer-->

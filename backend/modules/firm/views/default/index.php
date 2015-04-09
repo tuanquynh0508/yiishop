@@ -23,7 +23,7 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
         <div class="box-header">
 			<h3 class="box-title"><?= Html::encode($this->title) ?></h3>
 			<div class="box-tools">
-				<a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/firm/default/create']); ?>" class="btn btn-block btn-success btn-sm"><i class="fa fa-plus"></i> Thêm mới</a>
+				<?= Html::a('<i class="fa fa-plus"></i> ' . Yii::t('app', 'Add New'), ['create'], ['class' => 'btn btn-block btn-success btn-sm']) ?>
 			</div><!-- /.box-tools -->
         </div><!-- /.box-header -->
         <div class="box-body no-padding">

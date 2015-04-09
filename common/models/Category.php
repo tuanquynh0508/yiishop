@@ -48,14 +48,14 @@ class Category extends CActiveRecord {
 	 */
 	public function attributeLabels() {
 		return [
-			'id' => Yii::t('backend', 'ID'),
-			'parent_id' => Yii::t('backend', 'Parent ID'),
-			'slug' => Yii::t('backend', 'Slug'),
-			'title' => Yii::t('backend', 'Title'),
-			'description' => Yii::t('backend', 'Description'),
-			'created_at' => Yii::t('backend', 'Created At'),
-			'updated_at' => Yii::t('backend', 'Updated At'),
-			'del_flg' => Yii::t('backend', 'Del Flg'),
+			'id' => Yii::t('app', 'ID'),
+			'parent_id' => Yii::t('app', 'Parent ID'),
+			'slug' => Yii::t('app', 'Slug'),
+			'title' => Yii::t('app', 'Title'),
+			'description' => Yii::t('app', 'Description'),
+			'created_at' => Yii::t('app', 'Created At'),
+			'updated_at' => Yii::t('app', 'Updated At'),
+			'del_flg' => Yii::t('app', 'Del Flg'),
 			'parentName' => 'Danh mục cha',
 		];
 	}

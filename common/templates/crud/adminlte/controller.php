@@ -38,24 +38,12 @@ use yii\data\ActiveDataProvider;
 <?php endif; ?>
 use <?= ltrim($generator->baseControllerClass, '\\') ?>;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * <?= $controllerClass ?> implements the CRUD actions for <?= $modelClass ?> model.
  */
 class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->baseControllerClass) . "\n" ?>
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all <?= $modelClass ?> models.
@@ -83,18 +71,6 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     }
 
     /**
-     * Displays a single <?= $modelClass ?> model.
-     * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
-     * @return mixed
-     */
-    public function actionView(<?= $actionParams ?>)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel(<?= $actionParams ?>),
-        ]);
-    }
-
-    /**
      * Creates a new <?= $modelClass ?> model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -104,6 +80,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
         $model = new <?= $modelClass ?>();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			Yii::$app->session->setFlash('success', <?= $generator->generateString('Create successful.')?>);
             return $this->redirect(['view', <?= $urlParams ?>]);
         } else {
             return $this->render('create', [
@@ -123,6 +100,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
         $model = $this->findModel(<?= $actionParams ?>);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			Yii::$app->session->setFlash('success', <?= $generator->generateString('Update successful.')?>);
             return $this->redirect(['view', <?= $urlParams ?>]);
         } else {
             return $this->render('update', [
@@ -140,8 +118,20 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     public function actionDelete(<?= $actionParams ?>)
     {
         $this->findModel(<?= $actionParams ?>)->delete();
-
+		Yii::$app->session->setFlash('warning', <?= $generator->generateString('Delete successful.')?>);
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Displays a single <?= $modelClass ?> model.
+     * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
+     * @return mixed
+     */
+    public function actionView(<?= $actionParams ?>)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel(<?= $actionParams ?>),
+        ]);
     }
 
     /**
@@ -167,7 +157,7 @@ if (count($pks) === 1) {
         if (($model = <?= $modelClass ?>::findOne(<?= $condition ?>)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(<?= $generator->generateString('Record not found.')?>);
         }
     }
 }

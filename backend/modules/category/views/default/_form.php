@@ -31,7 +31,7 @@ use common\models\Category;
 	</div><!-- /.box-body -->
 	<div class="box-footer">
 		<a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/category/default/index']); ?>" class="btn btn-default"><i class="fa fa-caret-left"></i> Quay lại</a>
-		<?= Html::submitButton('<i class="fa fa-save"></i> ' . ($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update')), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+		<?= Html::submitButton('<i class="fa fa-save"></i> ' . ($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update')), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 	</div>
 	<?php ActiveForm::end(); ?>
 </div><!-- /.box -->

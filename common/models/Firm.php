@@ -45,12 +45,12 @@ class Firm extends CActiveRecord {
 	 */
 	public function attributeLabels() {
 		return [
-			'id' => Yii::t('backend', 'ID'),
-			'title' => Yii::t('backend', 'Title'),
-			'logo' => Yii::t('backend', 'Logo'),
-			'created_at' => Yii::t('backend', 'Created At'),
-			'updated_at' => Yii::t('backend', 'Updated At'),
-			'del_flg' => Yii::t('backend', 'Del Flg'),
+			'id' => Yii::t('app', 'ID'),
+			'title' => Yii::t('app', 'Title'),
+			'logo' => Yii::t('app', 'Logo'),
+			'created_at' => Yii::t('app', 'Created At'),
+			'updated_at' => Yii::t('app', 'Updated At'),
+			'del_flg' => Yii::t('app', 'Del Flg'),
 		];
 	}
 

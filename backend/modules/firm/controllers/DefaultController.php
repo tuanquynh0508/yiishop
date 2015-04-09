@@ -44,7 +44,7 @@ class DefaultController extends CController {
 						Yii::$app->utility->thumbnails($pathUpload . $model->logo, $pathUpload, 'medium');
 					}
 
-					Yii::$app->session->setFlash('success', Yii::t('backend', 'Create successful.'));
+					Yii::$app->session->setFlash('success', Yii::t('app', 'Create successful.'));
 					return $this->redirect(['view', 'id' => $model->id]);
 				}
 			}
@@ -82,7 +82,7 @@ class DefaultController extends CController {
 						Yii::$app->utility->deleteImgWithThumbnails($oldFile, $pathUpload);
 					}
 
-					Yii::$app->session->setFlash('success', Yii::t('backend', 'Update successful.'));
+					Yii::$app->session->setFlash('success', Yii::t('app', 'Update successful.'));
 					return $this->redirect(['view', 'id' => $model->id]);
 				}
 			}
@@ -100,7 +100,7 @@ class DefaultController extends CController {
 	 */
 	public function actionDelete($id) {
 		$this->findModel($id)->delete();
-		Yii::$app->session->setFlash('warning', Yii::t('backend', 'Delete successful.'));
+		Yii::$app->session->setFlash('warning', Yii::t('app', 'Delete successful.'));
 		return $this->redirect(['index']);
 	}
 
@@ -126,7 +126,7 @@ class DefaultController extends CController {
 		if (($model = Firm::findOne($id)) !== null) {
 			return $model;
 		} else {
-			throw new NotFoundHttpException(Yii::t('backend', 'Record not found.'));
+			throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
 		}
 	}
 
