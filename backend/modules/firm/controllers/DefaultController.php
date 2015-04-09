@@ -7,6 +7,7 @@ use backend\components\CController;
 use common\models\Firm;
 use backend\models\FirmSearch;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 class DefaultController extends CController {
 
@@ -27,15 +28,30 @@ class DefaultController extends CController {
 	 */
 	public function actionCreate() {
 		$model = new Firm();
+		$pathUpload = Yii::getAlias(Yii::$app->params['upload_path']['category']);
 
-		if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			Yii::$app->session->setFlash('success', Yii::t('backend', 'Create successful.'));
-			return $this->redirect(['view', 'id' => $model->id]);
-		} else {
-			return $this->render('create', [
-						'model' => $model,
-			]);
+		if (Yii::$app->request->isPost) {
+			$file = UploadedFile::getInstance($model, 'logo');
+			if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+				if ($file) {
+					$model->logo = date('YmdHis') . '.' . $file->extension;
+				}
+
+				if ($model->save()) {
+					if ($file) {
+						$file->saveAs($pathUpload . $model->logo);
+						Yii::$app->utility->thumbnails($pathUpload . $model->logo, $pathUpload, 'small');
+						Yii::$app->utility->thumbnails($pathUpload . $model->logo, $pathUpload, 'medium');
+					}
+
+					Yii::$app->session->setFlash('success', Yii::t('backend', 'Create successful.'));
+					return $this->redirect(['view', 'id' => $model->id]);
+				}
+			}
 		}
+		return $this->render('create', [
+					'model' => $model,
+		]);
 	}
 
 	/**
@@ -46,15 +62,34 @@ class DefaultController extends CController {
 	 */
 	public function actionUpdate($id) {
 		$model = $this->findModel($id);
+		$pathUpload = Yii::getAlias(Yii::$app->params['upload_path']['category']);
+		$oldFile = $model->logo;
 
-		if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			Yii::$app->session->setFlash('success', Yii::t('backend', 'Update successful.'));
-			return $this->redirect(['view', 'id' => $model->id]);
-		} else {
-			return $this->render('update', [
-						'model' => $model,
-			]);
+		if (Yii::$app->request->isPost) {
+			$file = UploadedFile::getInstance($model, 'logo');
+			if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+				if ($file) {
+					$model->logo = date('YmdHis') . '.' . $file->extension;
+				} else {
+					$model->logo = $oldFile;
+				}
+
+				if ($model->save()) {
+					if ($file) {
+						$file->saveAs($pathUpload . $model->logo);
+						Yii::$app->utility->thumbnails($pathUpload . $model->logo, $pathUpload, 'small');
+						Yii::$app->utility->thumbnails($pathUpload . $model->logo, $pathUpload, 'medium');
+						Yii::$app->utility->deleteImgWithThumbnails($oldFile, $pathUpload);
+					}
+
+					Yii::$app->session->setFlash('success', Yii::t('backend', 'Update successful.'));
+					return $this->redirect(['view', 'id' => $model->id]);
+				}
+			}
 		}
+		return $this->render('create', [
+					'model' => $model,
+		]);
 	}
 
 	/**
@@ -91,7 +126,7 @@ class DefaultController extends CController {
 		if (($model = Firm::findOne($id)) !== null) {
 			return $model;
 		} else {
-			throw new NotFoundHttpException('The requested page does not exist.');
+			throw new NotFoundHttpException(Yii::t('backend', 'Record not found.'));
 		}
 	}
 

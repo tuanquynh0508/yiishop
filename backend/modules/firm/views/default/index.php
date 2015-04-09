@@ -1,5 +1,6 @@
 <?php
 
+use Yii;
 use yii\helpers\Html;
 //use yii\grid\GridView;
 use backend\components\CGridView;
@@ -37,11 +38,23 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
 					['class' => 'yii\grid\SerialColumn'],
 					'id',
 					'title',
-					'logo',
-					['class' => 'yii\grid\ActionColumn'],
-				],
-			]);
-			?>
+					[
+						'attribute' => 'logo',
+						'format' => 'html',
+						'value' => function ($data) {
+							$picture = Yii::getAlias('@img_path/category/') . Yii::$app->params['upload_var']['small']['prefix'] . $data->logo;
+							if (empty($data->logo)) {
+								$picture = Yii::getAlias('@img_path/sm_nopicture.jpg');
+							}
+							return Html::img($picture, ['height' => 30]);
+						},
+								'enableSorting' => false,
+								'filter' => false,
+							],
+							['class' => 'yii\grid\ActionColumn'],
+						],
+					]);
+					?>
         </div><!-- /.box-body -->
 	</div><!-- /.box -->
 	<!-- ====================================== -->

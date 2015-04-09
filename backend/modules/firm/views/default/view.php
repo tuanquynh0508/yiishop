@@ -19,13 +19,21 @@ $this->params['breadcrumbs'][] = $this->title;
 			<h3 class="box-title"><?= Html::encode($this->title) ?></h3>
 		</div><!-- /.box-header -->
 		<div class="box-body">
-			<?=
-			DetailView::widget([
+			<?php
+			$picture = Yii::getAlias('@img_path/category/') . Yii::$app->params['upload_var']['small']['prefix'] . $model->logo;
+			if (empty($model->logo)) {
+				$picture = Yii::getAlias('@img_path/sm_nopicture.jpg');
+			}
+			echo DetailView::widget([
 				'model' => $model,
 				'attributes' => [
 					'id',
 					'title',
-					'logo',
+					[
+						'attribute' => 'logo',
+						'value' => $picture,
+						'format' => ['image', ['height' => '30']],
+					],
 					'created_at',
 					'updated_at',
 					'del_flg',

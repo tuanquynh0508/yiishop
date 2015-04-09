@@ -13,11 +13,20 @@ use yii\widgets\ActiveForm;
 		<h3 class="box-title"><?= Html::encode($this->title) ?></h3>
 	</div><!-- /.box-header -->
 	<!-- form start -->
-	<?php $form = ActiveForm::begin(); ?>
+	<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 	<div class="box-body">
 		<?= $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
 
-		<?= $form->field($model, 'logo')->textInput(['maxlength' => 255]) ?>
+		<?php
+		if (!empty($model->logo)) {
+			echo '<div class="form-group">';
+			$picture = Yii::getAlias('@img_path/category/') . Yii::$app->params['upload_var']['small']['prefix'] . $model->logo;
+			echo Html::img($picture, ['height' => 30]);
+			echo '</div>';
+		}
+		?>
+
+		<?= $form->field($model, 'logo')->fileInput() ?>
 	</div><!-- /.box-body -->
 	<div class="box-footer">
 		<a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/firm/default/index']); ?>" class="btn btn-default"><i class="fa fa-caret-left"></i> Quay lại</a>

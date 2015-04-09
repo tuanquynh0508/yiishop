@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use common\components\CActiveRecord;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "{{%firm}}".
@@ -34,6 +35,7 @@ class Firm extends CActiveRecord {
 			[['title'], 'required'],
 			[['created_at', 'updated_at'], 'safe'],
 			[['del_flg'], 'integer'],
+			[['logo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'gif, jpg, jpeg, png, bmp'],
 			[['title', 'logo'], 'string', 'max' => 255]
 		];
 	}

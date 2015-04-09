@@ -125,12 +125,34 @@ Then, you can login into the application with same email address and password at
         Require all granted
     </Directory>
 
-    #ProxyPass /backend http://api-dev.securitoo.com/api/V8
-        #ProxyPassReverse /backend http://api-dev.securitoo.com/api/V8
+    #ProxyPass /backend http://example.com
+	#ProxyPassReverse /backend http://example.com
 
     #For Ubuntu apache config
     ErrorLog ${APACHE_LOG_DIR}/error-yiishop.log
     CustomLog ${APACHE_LOG_DIR}/access-yiishop.log combined
+
+    #For Xampp windows config
+    #ErrorLog "logs/api-news-error.log"
+    #CustomLog "logs/api-news-access.log" combined
+</VirtualHost>
+
+<VirtualHost *:80>
+	ServerAdmin tuanquynh0508@gmail.com
+    ServerName img.yiishop.local
+    ServerAlias *img.yiishop.local
+
+    DocumentRoot "/home/tnguyennhu/gits/yiishop/uploads"
+    SetEnv yiiEnv dev_tuan
+    <Directory "/home/tnguyennhu/gits/yiishop/uploads">
+        Options Indexes FollowSymLinks
+        AllowOverride all
+        Require all granted
+    </Directory>
+
+	#For Ubuntu apache config
+    ErrorLog ${APACHE_LOG_DIR}/error-img-yiishop.log
+    CustomLog ${APACHE_LOG_DIR}/access-img-yiishop.log combined
 
     #For Xampp windows config
     #ErrorLog "logs/api-news-error.log"

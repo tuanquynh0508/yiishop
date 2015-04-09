@@ -23,4 +23,5 @@ return [
 	'Delete successful.' => 'Đã xóa thành công.',
 	'Create successful.' => 'Đã tạo thành công.',
 	'Update successful.' => 'Đã cập nhật thành công.',
+	'Record not found.' => 'Bản ghi không tồn tại.'
 ];

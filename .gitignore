@@ -28,3 +28,9 @@ composer.phar
 phpunit.phar
 # local phpunit config
 /phpunit.xml
+
+# upload file
+/uploads/category/*.jpg
+/uploads/category/*.png
+/uploads/category/*.gif
+/uploads/category/*.bmp
