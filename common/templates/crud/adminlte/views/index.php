@@ -30,7 +30,7 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
 <section class="content">
 	<!-- ====================================== -->
 	<?= "<?php " ?> echo yii\base\View::render('//partials/flashMessage', array()); ?>
-	
+
 	<div class="box box-primary">
         <div class="box-header">
 			<h3 class="box-title"><?= "<?= " ?> Html::encode($this->title) ?></h3>
@@ -42,6 +42,9 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
 
 			<?php if ($generator->indexWidgetType === 'grid'): ?>
     <?= "<?= " ?>CGridView::widget([
+		'tableOptions' => [
+			'class' => 'table table-bordered table-striped dataTable'
+		],
         'dataProvider' => $dataProvider,
         <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n        'columns' => [\n" : "'columns' => [\n"; ?>
             ['class' => 'yii\grid\SerialColumn'],

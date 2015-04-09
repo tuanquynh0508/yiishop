@@ -14,7 +14,7 @@ return [
 			'height' => 250,
 		],
 		'normal' => [
-			'prefix' => 'bg_',
+			'prefix' => '',
 			'width' => 500,
 			'height' => 500,
 		],

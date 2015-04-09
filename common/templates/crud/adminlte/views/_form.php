@@ -24,19 +24,24 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
+<div class="box box-primary">
+	<div class="box-header">
+		<h3 class="box-title"><?= "<?= " ?> Html::encode($this->title) ?></h3>
+	</div><!-- /.box-header -->
+	<!-- form start -->
+	<?= "<?php " ?> $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+	<div class="box-body">
 
-    <?= "<?php " ?>$form = ActiveForm::begin(); ?>
+	<?php foreach ($generator->getColumnNames() as $attribute) {
+		if (in_array($attribute, $safeAttributes)) {
+			echo "    <?= " . $generator->generateActiveField($attribute) . " ?>\n\n";
+		}
+	} ?>
 
-<?php foreach ($generator->getColumnNames() as $attribute) {
-    if (in_array($attribute, $safeAttributes)) {
-        echo "    <?= " . $generator->generateActiveField($attribute) . " ?>\n\n";
-    }
-} ?>
-    <div class="form-group">
-        <?= "<?= " ?>Html::submitButton($model->isNewRecord ? <?= $generator->generateString('Create') ?> : <?= $generator->generateString('Update') ?>, ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-
-    <?= "<?php " ?>ActiveForm::end(); ?>
-
-</div>
+	</div><!-- /.box-body -->
+	<div class="box-footer">
+		<?= "<?= " ?> Html::a('<i class="fa fa-caret-left"></i> ' . <?= $generator->generateString('Back')?>, ['index'], ['class' => 'btn btn-default']) ?>
+		<?= "<?= " ?> Html::submitButton('<i class="fa fa-save"></i> ' . ($model->isNewRecord ? <?= $generator->generateString('Create')?> : <?= $generator->generateString('Update')?>), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+	</div>
+	<?= "<?php " ?> ActiveForm::end(); ?>
+</div><!-- /.box -->

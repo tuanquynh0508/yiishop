@@ -14,7 +14,7 @@ class Utility extends Component {
 		return "Utility component by TuanQuynh.";
 	}
 
-	public function thumbnails($file, $path, $type = 'small') {
+	public function thumbnails($file, $path, $type = 'small', $clear = false) {
 		$handle = new Upload($file, 'vn_VN');
 		if ($handle->uploaded) {
 			//Check Mime
@@ -33,7 +33,9 @@ class Utility extends Component {
 
 			$handle->process($path);
 			if ($handle->processed) {
-				//$handle->clean();
+				if($clear) {
+					$handle->clean();
+				}
 				return true;
 			} else {
 				throw new HttpException(501, $handle->error);
