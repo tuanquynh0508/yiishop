@@ -39,7 +39,7 @@ $baseUrl = Yii::$app->request->baseUrl;
             <span class="icon-bar"></span>
           </a>
           <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">              
+            <ul class="nav navbar-nav">
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -61,7 +61,7 @@ $baseUrl = Yii::$app->request->baseUrl;
                       <a href="#" class="btn btn-default btn-flat">Hồ sơ</a>
                     </div>
                     <div class="pull-right">
-                      <a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/user/default/logout','key'=>'value']); ?>" class="btn btn-default btn-flat">Thoát</a>
+                      <a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/user/default/logout']); ?>" class="btn btn-default btn-flat">Thoát</a>
                     </div>
                   </li>
                 </ul>

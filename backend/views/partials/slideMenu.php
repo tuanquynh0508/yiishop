@@ -22,7 +22,7 @@ $baseUrl = Yii::$app->request->baseUrl;
       http://www.bsourcecode.com/yiiframework2/menu-widget-in-yii-framework-2-0/
       echo Menu::widget([
         'items' => [
-            ['label' => '<i class="fa fa-home"></i> <span>Trang chủ</span>', 'url' => ['/site/index'],
+            ['label' => '<i class="fa fa-dashboard"></i> <span>Trang chủ</span>', 'url' => ['/site/index'],
               'options' => [
                 'class' => 'treeview',
               ],
@@ -50,6 +50,7 @@ $baseUrl = Yii::$app->request->baseUrl;
               'template' => '<a href="{url}">{label} <i class="fa fa-angle-left pull-right"></i></a>',
             ],
             ['label' => '<i class="fa fa-newspaper-o"></i> <span>Trang tin</span>', 'url' => ['product/index']],
+			['label' => '<i class="fa fa-users"></i> <span>Quản trị web</span>', 'url' => ['/user/default/index']],
         ],
         'options' => [
           'class' => 'sidebar-menu',

@@ -3,41 +3,18 @@
 namespace backend\modules\user\controllers;
 
 use Yii;
-//use yii\filters\AccessControl;
-//use yii\web\Controller;
 use common\models\User;
 use backend\models\UserSearch;
-use backend\models\LoginForm;
-
-use backend\components\CController;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
-class DefaultController extends CController {
+/**
+ * CrudController implements the CRUD actions for User model.
+ */
+class CrudController extends Controller
+{
 
-	public function actionLogin() {
-		$this->layout = '//adminlte_login';
-
-		if (!\Yii::$app->user->isGuest) {
-			return $this->goHome();
-		}
-
-		$model = new LoginForm();
-		if ($model->load(Yii::$app->request->post()) && $model->login()) {
-			return $this->goBack();
-		} else {
-			return $this->render('login', [
-						'model' => $model,
-			]);
-		}
-	}
-
-	public function actionLogout() {
-		Yii::$app->user->logout();
-
-		return $this->goHome();
-	}
-
-	/**
+    /**
      * Lists all User models.
      * @return mixed
      */
@@ -131,5 +108,4 @@ class DefaultController extends CController {
             throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
         }
     }
-
 }

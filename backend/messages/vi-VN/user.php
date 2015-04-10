@@ -11,7 +11,7 @@ return [
     'First Name' => 'Họ Lót',
     'Last Name' => 'Tên',
     'Email' => 'Email',
-    'Status' => 'Bị khóa',
+    'Status' => 'Trạng thái',
     'Last Login' => 'Đăng nhập cuối',
 
     //Form

@@ -48,13 +48,13 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
 							}
 							return Html::img($picture, ['height' => 30]);
 						},
-								'enableSorting' => false,
-								'filter' => false,
-							],
-							['class' => 'yii\grid\ActionColumn'],
-						],
-					]);
-					?>
+						'enableSorting' => false,
+						'filter' => false,
+					],
+					['class' => 'yii\grid\ActionColumn'],
+				],
+			]);
+			?>
         </div><!-- /.box-body -->
 	</div><!-- /.box -->
 	<!-- ====================================== -->
