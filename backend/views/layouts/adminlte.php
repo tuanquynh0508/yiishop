@@ -58,7 +58,7 @@ $baseUrl = Yii::$app->request->baseUrl;
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Hồ sơ</a>
+                      <a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/user/default/change-password']); ?>" class="btn btn-default btn-flat">Đổi mật khẩu</a>
                     </div>
                     <div class="pull-right">
                       <a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/user/default/logout']); ?>" class="btn btn-default btn-flat">Thoát</a>

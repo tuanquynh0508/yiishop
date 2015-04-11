@@ -8,6 +8,7 @@ use Yii;
 use common\models\User;
 use backend\models\UserSearch;
 use backend\models\LoginForm;
+use backend\models\ChangePasswordForm;
 
 use backend\components\CController;
 use yii\web\NotFoundHttpException;
@@ -59,11 +60,15 @@ class DefaultController extends CController {
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new User(['scenario' => 'register']);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			Yii::$app->session->setFlash('success', Yii::t('app', 'Create successful.'));
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+			$model->generateAuthKey();
+			$model->generatePasswordResetToken();
+			if($model->save()) {
+				Yii::$app->session->setFlash('success', Yii::t('app', 'Create successful.'));
+				return $this->redirect(['view', 'id' => $model->id]);
+			}
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -129,6 +134,20 @@ class DefaultController extends CController {
             return $model;
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
+        }
+    }
+	
+	public function actionChangePassword()
+    {
+        $model = new ChangePasswordForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->changePassword()) {
+			Yii::$app->session->setFlash('success', Yii::t('app', 'Change password successful.'));
+            return $this->refresh();
+        } else {
+            return $this->render('changePassword', [
+                'model' => $model,
+            ]);
         }
     }
 

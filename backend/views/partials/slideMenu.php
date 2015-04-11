@@ -48,9 +48,10 @@ $baseUrl = Yii::$app->request->baseUrl;
                 ['label' => '<i class="fa fa-caret-right"></i> Báo cáo tồn kho', 'url' => ['product/index']],
               ],
               'template' => '<a href="{url}">{label} <i class="fa fa-angle-left pull-right"></i></a>',
+				'visible' => Yii::$app->user->identity->isSuperAdmin()
             ],
             ['label' => '<i class="fa fa-newspaper-o"></i> <span>Trang tin</span>', 'url' => ['product/index']],
-			['label' => '<i class="fa fa-users"></i> <span>Quản trị web</span>', 'url' => ['/user/default/index']],
+			['label' => '<i class="fa fa-users"></i> <span>Quản trị web</span>', 'url' => ['/user/default/index'], 'visible' => Yii::$app->user->identity->isSuperAdmin()],
         ],
         'options' => [
           'class' => 'sidebar-menu',

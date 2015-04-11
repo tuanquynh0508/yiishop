@@ -3,6 +3,7 @@
 use Yii;
 use yii\helpers\Html;
 use backend\components\CGridView;
+use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\UserSearch */
@@ -36,9 +37,23 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'username',
+            [
+				'attribute' => 'id',
+				'value' => function($data) {return $data->id;},
+				'headerOptions' => ['width' => '50'],
+			],
+			[
+				'attribute' => 'username',
+				'format' => 'html',
+				'value' => function($data) {
+					if($data->isSuperAdmin()) {
+						$isSuper = '<i class="fa fa-gavel"></i>';
+					} else {
+						$isSuper = '<i class="fa fa-user"></i>';
+					}
+					return $isSuper.'-'.$data->username;					
+				},
+			],
             'first_name',
             'last_name',
             'email:email',
@@ -46,7 +61,7 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
 				'attribute' => 'status',
 				'format' => 'html',
 				'value' => function ($data) {
-					if ($data->status==10) {
+					if ($data->status==User::STATUS_ACTIVE) {
 						return '<span class="label label-success">Hoạt động</span>';
 					} else {
 						return '<span class="label label-danger">Đang khóa</span>';
@@ -54,7 +69,7 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
 				},
 				//'enableSorting' => true,
 				'filter' => false,
-				'htmlOptions' => ['class' => 'center'],
+				'headerOptions' => ['width' => '80'],
 			],
             //'status',
             // 'last_login',

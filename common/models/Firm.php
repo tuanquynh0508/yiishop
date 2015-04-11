@@ -35,7 +35,7 @@ class Firm extends CActiveRecord {
 			[['title'], 'required'],
 			[['created_at', 'updated_at'], 'safe'],
 			[['del_flg'], 'integer'],
-			[['logo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'gif, jpg, jpeg, png, bmp'],
+			[['logo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'gif, jpg, jpeg, png, bmp', 'maxSize' => 1024*1024],
 			[['title', 'logo'], 'string', 'max' => 255]
 		];
 	}

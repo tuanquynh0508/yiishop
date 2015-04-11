@@ -2,11 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
-$this->title = $model->id;
+$this->title = $model->getFullname();
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -20,24 +21,42 @@ $this->params['breadcrumbs'][] = $this->title;
 		</div><!-- /.box-header -->
 		<div class="box-body">
 
-			<?= DetailView::widget([
-					'model' => $model,
-					'attributes' => [
-			            'id',
-            'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            'first_name',
-            'last_name',
-            'email:email',
-            'status',
-            'last_login',
-            'created_at',
-            'updated_at',
-            'del_flg',
+			<?php
+			if($model->status==User::STATUS_ACTIVE) {
+				$status = '<span class="label label-success">Hoạt động</span>';
+			} else {
+				$status = '<span class="label label-danger">Đang khóa</span>';
+			}
+			
+			if($model->isSuperAdmin()) {
+				$isSuper = '<i class="fa fa-gavel"></i>';
+			} else {
+				$isSuper = '<i class="fa fa-user"></i>';
+			}
+			
+			echo DetailView::widget([
+				'model' => $model,
+				'attributes' => [
+					'id',
+					'username',            
+					'first_name',
+					'last_name',
+					'email:email',
+					[
+						'attribute' => 'status',
+						'value' => $status,
+						'format' => 'html',
 					],
-				]) ?>
+					[
+						'attribute' => 'is_super',
+						'value' => $isSuper,
+						'format' => 'html',
+					],
+					'last_login',
+					'created_at',
+					'updated_at',
+				],
+			]) ?>
 
 		</div><!-- /.box-body -->
 		<div class="box-footer">

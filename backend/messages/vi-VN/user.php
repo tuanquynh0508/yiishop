@@ -6,12 +6,16 @@ return [
     //Attributes
     'Username' => 'Mã',
     'Auth Key' => 'Mã xác thực',
+	'Password' => 'Mật khẩu',
+	'Password Confirm' => 'Nhập lại mật khẩu',
+	'Password Old' => 'Mật khẩu cũ',
     'Password Hash' => 'Mật khẩu',
     'Password Reset Token' => 'Mã thay đổi mật khẩu',
     'First Name' => 'Họ Lót',
     'Last Name' => 'Tên',
     'Email' => 'Email',
     'Status' => 'Trạng thái',
+	'Super Admin' => 'Loại người dùng',
     'Last Login' => 'Đăng nhập cuối',
 
     //Form

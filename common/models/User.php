@@ -20,6 +20,7 @@ use common\components\CActiveRecord;
  * @property string $email
  * @property string $auth_key
  * @property integer $status
+ * @property integer $is_super
  * @property datetime $last_login
  * @property datetime $created_at
  * @property datetime $updated_at
@@ -28,9 +29,10 @@ use common\components\CActiveRecord;
 class User extends CActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 10;
+    const STATUS_ACTIVE = 1;
 
     public $password;
+	public $passwordConfirm;
 
     /**
      * @inheritdoc
@@ -56,16 +58,28 @@ class User extends CActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'password_hash', 'first_name', 'last_name', 'email'], 'required'],
-            [['status', 'del_flg'], 'integer'],
-            [['last_login', 'created_at', 'updated_at', 'password'], 'safe'],
+            [['username', 'first_name', 'last_name', 'email'], 'required'],
+            [['status', 'is_super', 'del_flg'], 'integer'],
+            [['last_login', 'created_at', 'updated_at', 'password', 'passwordConfirm'], 'safe'],			
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['first_name', 'last_name'], 'string', 'max' => 50],
             [['auth_key'], 'string', 'max' => 32],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
             [['email'], 'email'],
+			['username', 'filter', 'filter' => 'trim'],
+			[['username', 'email'], 'unique'],
+			['password', 'string', 'min' => 6],
+			[['password', 'passwordConfirm'], 'required', 'on' => 'register'],
+			[['passwordConfirm'], 'compare', 'compareAttribute' => 'password'],
         ];
+    }
+	
+	public function scenarios()
+    {
+		$scenarios = parent::scenarios();
+        $scenarios['login'] = ['username','password_hash'];//Scenario Values Only Accepted
+        return $scenarios;
     }
 
     /**
@@ -76,13 +90,16 @@ class User extends CActiveRecord implements IdentityInterface
         return [
             'id' => Yii::t('app', 'ID'),
             'username' => Yii::t('user', 'Username'),
-            'auth_key' => Yii::t('user', 'Auth Key'),
+            'auth_key' => Yii::t('user', 'Auth Key'),			
+			'password' => Yii::t('user', 'Password'),
+			'passwordConfirm' => Yii::t('user', 'Password Confirm'),
             'password_hash' => Yii::t('user', 'Password Hash'),
             'password_reset_token' => Yii::t('user', 'Password Reset Token'),
             'first_name' => Yii::t('user', 'First Name'),
             'last_name' => Yii::t('user', 'Last Name'),
             'email' => Yii::t('user', 'Email'),
             'status' => Yii::t('user', 'Status'),
+			'is_super' => Yii::t('user', 'Super Admin'),			
             'last_login' => Yii::t('user', 'Last Login'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
@@ -99,6 +116,10 @@ class User extends CActiveRecord implements IdentityInterface
 
     public function getFullname() {
         return $this->first_name.' '.$this->last_name;
+    }
+	
+	public function isSuperAdmin() {
+        return ($this->is_super==1)?true:false;
     }
 
     public function toString() {

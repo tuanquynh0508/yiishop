@@ -16,30 +16,21 @@ use yii\widgets\ActiveForm;
 	<?php  $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 	<div class="box-body">
 
-	    <?= $form->field($model, 'username')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'auth_key')->textInput(['maxlength' => 32]) ?>
-
-    <?= $form->field($model, 'password_hash')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'password_reset_token')->textInput(['maxlength' => 255]) ?>
+	<?= $form->field($model, 'username')->textInput(['maxlength' => 255]) ?>   
+		
+	<?= $form->field($model, 'password')->passwordInput(['maxlength' => 255])->hint('Trong trường hợp cập nhật, nhập mật khẩu mới nếu bạn muốn thay đổi.') ?>   
+		
+	<?= $form->field($model, 'passwordConfirm')->passwordInput(['maxlength' => 255]) ?>
+	
+	<?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
 
     <?= $form->field($model, 'first_name')->textInput(['maxlength' => 50]) ?>
 
-    <?= $form->field($model, 'last_name')->textInput(['maxlength' => 50]) ?>
-
-    <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'last_login')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'del_flg')->textInput() ?>
-
+    <?= $form->field($model, 'last_name')->textInput(['maxlength' => 50]) ?>    
+		
+	<?= $form->field($model, 'is_super')->checkbox() ?>
+		
+    <?= $form->field($model, 'status')->checkbox() ?>
 
 	</div><!-- /.box-body -->
 	<div class="box-footer">
