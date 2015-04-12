@@ -32,6 +32,7 @@ $baseUrl = Yii::$app->request->baseUrl;
                 ['label' => '<i class="fa fa-caret-right"></i> Danh mục sản phẩm', 'url' => ['/product/category/index']],
 				['label' => '<i class="fa fa-caret-right"></i> Hãng sản xuất', 'url' => ['/product/firm/index']],
 				['label' => '<i class="fa fa-caret-right"></i> Giảm giá', 'url' => ['/product/sale/index']],
+				['label' => '<i class="fa fa-caret-right"></i> Thuộc tính', 'url' => ['/product/option/index']],
               ],
               'options' => [
                 'class' => 'treeview',
