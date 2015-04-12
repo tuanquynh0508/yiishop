@@ -18,8 +18,10 @@ use common\components\CActiveRecord;
  * @property Option[] $options
  */
 class OptionGroup extends CActiveRecord
-{				
-    /**
+{
+	public $optionsList = [];
+
+	/**
      * @inheritdoc
      */
     public static function tableName()
@@ -33,6 +35,7 @@ class OptionGroup extends CActiveRecord
     public function rules()
     {
         return [
+			[['title'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['del_flg'], 'integer'],
             [['title'], 'string', 'max' => 255],
@@ -62,11 +65,39 @@ class OptionGroup extends CActiveRecord
     {
         return $this->hasMany(Option::className(), ['option_group_id' => 'id']);
     }
-	
+
 	public function getTypeList() {
 		return [
 			'text' => 'Kiểu Text',
-			'color' => 'Kiểu Màu sắc',			
+			'color' => 'Kiểu Màu sắc',
 		];
+	}
+
+	public function save($runValidation = true, $attributeNames = null) {
+		$transaction = $this->getDb()->beginTransaction();
+		try {
+			parent::save($runValidation, $attributeNames);
+
+			$this->unlinkAll('options', true);
+
+			foreach ($this->optionsList as $optionId => $optionTitle) {
+				$option = new Option();
+				$option->title = $optionTitle;
+				$this->link('options', $option);
+			}
+
+			$transaction->commit();
+
+			return $this;
+		} catch (Exception $e) {
+			$transaction->rollBack();
+			return null;
+		}
+	}
+
+	public function getOptionsList() {
+		foreach ($this->options as $option) {
+			$this->optionsList[$option->id] = $option->title;
+		}
 	}
 }

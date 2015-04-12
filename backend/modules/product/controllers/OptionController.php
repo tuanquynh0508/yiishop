@@ -38,14 +38,19 @@ class OptionController extends CController
     {
         $model = new OptionGroup();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			Yii::$app->session->setFlash('success', Yii::t('app', 'Create successful.'));
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+			$post = Yii::$app->request->post();
+			$model->optionsList = $post['Options'];
+			$model->optionsList = $this->formatRelationList($model->optionsList);
+			if($model->save()) {
+				Yii::$app->session->setFlash('success', Yii::t('app', 'Create successful.'));
+				return $this->redirect(['view', 'id' => $model->id]);
+			}
         }
+		return $this->render('create', [
+			'model' => $model,
+			'listOptions' => $model->optionsList,
+		]);
     }
 
     /**
@@ -57,15 +62,21 @@ class OptionController extends CController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		$model->getOptionsList();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			Yii::$app->session->setFlash('success', Yii::t('app', 'Update successful.'));
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+		if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+			$post = Yii::$app->request->post();
+			$model->optionsList = $post['Options'];
+			$model->optionsList = $this->formatRelationList($model->optionsList);
+			if($model->save()) {
+				Yii::$app->session->setFlash('success', Yii::t('app', 'Update successful.'));
+				return $this->redirect(['view', 'id' => $model->id]);
+			}
         }
+		return $this->render('update', [
+			'model' => $model,
+			'listOptions' => $model->optionsList,
+		]);
     }
 
     /**
@@ -108,4 +119,13 @@ class OptionController extends CController
             throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
         }
     }
+
+	private function formatRelationList($data) {
+		foreach($data as $key => $value) {
+			if(trim($value)=='') {
+				unset($data[$key]);
+			}
+		}
+		return $data;
+	}
 }
