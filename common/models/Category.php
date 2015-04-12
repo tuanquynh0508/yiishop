@@ -39,7 +39,8 @@ class Category extends CActiveRecord {
 			[['description'], 'string'],
 			[['created_at', 'updated_at'], 'safe'],
 			[['slug', 'title'], 'string', 'max' => 255],
-			[['slug'], 'unique']
+			[['slug'], 'unique'],
+			['parent_id', 'checkParentValidation'],
 		];
 	}
 
@@ -58,6 +59,12 @@ class Category extends CActiveRecord {
 			'del_flg' => Yii::t('app', 'Del Flg'),
 			'parentName' => 'Danh mục cha',
 		];
+	}
+	
+	public function checkParentValidation($attribute, $params){
+		// add custom validation
+		if(!empty($this->$attribute) && $this->$attribute==$this->id)
+			$this->addError($attribute,Yii::t('backend', 'Danh mục cha không hợp lệ'));
 	}
 
 	/**
@@ -86,9 +93,10 @@ class Category extends CActiveRecord {
 	public function getTreeCategory($parentId = 0, $level = 1, $suffix = "", $recursive = false, $skipId = 0) {
 		$list = array();
 		$categories = Category::find()
-				->where('IFNULL(parent_id,0) = :parentId AND id != :skipId', [
+				->where('IFNULL(parent_id,0) = :parentId AND id != :skipId AND del_flg = :delFlag', [
 					':parentId' => $parentId,
 					':skipId' => $skipId,
+					':delFlag' => 0,
 				])
 				->orderBy('title')
 				->all();

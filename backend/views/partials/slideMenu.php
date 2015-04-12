@@ -27,10 +27,11 @@ $baseUrl = Yii::$app->request->baseUrl;
                 'class' => 'treeview',
               ],
             ],
-            ['label' => '<i class="fa fa-cube"></i> <span>Sản phẩm</span>', 'url' => ['product/index'], 'items' => [
-				['label' => '<i class="fa fa-caret-right"></i> Sản phẩm', 'url' => ['product/index']],
-                ['label' => '<i class="fa fa-caret-right"></i> Danh mục sản phẩm', 'url' => ['/category/default/index']],
-				['label' => '<i class="fa fa-caret-right"></i> Hãng sản xuất', 'url' => ['/firm/default/index']],
+            ['label' => '<i class="fa fa-cube"></i> <span>Sản phẩm</span>', 'url' => ['/product/default/index'], 'items' => [
+				['label' => '<i class="fa fa-caret-right"></i> Sản phẩm', 'url' => ['/product/default/index']],
+                ['label' => '<i class="fa fa-caret-right"></i> Danh mục sản phẩm', 'url' => ['/product/category/index']],
+				['label' => '<i class="fa fa-caret-right"></i> Hãng sản xuất', 'url' => ['/product/firm/index']],
+				['label' => '<i class="fa fa-caret-right"></i> Giảm giá', 'url' => ['/product/sale/index']],
               ],
               'options' => [
                 'class' => 'treeview',

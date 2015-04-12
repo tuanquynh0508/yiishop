@@ -15,7 +15,7 @@ return [
     'Last Name' => 'Tên',
     'Email' => 'Email',
     'Status' => 'Trạng thái',
-	'Super Admin' => 'Loại người dùng',
+	'Super Admin' => 'Quản trị cấp cao',
     'Last Login' => 'Đăng nhập cuối',
 
     //Form

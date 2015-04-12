@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\CategorySearch */
+/* @var $model backend\models\SaleSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="category-search">
+<div class="sale-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,13 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'parent_id') ?>
-
-    <?= $form->field($model, 'slug') ?>
-
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'description') ?>
+    <?= $form->field($model, 'sale') ?>
+
+    <?= $form->field($model, 'start_date') ?>
+
+    <?= $form->field($model, 'end_date') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 

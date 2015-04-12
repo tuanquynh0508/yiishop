@@ -12,9 +12,29 @@ use backend\models\ChangePasswordForm;
 
 use backend\components\CController;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 
 class DefaultController extends CController {
-
+	
+	public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'delete', 'view'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'create', 'update', 'delete', 'view'],
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            return Yii::$app->user->identity->isSuperAdmin();
+                        }
+                    ],
+                ],
+            ],
+        ];
+    }
+	
 	public function actionLogin() {
 		$this->layout = '//adminlte_login';
 

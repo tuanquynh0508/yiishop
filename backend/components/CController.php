@@ -47,7 +47,7 @@ class CController extends Controller
         ];
 
         if(!empty($this->CBehaviors())) {
-            $defaultAccessRules = array_merge_recursive($this->CBehaviors(),$defaultAccessRules) ;
+            $defaultAccessRules = array_merge_recursive($defaultAccessRules, $this->CBehaviors()) ;
         }
 
         return $defaultAccessRules;

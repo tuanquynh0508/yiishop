@@ -36,13 +36,12 @@ $this->params['breadcrumbs'][] = $this->title;
 					],
 					'created_at',
 					'updated_at',
-					'del_flg',
 				],
 			])
 			?>
 		</div><!-- /.box-body -->
 		<div class="box-footer">
-			<a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/firm/default/index']); ?>" class="btn btn-default"><i class="fa fa-caret-left"></i> Quay lại</a>
+			<?=  Html::a('<i class="fa fa-caret-left"></i> ' . Yii::t('app', 'Back'), ['index'], ['class' => 'btn btn-default']) ?>
 			<?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 			<?=
 			Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [

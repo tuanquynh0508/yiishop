@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\modules\firm\controllers;
+namespace backend\modules\product\controllers;
 
 use Yii;
 use backend\components\CController;
@@ -9,7 +9,7 @@ use backend\models\FirmSearch;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
-class DefaultController extends CController {
+class FirmController extends CController {
 
 	public function actionIndex() {
 		$searchModel = new FirmSearch();

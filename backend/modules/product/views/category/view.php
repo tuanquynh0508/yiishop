@@ -2,13 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use common\models\User;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\User */
+/* @var $model common\models\Category */
 
-$this->title = $model->getFullname();
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
+$this->title = $model->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="content">
@@ -21,38 +20,17 @@ $this->params['breadcrumbs'][] = $this->title;
 		</div><!-- /.box-header -->
 		<div class="box-body">
 
-			<?php
-			if($model->status==User::STATUS_ACTIVE) {
-				$status = '<span class="label label-success">Hoạt động</span>';
-			} else {
-				$status = '<span class="label label-danger">Đang khóa</span>';
-			}
-			
-			if($model->isSuperAdmin()) {
-				$isSuper = '<i class="fa fa-check-circle"></i>';
-			} else {
-				$isSuper = '<i class="fa fa-minus-square"></i>';
-			}
-			
-			echo DetailView::widget([
+			<?= DetailView::widget([
 				'model' => $model,
 				'attributes' => [
 					'id',
-					'username',            
-					'first_name',
-					'last_name',
-					'email:email',
 					[
-						'attribute' => 'status',
-						'value' => $status,
-						'format' => 'html',
+						'attribute' => 'parent_id',
+						'value' => $model->getParentName(),
 					],
-					[
-						'attribute' => 'is_super',
-						'value' => $isSuper,
-						'format' => 'html',
-					],
-					'last_login',
+					'slug',
+					'title',
+					'description:ntext',
 					'created_at',
 					'updated_at',
 				],

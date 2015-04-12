@@ -12,13 +12,13 @@ return [
 	'modules' => [
 		'user' => [
 			'class' => 'backend\modules\user\User',
-		],
-		'category' => [
-			'class' => 'backend\modules\category\Category',
-		],
+		],		
 		'firm' => [
 			'class' => 'backend\modules\firm\Firm',
 		],
+		'product' => [
+            'class' => 'backend\modules\product\Product',
+        ],
 	],
 	'components' => [
 		'user' => [

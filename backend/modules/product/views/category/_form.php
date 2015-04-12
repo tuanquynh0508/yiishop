@@ -30,7 +30,7 @@ use common\models\Category;
 		<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 	</div><!-- /.box-body -->
 	<div class="box-footer">
-		<a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/category/default/index']); ?>" class="btn btn-default"><i class="fa fa-caret-left"></i> Quay lại</a>
+		<?=  Html::a('<i class="fa fa-caret-left"></i> ' . Yii::t('app', 'Back'), ['index'], ['class' => 'btn btn-default']) ?>
 		<?= Html::submitButton('<i class="fa fa-save"></i> ' . ($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update')), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 	</div>
 	<?php ActiveForm::end(); ?>
