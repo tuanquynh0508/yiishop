@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\OptionGroup */
+/* @var $model common\models\Product */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Option Groups'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="content">
@@ -20,27 +20,29 @@ $this->params['breadcrumbs'][] = $this->title;
 		</div><!-- /.box-header -->
 		<div class="box-body">
 
-			<?php
-			$options = '';
-			$listOption = $model->options;
-			foreach($listOption as $option) {
-				$options .= '<p>- '.$option->title.'</p>';
-			}
-			echo DetailView::widget([
-				'model' => $model,
-				'attributes' => [
-					'id',
-					'title',
-					'option_type',
-					[
-						'attribute' => 'options',
-						'value' => $options,
-						'format' => 'html',
+			<?= DetailView::widget([
+					'model' => $model,
+					'attributes' => [
+			            'id',
+            'firm_id',
+            'upc',
+            'slug',
+            'title',
+            'description:ntext',
+            'wholesale_prices',
+            'retail_price',
+            'cost',
+            'made',
+            'quantity',
+            'out_of_stock',
+            'is_new',
+            'is_special',
+            'views',
+            'created_at',
+            'updated_at',
+            'del_flg',
 					],
-					'created_at',
-					'updated_at',
-				],
-			]) ?>
+				]) ?>
 
 		</div><!-- /.box-body -->
 		<div class="box-footer">

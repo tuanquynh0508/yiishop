@@ -1,12 +1,66 @@
-<div class="product-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
-</div>
+<?php
+
+use Yii;
+use yii\helpers\Html;
+use backend\components\CGridView;
+
+/* @var $this yii\web\View */
+/* @var $searchModel backend\models\ProductSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = Yii::t('app', 'Products');
+$this->params['breadcrumbs'][] = $this->title;
+
+$baseUrl = Yii::$app->request->baseUrl;
+$this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.bootstrap.css', ['depends' => [\backend\assets\AdminlteAsset::className()]]);
+?>
+<!-- Main content -->
+<section class="content">
+	<!-- ====================================== -->
+	<?php  echo yii\base\View::render('//partials/flashMessage', array()); ?>
+
+	<div class="box box-primary">
+        <div class="box-header">
+			<h3 class="box-title"><?=  Html::encode($this->title) ?></h3>
+			<div class="box-tools">
+				<?=  Html::a('<i class="fa fa-plus"></i> ' . Yii::t('app', 'Add New'), ['create'], ['class' => 'btn btn-block btn-success btn-sm']) ?>
+			</div><!-- /.box-tools -->
+        </div><!-- /.box-header -->
+        <div class="box-body no-padding">
+
+			    <?= CGridView::widget([
+		'tableOptions' => [
+			'class' => 'table table-bordered table-striped dataTable'
+		],
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
+            'firm_id',
+            'upc',
+            'slug',
+            'title',
+            // 'description:ntext',
+            // 'wholesale_prices',
+            // 'retail_price',
+            // 'cost',
+            // 'made',
+            // 'quantity',
+            // 'out_of_stock',
+            // 'is_new',
+            // 'is_special',
+            // 'views',
+            // 'created_at',
+            // 'updated_at',
+            // 'del_flg',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+
+		</div><!-- /.box-body -->
+	</div><!-- /.box -->
+	<!-- ====================================== -->
+</section><!-- /.content -->

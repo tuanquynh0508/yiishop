@@ -117,5 +117,33 @@ class Category extends CActiveRecord {
 		}
 		return $list;
 	}
+	
+	public static function staticGetTreeCategory($parentId = 0, $level = 1, $suffix = "", $recursive = false, $skipId = 0) {
+		$list = array();
+		$categories = Category::find()
+				->where('IFNULL(parent_id,0) = :parentId AND id != :skipId AND del_flg = :delFlag', [
+					':parentId' => $parentId,
+					':skipId' => $skipId,
+					':delFlag' => 0,
+				])
+				->orderBy('title')
+				->all();
+		foreach ($categories as $category) {
+			$item = new \stdClass();
+			$item->id = $category->id;
+			$item->title = str_pad($category->title, 3 * $level + strlen($category->title), $suffix, STR_PAD_LEFT);
+			$item->parent_id = $category->parent_id;
+			$item->slug = $category->slug;
+			$item->level = $level;
+			if ($recursive) {
+				$item->childrent = Category::staticGetTreeCategory($category->id, $level + 1);
+				$list[] = $item;
+			} else {
+				$list[] = $item;
+				$list = array_merge($list, Category::staticGetTreeCategory($category->id, $level + 1, $suffix, $recursive, $skipId));
+			}
+		}
+		return $list;
+	}
 
 }
