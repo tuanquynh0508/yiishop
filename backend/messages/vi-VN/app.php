@@ -25,6 +25,7 @@ return [
 	'Views' => 'Số lượng xem',
 	'Firm ID' => 'Hãng sản xuất',
 	'Categories' => 'Danh mục',
+	'Sales' => 'Khuyến mãi',
 	
 	//Buttons
 	'Add New' => 'Tạo mới',

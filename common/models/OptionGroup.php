@@ -100,4 +100,15 @@ class OptionGroup extends CActiveRecord
 			$this->optionsList[$option->id] = $option->title;
 		}
 	}
+	
+	/**
+     * @inheritdoc
+     */
+	public function load($data, $formName = null)
+    {		
+		if(isset($data['Options'])) {
+			$this->optionsList = $this->removeEmptyData($data['Options']);
+		}
+		return parent::load($data,$formName);
+	}
 }

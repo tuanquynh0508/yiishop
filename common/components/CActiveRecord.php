@@ -48,5 +48,14 @@ class CActiveRecord extends \yii\db\ActiveRecord {
 		$this->del_flg = 1;
 		return $this->save();
 	}
+	
+	public function removeEmptyData($data) {
+		foreach($data as $key => $value) {
+			if(trim($value)=='') {
+				unset($data[$key]);
+			}
+		}
+		return $data;
+	}
 
 }

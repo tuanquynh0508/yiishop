@@ -7,6 +7,7 @@ use backend\components\CController;
 use common\models\Product;
 use backend\models\ProductSearch;
 use yii\web\NotFoundHttpException;
+use common\models\OptionGroup;
 
 /**
  * DefaultController implements the CRUD actions for Product model.
@@ -38,16 +39,13 @@ class DefaultController extends CController
     {
         $model = new Product();
 		
-		if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-			$post = Yii::$app->request->post();
-			$model->inputCategories = $post['Product']['categories'];
-			if($model->save()) {
-				Yii::$app->session->setFlash('success', Yii::t('app', 'Create successful.'));
-				return $this->redirect(['view', 'id' => $model->id]);
-			}
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			Yii::$app->session->setFlash('success', Yii::t('app', 'Create successful.'));
+			return $this->redirect(['view', 'id' => $model->id]);
         }
 		return $this->render('create', [
 			'model' => $model,
+			'listOptionGroups' => $this->findAllOptionGroups(),
 		]);
     }
 
@@ -60,17 +58,15 @@ class DefaultController extends CController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		$model->getInputOption();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-			$post = Yii::$app->request->post();
-			$model->inputCategories = $post['Product']['categories'];
-			if($model->save()) {
-				Yii::$app->session->setFlash('success', Yii::t('app', 'Update successful.'));
-				return $this->redirect(['view', 'id' => $model->id]);
-			}
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			Yii::$app->session->setFlash('success', Yii::t('app', 'Update successful.'));
+			return $this->redirect(['view', 'id' => $model->id]);
         }
 		return $this->render('update', [
 			'model' => $model,
+			'listOptionGroups' => $this->findAllOptionGroups(),
 		]);
     }
 
@@ -114,4 +110,9 @@ class DefaultController extends CController
             throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
         }
     }
+	
+	protected function findAllOptionGroups()
+	{
+		return OptionGroup::findAll(['del_flg' => '0']);
+	}
 }
