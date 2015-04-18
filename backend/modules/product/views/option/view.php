@@ -24,7 +24,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			$options = '';
 			$listOption = $model->options;
 			foreach($listOption as $option) {
-				$options .= '<p>- '.$option->title.'</p>';
+				if($model->option_type == 'color') {					
+					$options .= '<i class="fa fa-square fa-lg" style="color:'.$option->title.';"></i> &nbsp;';
+				} else {
+					$options .= '<p>- '.$option->title.'</p>';
+				}
 			}
 			echo DetailView::widget([
 				'model' => $model,

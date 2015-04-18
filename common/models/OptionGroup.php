@@ -72,18 +72,29 @@ class OptionGroup extends CActiveRecord
 			'color' => 'Kiểu Màu sắc',
 		];
 	}
-
+	
+	/**
+     * @inheritdoc
+     */
 	public function save($runValidation = true, $attributeNames = null) {
 		$transaction = $this->getDb()->beginTransaction();
 		try {
 			parent::save($runValidation, $attributeNames);
 
-			$this->unlinkAll('options', true);
+			//Delete option old
+			$this->unlinkOption($this->optionsList);
 
 			foreach ($this->optionsList as $optionId => $optionTitle) {
-				$option = new Option();
-				$option->title = $optionTitle;
-				$this->link('options', $option);
+				if($optionId<0) {
+					$option = new Option();
+					$option->title = $optionTitle;
+					$this->link('options', $option);
+				} else {
+					if (($option = Option::findOne($optionId)) !== null) {
+						$option->title = $optionTitle;
+						$option->save();
+					}
+				}
 			}
 
 			$transaction->commit();
@@ -94,7 +105,19 @@ class OptionGroup extends CActiveRecord
 			return null;
 		}
 	}
-
+	
+	public function unlinkOption($list, $unlinkAll=false, $delete = true) {
+		if($unlinkAll) {
+			$this->unlinkAll('options', $delete);
+		} else {
+			foreach ($this->options as $option) {
+				if(!array_key_exists($option->id,$list)) {
+					$this->unlink('options', $option, $delete);
+				}
+			}
+		}
+	}
+	
 	public function getOptionsList() {
 		foreach ($this->options as $option) {
 			$this->optionsList[$option->id] = $option->title;

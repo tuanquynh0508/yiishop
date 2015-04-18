@@ -115,4 +115,9 @@ class DefaultController extends CController
 	{
 		return OptionGroup::findAll(['del_flg' => '0']);
 	}
+	
+	public function actionUpload()
+    {
+        
+    }
 }

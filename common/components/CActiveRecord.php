@@ -13,7 +13,10 @@ class CActiveRecord extends \yii\db\ActiveRecord {
 	public function CBehaviors() {
 		return [];
 	}
-
+	
+	/**
+     * @inheritdoc
+     */
 	public function behaviors() {
 		$defaultBehaviors = [
 			'timestamp' => [
@@ -34,7 +37,10 @@ class CActiveRecord extends \yii\db\ActiveRecord {
 
 		return $defaultBehaviors;
 	}
-
+	
+	/**
+     * @inheritdoc
+     */
 	public static function find() {
 		return new CActiveQuery(get_called_class());
 	}
@@ -43,7 +49,10 @@ class CActiveRecord extends \yii\db\ActiveRecord {
 	  {
 	  return parent::find()->where(['del_flg' => 0]);
 	  } */
-
+	
+	/**
+     * @inheritdoc
+     */
 	public function delete() {
 		$this->del_flg = 1;
 		return $this->save();

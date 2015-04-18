@@ -3,7 +3,7 @@
 namespace common\models;
 
 use Yii;
-use common\components\CActiveRecord;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%option}}".
@@ -19,7 +19,7 @@ use common\components\CActiveRecord;
  * @property ProductOption[] $productOptions
  * @property Product[] $products
  */
-class Option extends CActiveRecord
+class Option extends ActiveRecord
 {
     /**
      * @inheritdoc

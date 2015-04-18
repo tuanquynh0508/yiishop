@@ -18,9 +18,9 @@ $this->registerCssFile($baseUrl.'/adminlte/plugins/iCheck/all.css', ['depends' =
 $this->registerJsFile($baseUrl.'/adminlte/plugins/iCheck/icheck.min.js', ['depends' => [\yii\bootstrap\BootstrapPluginAsset::className()]]);
 $this->registerJs("
 $(function () {
-    $('input[type=\"checkbox\"].flat-red').iCheck({
+    $('input[type=\"checkbox\"].flat-red, input[type=\"radio\"].flat-red').iCheck({
 		checkboxClass: 'icheckbox_flat-red',
-		radioClass: 'iradio_flat-green'
+		radioClass: 'iradio_flat-red'
 	});
 });
 ", View::POS_END);
@@ -100,8 +100,13 @@ $formName = StringHelper::basename(get_class($model));
 						?>
 						<tr>
 							<th><input type="checkbox" class="flat-red" tabindex='-1' name="<?= $formName ?>[options][]" value="<?= $option->id ?>" <?= (array_key_exists($option->id, $model->inputOption)?'checked':'') ?> /> </th>
+							<?php if($optionGroup->option_type == 'color'): ?>
+							<td><i class="fa fa-square fa-2x" style="color:<?= $option->title ?>;"></i></td>
+							<td><input type="hidden" name="<?= $formName ?>[options-value][<?= $option->id ?>]" value="<?= (array_key_exists($option->id, $model->inputOption)?$model->inputOption[$option->id]:'') ?>"/></td>
+							<?php else: ?>
 							<td><?= $option->title ?></td>
 							<td><input type="textbox" class="form-control" placeholder="Nhập giá trị cho thuộc tính" name="<?= $formName ?>[options-value][<?= $option->id ?>]" value="<?= (array_key_exists($option->id, $model->inputOption)?$model->inputOption[$option->id]:'') ?>"/></td>
+							<?php endif; ?>
 						  </tr>
 						<?php endforeach; ?>
 						  </tbody>
@@ -113,7 +118,44 @@ $formName = StringHelper::basename(get_class($model));
 		</div><!-- /.tab-pane -->
 
 		<div class="tab-pane" id="tab_4">
-			<div class="box-body">Ảnh sản phẩm</div>
+			<div class="box-body">
+				
+				<button class="btn btn-success" type="button" data-toggle="modal" data-target="#modalUpload">
+					<i class="fa fa-upload"></i>
+					Tải ảnh lên.
+				</button>
+				
+				<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="col-sm-1" nowrap>Ảnh đại diện</th>
+						<th class="col-sm-5" nowrap>Ảnh</th>
+						<th class="col-sm-1" nowrap>Chiều rộng</th>
+						<th class="col-sm-1" nowrap>Chiều dài</th>
+						<th class="col-sm-1" nowrap>Dung lượng</th>
+						<th class="col-sm-1" nowrap>Loại ảnh</th>
+						<th class="col-sm-2" nowrap></th>
+					</tr>													  
+					</thead>
+					<tbody>
+				<?php 
+				//$listOption = $optionGroup->options;			
+				//foreach($listOption as $option):						
+				?>
+				<tr>
+					<th><input type="radio" class="flat-red" tabindex='-1' name="<?= $formName ?>[imgs][]" value=""/> </th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				  </tr>
+				<?php //endforeach; ?>
+				  </tbody>
+				  </table>
+				
+			</div>
 		</div><!-- /.tab-pane -->
 
 		<div class="tab-pane" id="tab_5">
@@ -148,3 +190,6 @@ $formName = StringHelper::basename(get_class($model));
 	<?php ActiveForm::end(); ?>
 
 </div><!-- nav-tabs-custom -->
+
+<!-- Modal Upload -->
+<?php  echo yii\base\View::render('//partials/modalUpload', array()); ?>
