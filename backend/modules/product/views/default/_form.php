@@ -120,7 +120,7 @@ $formName = StringHelper::basename(get_class($model));
 		<div class="tab-pane" id="tab_4">
 			<div class="box-body">
 				
-				<button class="btn btn-success" type="button" data-toggle="modal" data-target="#modalUpload">
+				<button class="btn btn-success" type="button" onClick="showModalUpload();">
 					<i class="fa fa-upload"></i>
 					Tải ảnh lên.
 				</button>
