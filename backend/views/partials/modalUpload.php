@@ -10,22 +10,22 @@ $this->registerJsFile($baseUrl.'/adminlte/plugins/plupload/i18n/vi.js', ['depend
 
 $this->registerJs("
 // Initialize the widget when the DOM is ready
-$(function() {
+//$(function() {
     // Setup html5 version
     var uploader = $('#uploader').plupload({
         // General settings
         runtimes : 'html5,flash,silverlight,html4',
-        url : '$baseUrl/upload.php',         
-        chunk_size : '1mb',		
+        url : '$baseUrl/upload.php',
+        chunk_size : '1mb',
         rename : true,
 		unique_names : true,
-        dragdrop: true,		
+        dragdrop: true,
         sortable: true,
 		views: {
             list: true,
             thumbs: true, // Show thumbs
             active: 'thumbs'
-        },         
+        },
         filters : {
             // Maximum file size
             max_file_size : '2mb',
@@ -37,22 +37,30 @@ $(function() {
 		// Resize images on client-side if we can
         //resize : {width : 640, height : 480, quality : 1000},
         // Flash settings
-        flash_swf_url : '$baseUrl/adminlte/plugins/plupload/Moxie.swf',     
+        flash_swf_url : '$baseUrl/adminlte/plugins/plupload/Moxie.swf',
         // Silverlight settings
-        silverlight_xap_url : '$baseUrl/adminlte/plugins/plupload/Moxie.xap'
-    });
-	
-UploadComplete: function(up, files) {
-                // Called when all files are either uploaded or failed
-                log('[UploadComplete]');
-            },
-});
+        silverlight_xap_url : '$baseUrl/adminlte/plugins/plupload/Moxie.xap',
 
-function showModalUpload() {    
+		// Post init events, bound after the internal events
+        init : {
+			UploadComplete: function(up, files) {
+				// Called when all files are either uploaded or failed
+				console.log(files[0]);
+			}
+		}
+    });
+
+//});
+
+function showModalUpload() {
     $('#modalUpload').modal({
         backdrop: 'static'
     }).on('shown.bs.modal', function (e) {
-		uploader.refresh();
+		$.each(uploader.files, function (i, file) {
+			if (file && file.id != currentFile.id) {
+				uploader.removeFile(file);
+			}
+		});
     }).on('hidden.bs.modal', function (e) {
         //$('.btnAddEvent',$(this)).off();
     }).modal('show');
@@ -67,7 +75,7 @@ function showModalUpload() {
 		  <h4 class="modal-title">
 			  <i class="fa fa-upload"></i> Tải ảnh lên
 		  </h4>
-		</div>		  
+		</div>
 		<div id="uploader">
 			<p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
 		</div>

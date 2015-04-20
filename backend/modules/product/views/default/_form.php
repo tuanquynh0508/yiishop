@@ -32,14 +32,14 @@ $formName = StringHelper::basename(get_class($model));
 <div class="nav-tabs-custom">
 	<ul class="nav nav-tabs pull-right">
 		<li class="active"><a href="#tab_1" data-toggle="tab">Thông tin cơ bản</a></li>
-		<li><a href="#tab_2" data-toggle="tab">Chi tiết</a></li>		
+		<li><a href="#tab_2" data-toggle="tab">Chi tiết</a></li>
 		<li><a href="#tab_3" data-toggle="tab">Thuộc tính (Quy cách)</a></li>
 		<li><a href="#tab_4" data-toggle="tab">Ảnh sản phẩm</a></li>
-		<li><a href="#tab_5" data-toggle="tab">Liên kết danh mục</a></li>		
+		<li><a href="#tab_5" data-toggle="tab">Liên kết danh mục</a></li>
 		<li class="pull-left header"><i class="fa fa-cube"></i> <?= Html::encode($this->title) ?></li>
 	</ul>
 	<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-	<div class="tab-content">	  
+	<div class="tab-content">
 		<div class="tab-pane active" id="tab_1">
 			<div class="box-body">
 				<?= $form->field($model, 'upc')->textInput(['maxlength' => 255])->hint('Mã hàng phải là duy nhất, không được trùng lặp') ?>
@@ -58,7 +58,7 @@ $formName = StringHelper::basename(get_class($model));
 
 				<?= $form->field($model, 'wholesale_prices')->textInput()->hint('Giá này không xuất hiện trên web') ?>
 
-				<?= $form->field($model, 'retail_price')->textInput()->hint('Giá này sẽ xuất hiện trên web') ?>    				
+				<?= $form->field($model, 'retail_price')->textInput()->hint('Giá này sẽ xuất hiện trên web') ?>
 
 				<?=
 				$form->field($model, 'sales')->dropDownList(
@@ -91,12 +91,12 @@ $formName = StringHelper::basename(get_class($model));
 								<th class="col-sm-1">Lựa chọn</th>
 								<th class="col-sm-4">Thuộc tính</th>
 							  <th class="col-sm-7">Giá trị</th>
-							</tr>													  
+							</tr>
 							</thead>
 							<tbody>
-						<?php 
-						$listOption = $optionGroup->options;			
-						foreach($listOption as $option):						
+						<?php
+						$listOption = $optionGroup->options;
+						foreach($listOption as $option):
 						?>
 						<tr>
 							<th><input type="checkbox" class="flat-red" tabindex='-1' name="<?= $formName ?>[options][]" value="<?= $option->id ?>" <?= (array_key_exists($option->id, $model->inputOption)?'checked':'') ?> /> </th>
@@ -119,42 +119,15 @@ $formName = StringHelper::basename(get_class($model));
 
 		<div class="tab-pane" id="tab_4">
 			<div class="box-body">
-				
-				<button class="btn btn-success" type="button" onClick="showModalUpload();">
-					<i class="fa fa-upload"></i>
-					Tải ảnh lên.
-				</button>
-				
-				<table class="table table-hover">
-				<thead>
-					<tr>
-						<th class="col-sm-1" nowrap>Ảnh đại diện</th>
-						<th class="col-sm-5" nowrap>Ảnh</th>
-						<th class="col-sm-1" nowrap>Chiều rộng</th>
-						<th class="col-sm-1" nowrap>Chiều dài</th>
-						<th class="col-sm-1" nowrap>Dung lượng</th>
-						<th class="col-sm-1" nowrap>Loại ảnh</th>
-						<th class="col-sm-2" nowrap></th>
-					</tr>													  
-					</thead>
-					<tbody>
-				<?php 
-				//$listOption = $optionGroup->options;			
-				//foreach($listOption as $option):						
-				?>
-				<tr>
-					<th><input type="radio" class="flat-red" tabindex='-1' name="<?= $formName ?>[imgs][]" value=""/> </th>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				  </tr>
-				<?php //endforeach; ?>
-				  </tbody>
-				  </table>
-				
+
+				<div class="clearfix image-list">
+
+					<div class="image-item margin">
+						<img class="img-thumbnail" src="<?php echo $baseUrl; ?>/Apple-II-Computer.jpg" width="250" height="250"/>
+					</div>
+
+				</div>
+
 			</div>
 		</div><!-- /.tab-pane -->
 
@@ -178,7 +151,7 @@ $formName = StringHelper::basename(get_class($model));
 				<?= $form->field($model, 'is_new')->checkbox() ?>
 				<?= $form->field($model, 'is_special')->checkbox() ?>
 			</div>
-		</div><!-- /.tab-pane -->				
+		</div><!-- /.tab-pane -->
 
 	</div><!-- /.tab-content -->
 
@@ -192,4 +165,4 @@ $formName = StringHelper::basename(get_class($model));
 </div><!-- nav-tabs-custom -->
 
 <!-- Modal Upload -->
-<?php  echo yii\base\View::render('//partials/modalUpload', array()); ?>
+<?php  //echo yii\base\View::render('//partials/modalUpload', array()); ?>
