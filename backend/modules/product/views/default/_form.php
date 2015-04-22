@@ -119,15 +119,7 @@ $formName = StringHelper::basename(get_class($model));
 
 		<div class="tab-pane" id="tab_4">
 			<div class="box-body">
-
-				<div class="clearfix image-list">
-
-					<div class="image-item margin">
-						<img class="img-thumbnail" src="<?php echo $baseUrl; ?>/Apple-II-Computer.jpg" width="250" height="250"/>
-					</div>
-
-				</div>
-
+				<?php  echo yii\base\View::render('//partials/dmuploader', array()); ?>
 			</div>
 		</div><!-- /.tab-pane -->
 
@@ -163,6 +155,3 @@ $formName = StringHelper::basename(get_class($model));
 	<?php ActiveForm::end(); ?>
 
 </div><!-- nav-tabs-custom -->
-
-<!-- Modal Upload -->
-<?php  //echo yii\base\View::render('//partials/modalUpload', array()); ?>
