@@ -7,7 +7,10 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/dmupload/dmuploader.css', [
 $this->registerJsFile($baseUrl . '/adminlte/plugins/dmupload/dmuploader.min.js', ['depends' => [\yii\bootstrap\BootstrapPluginAsset::className()]]);
 $this->registerJs("
 $(function () {
-
+	$('input[type=\"checkbox\"].minimal-red, input[type=\"radio\"].minimal-red').iCheck({
+		checkboxClass: 'icheckbox_minimal-red',
+		radioClass: 'iradio_minimal-red'
+	});
 });
 ", View::POS_END);
 ?>
@@ -27,12 +30,12 @@ $(function () {
 <div class="clearfix tq-image-list">
 
 	<div class="tq-image-item margin">
-		<div class="clearfix btnTools bg-gray">
-			<div class="pull-left text-left">
-				<input type="radio" class="flat-red margin" name="" value="" />
+		<div class="clearfix btnTools">
+			<div class="pull-left text-left margin">
+				<input type="radio" class="flat-red" name="" value="" />
 			</div>
-			<div class="pull-right text-right">
-				<button class="btn btn-sm btn-danger btnDelete" type="button"><i class="fa fa-trash-o"></i></button>
+			<div class="pull-right text-right margin">
+				<i class="fa fa-trash-o text-danger"></i>
 			</div>
 		</div>
 		<img src="<?php echo $baseUrl; ?>/Apple-II-Computer.jpg"/>
