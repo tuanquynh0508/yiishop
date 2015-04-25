@@ -84,71 +84,20 @@ and open the template in the editor.
 }
 
 /*
- * File list
- */
-#fileList {
-  float:right;
-  width: 330px;
-  height:196px;
-	margin: 0px;
-	padding: 0px;
-	list-style-type: none;
-	color: gray;
-
-  font-size: 12px;
-
-  overflow: auto;
-}
-
-#fileList .file {
-  width: 290px;
-  margin-bottom: 15px;
-}
-
-#fileList .info {
-  width: 290px;
-  height: 26px;
-  display: block;
-  overflow: hidden;
-
-  line-height: 13px;
-}
-
-#fileList .filename {
-  font-weight: bold;
-}
-
-#fileList .bar {
-  border: solid 1px #C0C0C0;
-  height: 12px;
-  margin-top: 5px;
-  padding: 1px;
-  width: 290px;
-}
-
-#fileList .progress {
-  height: 12px;
-  background-color: #00CCFF;
-}
-
-#fileList span.success {
-  color: #009900;
-}
-
-#fileList span.error {
-  color: #990000;
-}
-
-/*
 Image List
 */
 .tq-image-item {
 	width: 250px;
 /*	height: 250px;*/
-	border: 1px solid #f4f4f4;
+	border: 1px solid #A5A5C7;
 	padding: 5px;
 /*	background: url(bg.png);*/
+	min-height: 240px;
+	max-height: 240px;
+	overflow: hidden;
 }
 .tq-image-item img {
 	width: 100%;
+	max-height: 183px;
+	border: 1px solid #A5A5C7;
 }

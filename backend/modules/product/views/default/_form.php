@@ -22,6 +22,22 @@ $(function () {
 		checkboxClass: 'icheckbox_flat-red',
 		radioClass: 'iradio_flat-red'
 	});
+	
+	//TAB
+	$('a[data-toggle=\"tab\"]').on('shown.bs.tab', function(e){
+		//save the latest tab using a cookie:
+		localStorage.setItem('product-form-tabs-state', $(e.target).attr('href'));
+	});
+	//activate latest tab, if it exists:
+	var lastTab = localStorage.getItem('product-form-tabs-state');
+	if (lastTab) {
+		$('a[href=' + lastTab + ']').tab('show');
+	}
+	else
+	{
+		// Set the first tab if cookie do not exist
+		$('a[data-toggle=\"tab\"]:first').tab('show');
+	}
 });
 ", View::POS_END);
 
