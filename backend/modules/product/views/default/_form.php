@@ -135,7 +135,12 @@ $formName = StringHelper::basename(get_class($model));
 
 		<div class="tab-pane" id="tab_4">
 			<div class="box-body">
-				<?php  echo yii\base\View::render('//partials/dmuploader', array()); ?>
+				<?php
+					echo yii\base\View::render('//partials/dmuploader', array(
+						'formName' => $formName,
+						'imgList' => $model->inputImgs,
+					));
+				?>
 			</div>
 		</div><!-- /.tab-pane -->
 

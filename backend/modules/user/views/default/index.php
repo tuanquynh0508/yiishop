@@ -77,7 +77,10 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
             // 'updated_at',
             // 'del_flg',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+				'class' => 'yii\grid\ActionColumn',
+				'contentOptions' => ['style' => 'white-space: nowrap;'],
+			],
         ],
     ]); ?>
 

@@ -13,6 +13,13 @@ $(function () {
 		radioClass: 'iradio_minimal-red'
 	});
 	
+	$(document).on('click', '.btnDelete', function(e){
+		if(confirm('".Yii::t('app', 'Are you sure you want to delete this item?')."')) {
+			var parent = $(this).closest('.tq-image-item');
+			parent.remove();
+		}
+	});
+	
 	//DMUPLOADER----------------------------------------------------------------
 	//-- Some functions to work with our UI
 	function add_log(message)
@@ -26,6 +33,7 @@ $(function () {
 		if(status == 'success') {
 			if(data.status == 'success') {
 				$('#uploadFile' + id).find('.tq-upload-img').attr('src', path + data.file);
+				$('#uploadFile' + id).find('.tq-upload-img-val').val(data.file);
 			} else {
 				alert(data.message);
 			}
@@ -50,10 +58,10 @@ $(function () {
 						'<div class=\"tq-image-item margin pull-left\" id=\"uploadFile' + id + '\">' +
 							'<div class=\"clearfix btnTools\">' +
 								'<div class=\"pull-left text-left margin\">' +
-									'<input type=\"radio\" name=\"\" value=\"\" />' +
+									'<input type=\"radio\" name=\"".$formName."[thumbnails-default]\" value=\"-' + (id+1) + '\" />' +
 								'</div>' +
 								'<div class=\"pull-right text-right margin\">' +
-									'<i class=\"fa fa-2x fa-trash-o text-danger\"></i>' +
+									'<i class=\"fa fa-2x fa-trash-o text-danger btnDelete\"></i>' +
 								'</div>' +
 							'</div>' +
 							'<div class=\"progress progress-sm active\">' +
@@ -62,9 +70,10 @@ $(function () {
 								'</div>' +
 							'</div>' +
 							'<img class=\"tq-upload-img\" src=\"".Yii::getAlias('@img_path/md_nopicture.jpg')."\"/>' +
+							'<input type=\"hidden\" class=\"tq-upload-img-val\" name=\"".$formName."[thumbnails][-' + (id+1) + ']\" value=\"\" />' +
 						'</div>';
 
-		$('.tq-image-list').prepend(template);
+		$('.tq-image-list').append(template);
 	}
 	
 	// Upload Plugin itself
@@ -132,22 +141,23 @@ $(function () {
 <!-- /D&D Markup -->
 
 <div class="clearfix tq-image-list">
-
+	<?php foreach($imgList as $key => $img): ?>
 	<div class="tq-image-item margin pull-left">
 		<div class="clearfix btnTools">
 			<div class="pull-left text-left margin">
-				<input type="radio" name="" value="" />
+				<input type="radio" name="<?= $formName ?>[thumbnails-default]" value="<?= $key ?>" <?= ($img->default)?'checked':'' ?> />
 			</div>
 			<div class="pull-right text-right margin">
-				<i class="fa fa-2x fa-trash-o text-danger"></i>
+				<i class="fa fa-2x fa-trash-o text-danger btnDelete"></i>
 			</div>
-		</div>
-		<img src="<?php echo Yii::getAlias('@img_path/md_nopicture.jpg'); ?>"/>
-<!--		<div class="progress progress-sm active">
+		</div>		
+		<!--<div class="progress progress-sm active">
 			<div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
 				<span class="sr-only">60% Complete (warning)</span>
 			</div>
 		</div>-->
+		<img src="<?php echo Yii::getAlias('@img_path/product/'.Yii::$app->params['upload_var']['medium']['prefix'].'/').$img->file; ?>"/>
+		<input type="hidden" class="tq-upload-img-val" name="<?= $formName ?>[thumbnails][<?= $key ?>]" value="<?= $img->file ?>" />
 	</div>
-
+	<?php endforeach; ?>
 </div>

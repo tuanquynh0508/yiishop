@@ -101,3 +101,6 @@ Image List
 	max-height: 183px;
 	border: 1px solid #A5A5C7;
 }
+.tq-image-item .btnDelete {
+	cursor: pointer;
+}

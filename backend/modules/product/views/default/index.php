@@ -36,12 +36,59 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'firm_id',
-            'upc',
-            'slug',
-            'title',
+			[
+				'attribute' => 'image',
+				'format' => 'html',
+				'value' => function ($data) {					
+					return Html::img($data->getDefaultImg('s'), ['height' => 30]);
+				},
+				'enableSorting' => false,
+				'filter' => false,
+			],
+			[
+				'attribute' => 'id',
+				'value' => function($data) {return $data->id;},
+				'headerOptions' => ['width' => '5%'],
+			],
+			[
+				'attribute' => 'upc',
+				'value' => function($data) {return $data->upc;},
+				'headerOptions' => ['width' => '5%', 'nowrap' => ''],
+			],
+			[
+				'attribute' => 'quantity',
+				'value' => function($data) {return $data->quantity;},
+				'headerOptions' => ['width' => '5%', 'nowrap' => ''],
+			],			
+			'title',
+			'slug',
+			[
+				'attribute' => 'firm_id',
+				'value' => function($data) {return $data->firm->title;},
+				'headerOptions' => ['width' => '10%', 'nowrap' => ''],
+			],
+			[
+				'attribute' => 'status',
+				'format' => 'html',
+				'value' => function ($data) {
+					$value = '';
+					if ($data->out_of_stock == 0) {
+						$value .= '<span class="label label-success">Còn hàng</span>&nbsp;';
+					} else {
+						$value .= '<span class="label label-danger">Hết hàng</span>&nbsp;';
+					}
+					if ($data->is_new == 1) {
+						$value .= '<span class="label label-primary">Hàng mới</span>&nbsp;';
+					}
+					if ($data->is_special == 1) {
+						$value .= '<span class="label label-warning">Đặc biệt</span>';
+					}
+					return $value;
+				},
+				'enableSorting' => false,
+				'filter' => false,
+				'headerOptions' => ['nowrap' => ''],
+			],
             // 'description:ntext',
             // 'wholesale_prices',
             // 'retail_price',
@@ -56,7 +103,10 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
             // 'updated_at',
             // 'del_flg',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+				'class' => 'yii\grid\ActionColumn',
+				'contentOptions' => ['style' => 'white-space: nowrap;'],
+			],
         ],
     ]); ?>
 

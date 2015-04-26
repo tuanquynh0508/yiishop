@@ -61,6 +61,7 @@ class DefaultController extends CController
     {
         $model = $this->findModel($id);
 		$model->getInputOption();
+		$model->getImgList();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			Yii::$app->session->setFlash('success', Yii::t('app', 'Update successful.'));
@@ -140,13 +141,13 @@ class DefaultController extends CController
 			$handle->image_y = Yii::$app->params['upload_var']['normal']['height'];
 			//$handle->image_rotate = '90';
 			$handle->file_name_body_pre = Yii::$app->params['upload_var']['normal']['prefix'];
-			//$handle->file_new_name_body = 'img_'.date('YmdHis');
+			$handle->file_new_name_body = Yii::$app->utility->slugify($handle->file_src_name_body);
 			$handle->process($path);
 			if ($handle->processed) {
 				//$handle->clean();
 				//$jsonObject['status'] = 'success';
-				//$jsonObject['file'] = $handle->file_dst_name;
-				$filename = $handle->file_dst_name;
+				//$jsonObject['file'] = $handle->file_dst_name_body;
+				$filename = $handle->file_dst_name_body;
 			} else {
 				$jsonObject['status'] = 'error';
 				$jsonObject['message'] = $handle->error;
@@ -157,7 +158,7 @@ class DefaultController extends CController
 			$handle->image_x = Yii::$app->params['upload_var']['small']['width'];
 			$handle->image_y = Yii::$app->params['upload_var']['small']['height'];
 			//$handle->image_rotate = '90';
-			$handle->file_name_body_pre = Yii::$app->params['upload_var']['small']['prefix'];
+			//$handle->file_name_body_pre = Yii::$app->params['upload_var']['small']['prefix'];
 			$handle->file_new_name_body = $filename;
 			$handle->process($path.'/'.Yii::$app->params['upload_var']['small']['prefix'].'/');
 			if ($handle->processed) {

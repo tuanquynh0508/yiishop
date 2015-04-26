@@ -130,7 +130,21 @@ class Product extends CActiveRecord
 			foreach($data['Product']['options'] as $optionKey) {
 				$this->inputOption[$optionKey] = $data['Product']['options-value'][$optionKey];
 			}
-		}		
+		}
+		if(isset($data['Product']['thumbnails'])) {
+			$this->inputImgs = [];
+			$selectedDefault = isset($data['Product']['thumbnails-default'])?$data['Product']['thumbnails-default']:0;
+			foreach($data['Product']['thumbnails'] as $key => $img) {
+				$itemPhoto = new \stdClass();
+				$itemPhoto->default = false;
+				if( $selectedDefault == $key) {
+					$itemPhoto->default = true;
+				}
+				$itemPhoto->file = $img;
+				$this->inputImgs[$key] = $itemPhoto;
+			}
+		}
+
 		return parent::load($data,$formName);
 	}
 	
@@ -161,7 +175,7 @@ class Product extends CActiveRecord
      */
     public function getFirm()
     {
-        return $this->hasOne(Firm::className(), ['id' => 'firm_id']);
+        return $this->hasOne(Firm::className(), ['id' => 'firm_id'])->visible();
     }
 
     /**
@@ -169,7 +183,7 @@ class Product extends CActiveRecord
      */
     public function getProductImgs()
     {
-        return $this->hasMany(ProductImg::className(), ['product_id' => 'id']);
+        return $this->hasMany(ProductImg::className(), ['product_id' => 'id'])->visible();
     }
 
     /**
@@ -239,6 +253,8 @@ class Product extends CActiveRecord
 			$this->unlinkAll('productSales', true);
 			//Remove old options link
 			$this->unlinkAll('productOptions', true);
+			//Remove old images
+			$this->unlinkImgs($this->inputImgs);
 			
 			//Add Categories
 			foreach ($this->inputCategories as $categoryId) {
@@ -261,6 +277,30 @@ class Product extends CActiveRecord
 				$productOption->option_value = $optionValue;
 				$this->link('productOptions', $productOption);
 			}
+			
+			//Add Images
+			foreach ($this->inputImgs as $imgId => $img) {
+				if(intval($imgId) < 0) {
+					$fullImgPath = Yii::getAlias(Yii::$app->params['upload_path']['product']).$img->file;
+					$path_parts = pathinfo($fullImgPath);
+					list($width, $height) = getimagesize($fullImgPath);
+					$imageItem = new ProductImg();
+					$imageItem->file = $img->file;
+					$imageItem->is_default = ($img->default)?1:0;					
+					$imageItem->product_id = $this->id;					
+					$imageItem->width = (float) $width;
+					$imageItem->height = (float) $height;
+					$imageItem->size = (float) filesize($fullImgPath);
+					$imageItem->ext = $path_parts['extension'];
+					
+					$imageItem->save();
+				} else {
+					if (($imageItem = ProductImg::findOne($imgId)) !== null) {
+						$imageItem->is_default = ($img->default)?1:0;
+						$imageItem->save();
+					}
+				}				
+			}
 
 			$transaction->commit();
 
@@ -268,6 +308,52 @@ class Product extends CActiveRecord
 		} catch (Exception $e) {
 			$transaction->rollBack();
 			return null;
+		}
+	}
+	
+	public function unlinkImgs($list) {
+		foreach ($this->productImgs as $img) {
+			if(!array_key_exists($img->id,$list)) {
+				$img->delete();
+			}
+		}
+	}
+	
+	public function getImgList() {
+		foreach ($this->productImgs as $img) {
+			$itemPhoto = new \stdClass();
+			$itemPhoto->default = false;
+			if($img->is_default == 1) {
+				$itemPhoto->default = true;
+			}
+			$itemPhoto->file = $img->file;
+			$this->inputImgs[$img->id] = $itemPhoto;
+		}
+	}
+	
+	public function getDefaultImg($size = 's') {
+		$sizeList = array(
+			's' => Yii::$app->params['upload_var']['small']['prefix']."/",
+			'm' => Yii::$app->params['upload_var']['medium']['prefix']."/",
+			'n' => Yii::$app->params['upload_var']['normal']['prefix'],
+		);
+		$sizeImg = $sizeList['s'];
+		$file = '';
+		
+		if(array_key_exists($size, $sizeList)) {
+			$sizeImg = $sizeList[$size];
+		}
+					
+		foreach ($this->productImgs as $img) {
+			if($img->is_default == 1) {
+				$file = $img->file;
+			}
+		}
+		
+		if($file !== '') {
+			return Yii::getAlias('@img_path/product/'.$sizeImg).$file;
+		} else {
+			return Yii::getAlias('@img_path/'.(str_replace("/", "", $sizeImg)).'nopicture.jpg');
 		}
 	}
 }
