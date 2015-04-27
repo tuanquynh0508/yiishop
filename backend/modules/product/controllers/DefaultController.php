@@ -40,7 +40,7 @@ class DefaultController extends CController
     public function actionCreate()
     {
         $model = new Product();
-		
+
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			Yii::$app->session->setFlash('success', Yii::t('app', 'Create successful.'));
 			return $this->redirect(['view', 'id' => $model->id]);
@@ -93,8 +93,11 @@ class DefaultController extends CController
      */
     public function actionView($id)
     {
+		$model = $this->findModel($id);
+		$model->getImgList();
+		
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -113,20 +116,20 @@ class DefaultController extends CController
             throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
         }
     }
-	
+
 	protected function findAllOptionGroups()
 	{
 		return OptionGroup::findAll(['del_flg' => '0']);
 	}
-	
+
 	public function actionUpload()
     {
 		\Yii::$app->response->format = 'json';
-		
+
 		$jsonObject = array();
 		$path = Yii::getAlias(Yii::$app->params['upload_path']['product']);
 		$filename = '';
-		
+
 		$handle = new Upload($_FILES['file'], 'vn_VN');
 		if ($handle->uploaded) {
 			//Check Mime
@@ -190,7 +193,7 @@ class DefaultController extends CController
 			$jsonObject['status'] = 'error';
 			$jsonObject['message'] = $handle->error;
 		}
-		
+
 		return $jsonObject;
 		//return \yii\helpers\Json::encode($jsonObject);
     }

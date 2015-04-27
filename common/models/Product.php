@@ -45,7 +45,7 @@ class Product extends CActiveRecord
 	public $inputImgs = [];
 	public $inputSales = [];
 	public $inputOption = [];
-	
+
     /**
      * @inheritdoc
      */
@@ -98,7 +98,7 @@ class Product extends CActiveRecord
             'del_flg' => Yii::t('app', 'Del Flg'),
         ];
     }
-	
+
 	/**
      * @inheritdoc
      */
@@ -113,12 +113,12 @@ class Product extends CActiveRecord
 		$this->views = 0;
 		$this->made = 'vn';
 	}
-	
+
 	/**
      * @inheritdoc
      */
 	public function load($data, $formName = null)
-    {		
+    {
 		if(isset($data['Product']['categories'])) {
 			$this->inputCategories = $this->removeEmptyData($data['Product']['categories']);
 		}
@@ -147,8 +147,8 @@ class Product extends CActiveRecord
 
 		return parent::load($data,$formName);
 	}
-	
-	public function getInputOption() {		
+
+	public function getInputOption() {
 		foreach ($this->productOptions as $option) {
 			$this->inputOption[$option->option_id] = $option->option_value;
 		}
@@ -241,12 +241,12 @@ class Product extends CActiveRecord
     {
         return $this->hasMany(Sale::className(), ['id' => 'sale_id'])->viaTable('{{%product_sale}}', ['product_id' => 'id']);
     }
-	
+
 	public function save($runValidation = true, $attributeNames = null) {
 		$transaction = $this->getDb()->beginTransaction();
 		try {
 			parent::save($runValidation, $attributeNames);
-			
+
 			//Remove old category link
 			$this->unlinkAll('categoryProducts', true);
 			//Remove old sales link
@@ -255,21 +255,21 @@ class Product extends CActiveRecord
 			$this->unlinkAll('productOptions', true);
 			//Remove old images
 			$this->unlinkImgs($this->inputImgs);
-			
+
 			//Add Categories
 			foreach ($this->inputCategories as $categoryId) {
 				$categoryProduct = new CategoryProduct();
 				$categoryProduct->category_id = $categoryId;
 				$this->link('categoryProducts', $categoryProduct);
 			}
-			
+
 			//Add Sales
 			if(!empty($this->inputSales)) {
 				$productSale = new ProductSale();
 				$productSale->sale_id = $this->inputSales;
 				$this->link('productSales', $productSale);
 			}
-			
+
 			//Add Options
 			foreach ($this->inputOption as $optionId => $optionValue) {
 				$productOption = new ProductOption();
@@ -277,7 +277,7 @@ class Product extends CActiveRecord
 				$productOption->option_value = $optionValue;
 				$this->link('productOptions', $productOption);
 			}
-			
+
 			//Add Images
 			foreach ($this->inputImgs as $imgId => $img) {
 				if(intval($imgId) < 0) {
@@ -286,20 +286,20 @@ class Product extends CActiveRecord
 					list($width, $height) = getimagesize($fullImgPath);
 					$imageItem = new ProductImg();
 					$imageItem->file = $img->file;
-					$imageItem->is_default = ($img->default)?1:0;					
-					$imageItem->product_id = $this->id;					
+					$imageItem->is_default = ($img->default)?1:0;
+					$imageItem->product_id = $this->id;
 					$imageItem->width = (float) $width;
 					$imageItem->height = (float) $height;
 					$imageItem->size = (float) filesize($fullImgPath);
 					$imageItem->ext = $path_parts['extension'];
-					
+
 					$imageItem->save();
 				} else {
 					if (($imageItem = ProductImg::findOne($imgId)) !== null) {
 						$imageItem->is_default = ($img->default)?1:0;
 						$imageItem->save();
 					}
-				}				
+				}
 			}
 
 			$transaction->commit();
@@ -310,7 +310,7 @@ class Product extends CActiveRecord
 			return null;
 		}
 	}
-	
+
 	public function unlinkImgs($list) {
 		foreach ($this->productImgs as $img) {
 			if(!array_key_exists($img->id,$list)) {
@@ -318,7 +318,7 @@ class Product extends CActiveRecord
 			}
 		}
 	}
-	
+
 	public function getImgList() {
 		foreach ($this->productImgs as $img) {
 			$itemPhoto = new \stdClass();
@@ -330,7 +330,7 @@ class Product extends CActiveRecord
 			$this->inputImgs[$img->id] = $itemPhoto;
 		}
 	}
-	
+
 	public function getDefaultImg($size = 's') {
 		$sizeList = array(
 			's' => Yii::$app->params['upload_var']['small']['prefix']."/",
@@ -339,21 +339,49 @@ class Product extends CActiveRecord
 		);
 		$sizeImg = $sizeList['s'];
 		$file = '';
-		
+
 		if(array_key_exists($size, $sizeList)) {
 			$sizeImg = $sizeList[$size];
 		}
-					
+
 		foreach ($this->productImgs as $img) {
 			if($img->is_default == 1) {
 				$file = $img->file;
 			}
 		}
-		
+
 		if($file !== '') {
 			return Yii::getAlias('@img_path/product/'.$sizeImg).$file;
 		} else {
 			return Yii::getAlias('@img_path/'.(str_replace("/", "", $sizeImg)).'nopicture.jpg');
 		}
+	}
+
+	public function getListOptionsGroup() {
+		$listOptions = new \stdClass();
+		$listOptions->group = array();
+		$listOptions->options = array();
+		$listOptions->values = array();
+		foreach ($this->options as $option) {
+			if(!array_key_exists($option->optionGroup->id, $listOptions->group)) {
+				$listOptions->group[$option->optionGroup->id] = $option->optionGroup;
+				$listOptions->options[$option->optionGroup->id] = array();
+			}
+			$listOptions->options[$option->optionGroup->id][] = $option;
+			foreach ($this->productOptions as $optionValue) {
+				if($option->id == $optionValue->option_id) {
+					$listOptions->values[$option->optionGroup->id.'-'.$option->id] = $optionValue->option_value;
+				}
+			}
+		}
+		return $listOptions;
+	}
+
+	public function getFullMade() {
+		$made = array(
+			'vn' => 'Việt Nam',
+			'cn' => 'Trung Quốc',
+		);
+		return $made[$this->made].' - '.$this->firm->title;
 	}
 }

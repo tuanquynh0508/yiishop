@@ -30,7 +30,11 @@ phpunit.phar
 /phpunit.xml
 
 # upload file
-/uploads/category/*.jpg
-/uploads/category/*.png
-/uploads/category/*.gif
-/uploads/category/*.bmp
+/uploads/*/*.jpg
+/uploads/*/*.png
+/uploads/*/*.gif
+/uploads/*/*.bmp
+/uploads/*/*/*.jpg
+/uploads/*/*/*.png
+/uploads/*/*/*.gif
+/uploads/*/*/*.bmp

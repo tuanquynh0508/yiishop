@@ -14,6 +14,9 @@ use common\models\Sale;
 /* @var $form yii\widgets\ActiveForm */
 
 $baseUrl = Yii::$app->request->baseUrl;
+
+$this->registerCssFile($baseUrl.'/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css', ['depends' => [\backend\assets\AdminlteAsset::className()]]);
+$this->registerJsFile($baseUrl.'/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js', ['depends' => [\yii\bootstrap\BootstrapPluginAsset::className()]]);
 $this->registerCssFile($baseUrl.'/adminlte/plugins/iCheck/all.css', ['depends' => [\backend\assets\AdminlteAsset::className()]]);
 $this->registerJsFile($baseUrl.'/adminlte/plugins/iCheck/icheck.min.js', ['depends' => [\yii\bootstrap\BootstrapPluginAsset::className()]]);
 $this->registerJs("
@@ -22,7 +25,7 @@ $(function () {
 		checkboxClass: 'icheckbox_flat-red',
 		radioClass: 'iradio_flat-red'
 	});
-	
+
 	//TAB
 	$('a[data-toggle=\"tab\"]').on('shown.bs.tab', function(e){
 		//save the latest tab using a cookie:
@@ -38,6 +41,9 @@ $(function () {
 		// Set the first tab if cookie do not exist
 		$('a[data-toggle=\"tab\"]:first').tab('show');
 	}
+
+	//bootstrap WYSIHTML5 - text editor
+	$('.textarea').wysihtml5();
 });
 ", View::POS_END);
 
@@ -64,7 +70,7 @@ $formName = StringHelper::basename(get_class($model));
 
 				<?= $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
 
-				<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+				<?= $form->field($model, 'description')->textarea(['class' => 'textarea', 'style' => 'width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;']) ?>
 			</div>
 		</div><!-- /.tab-pane -->
 
