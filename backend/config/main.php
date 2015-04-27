@@ -19,6 +19,9 @@ return [
 		'product' => [
             'class' => 'backend\modules\product\Product',
         ],
+		'content' => [
+            'class' => 'backend\modules\content\Content',
+        ],
 	],
 	'components' => [
 		'user' => [

@@ -52,7 +52,7 @@ $baseUrl = Yii::$app->request->baseUrl;
               'template' => '<a href="{url}">{label} <i class="fa fa-angle-left pull-right"></i></a>',
 				'visible' => Yii::$app->user->identity->isSuperAdmin()
             ],
-            ['label' => '<i class="fa fa-newspaper-o"></i> <span>Trang tin</span>', 'url' => ['product/index']],
+            ['label' => '<i class="fa fa-newspaper-o"></i> <span>Bài viết</span>', 'url' => ['/content/page/index']],
 			['label' => '<i class="fa fa-users"></i> <span>Quản trị web</span>', 'url' => ['/user/default/index'], 'visible' => Yii::$app->user->identity->isSuperAdmin()],
         ],
         'options' => [

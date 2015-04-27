@@ -6,6 +6,7 @@ return [
 	'Title' => 'Tiêu đề',
 	'Slug' => 'Slug',
 	'Description' => 'Chú thích',
+	'Content' => 'Nội dung',
 	'Created At' => 'Ngày tạo',
 	'Updated At' => 'Ngày sửa',
 	'Del Flg' => 'Xóa',
