@@ -12,6 +12,16 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+		'view' => [
+			'theme' => [
+				'pathMap' => [
+					'@app/views' => '@app/themes/cuahangnhua',
+					'@app/modules' => '@app/themes/basic/modules',
+					//'@app/widgets' => '@app/themes/basic/widgets',
+				],
+				'baseUrl' => '@web/themes/cuahangnhua',
+			],
+		],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,

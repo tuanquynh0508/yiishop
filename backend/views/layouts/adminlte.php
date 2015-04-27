@@ -28,7 +28,7 @@ $baseUrl = Yii::$app->request->baseUrl;
     <div class="wrapper">
 
       <header class="main-header">
-        <a href="index2.html" class="logo">Trang Quản Trị</a>
+        <a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/site/index']); ?>" class="logo">Trang Quản Trị</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
