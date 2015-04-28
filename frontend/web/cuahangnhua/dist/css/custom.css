@@ -7,6 +7,17 @@ and open the template in the editor.
     Created on : Apr 28, 2015, 2:21:44 AM
     Author     : nntuan
 */
+.content-wrapper, .right-side {
+	background-color: #fff;
+}
+
+.layout-boxed {
+	background: transparent;
+}
+
+.layout-boxed .wrapper {
+	box-shadow: none;
+}
 
 #topNavbar {
 	min-height: 30px;

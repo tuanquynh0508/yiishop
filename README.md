@@ -142,9 +142,9 @@ Then, you can login into the application with same email address and password at
     ServerName img.yiishop.local
     ServerAlias *img.yiishop.local
 
-    DocumentRoot "/home/tnguyennhu/gits/yiishop/uploads"
+    DocumentRoot "/home/nntuan/Gits/yiishop/uploads"
     SetEnv yiiEnv dev_tuan
-    <Directory "/home/tnguyennhu/gits/yiishop/uploads">
+    <Directory "/home/nntuan/Gits/yiishop/uploads">
         Options Indexes FollowSymLinks
         AllowOverride all
         Require all granted

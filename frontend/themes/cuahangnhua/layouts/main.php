@@ -24,10 +24,8 @@ $baseUrl = Yii::$app->request->baseUrl;
   </head>
   <body class="skin-blue layout-boxed">
     <?php $this->beginBody() ?>
-    <!-- Site wrapper -->
-    <div class="wrapper">
-
-      <header class="main-header">
+	  
+	  <header class="main-header">
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" id="topNavbar" role="navigation">          
           <div class="navbar-custom-menu">
@@ -38,13 +36,16 @@ $baseUrl = Yii::$app->request->baseUrl;
             </ul>
           </div>
         </nav>
-      </header>		
+      </header>
+	  
+    <!-- Site wrapper -->
+    <div class="wrapper">      		
 
       <!-- Right side column. Contains the navbar and content of the page -->
       <div class="content-wrapper">
 		  
 		<div class="bannerTop">
-			<div class="clearfix">
+			<div class="row">
 				<div class="col-sm-6">
 					<a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/site/index']); ?>" class="siteLogoTop"><span><?= Html::encode($this->title) ?></span></a>
 				</div>
@@ -73,15 +74,16 @@ $baseUrl = Yii::$app->request->baseUrl;
 		</div><!-- /.bannerTop -->
 		  
         <?= $content ?>
-      </div><!-- /.content-wrapper -->
-
-      <footer class="main-footer">
+      </div><!-- /.content-wrapper -->	  
+	        
+    </div><!-- ./wrapper -->
+	
+	<footer class="main-footer">
         <div class="pull-right hidden-xs">
           <?= Yii::powered() ?>. <b>Version</b> 1.0.
         </div>
         <strong>Copyright © <?php echo date('Y'); ?> <a href="http://i-designer.net">I-Designer</a>.</strong> All rights reserved.
       </footer>
-    </div><!-- ./wrapper -->
 
     <?php $this->endBody() ?>
   </body>
