@@ -69,3 +69,18 @@ and open the template in the editor.
 	background: url(../img/cart.png) no-repeat 0px 50%;
 	padding-left: 60px;
 }
+
+.custom-tab-primary .nav-tabs > li.active > a, 
+.custom-tab-primary .nav-tabs > li.active > a:hover, 
+.custom-tab-primary .nav-tabs > li.active > a:focus {
+	background-color: #3c8dbc;
+	border-color: #3c8dbc;
+	color: #fff;
+	font-weight: bold;
+}
+.custom-tab-primary .nav-tabs > li > a {
+	color: #333;
+}
+.custom-tab-primary .nav-tabs {
+	border-bottom: 4px solid #3c8dbc;
+}
