@@ -44,6 +44,13 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+		'urlManager' => [
+			'suffix' => '.html',
+            'rules' => [
+				'/product/<cateslug:[A-Za-z0-9 -_.]+>/<slug:[A-Za-z0-9 -_.]+>' => 'product/default/detail',
+				'/product/<cateslug:[A-Za-z0-9 -_.]+>' => 'product/default/category',
+            ],
+        ],
     ],
     'params' => $params,
 ];

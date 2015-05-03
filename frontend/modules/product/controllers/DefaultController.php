@@ -10,4 +10,14 @@ class DefaultController extends Controller
     {
         return $this->render('index');
     }
+
+	public function actionCategory()
+    {
+        return $this->render('category');
+    }
+
+	public function actionDetail()
+    {
+        return $this->render('detail');
+    }
 }

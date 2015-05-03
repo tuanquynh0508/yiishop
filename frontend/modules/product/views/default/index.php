@@ -7,7 +7,7 @@ $baseUrl = Yii::$app->request->baseUrl;
 <div class="row" id="bodyFirst">
 
 	<div class="col-sm-3 col-lg-3 col-md-3">
-			
+
 				<!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar" id="categoryMenu">
 				<!-- sidebar menu: : style can be found in sidebar.less -->
@@ -21,7 +21,7 @@ $baseUrl = Yii::$app->request->baseUrl;
                 <li><a href="#"><i class="fa fa-long-arrow-right"></i> Dashboard v1</a></li>
                 <li><a href="#"><i class="fa fa-long-arrow-right"></i> Dashboard v2</a></li>
               </ul>
-            </li>            
+            </li>
             <li><a href="#"><i class="fa fa-circle-o text-info"></i> Information</a></li>
           </ul>
         </section>
@@ -31,23 +31,23 @@ $baseUrl = Yii::$app->request->baseUrl;
 
 	<div class="col-sm-9 col-lg-9 col-md-9">
 
-		
+
 		<nav class="navbar navbar-default" id="pageMenuTop">
 			<div class="container-fluid">
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Trang chủ</a></li>
-						<li><a href="#">Hướng dẫn mua hàng</a></li>
-						<li><a href="#">Thanh toán</a></li>
-						<li><a href="#">Vận chuyển</a></li>
-						<li><a href="#">Đổi hàng</a></li>
-						<li><a href="#">Liên hệ</a></li>
+						<li class="active"><a href="#"><i class="fa fa-home"></i> Trang chủ</a></li>
+						<li><a href="#"><i class="fa fa-gift"></i> Hướng dẫn mua hàng</a></li>
+						<li><a href="#"><i class="fa fa-credit-card"></i> Thanh toán</a></li>
+						<li><a href="#"><i class="fa fa-truck"></i> Vận chuyển</a></li>
+						<li><a href="#"><i class="fa fa-umbrella"></i> Đổi hàng</a></li>
+						<li><a href="#"><i class="fa fa-envelope"></i> Liên hệ</a></li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 		</nav>
-		
+
 
 
 		<div id="carousel-example-generic" class="carousel slide margin-bottom" data-ride="carousel">
@@ -293,9 +293,9 @@ $baseUrl = Yii::$app->request->baseUrl;
 
 	<div class="col-sm-12 col-lg-12 col-md-12">
 
-		<div class="box box-primary">
+		<div class="box box-primary productList1">
 			<div class="box-header with-border">
-				<h3 class="box-title text-bold text-primary"><i class="fa fa-shopping-cart"></i> Danh mục sản phẩm 1</h3>
+				<h3 class="box-title text-bold text-primary"><i class="fa fa-chevron-circle-right"></i> Danh mục sản phẩm 1</h3>
 				<div class="box-tools pull-right">
 					<button class="btn btn-box-tool" type="button"><i class="fa fa-share-square-o"></i> Xem thêm</button>
 				</div><!-- /.box-tools -->
@@ -464,9 +464,9 @@ $baseUrl = Yii::$app->request->baseUrl;
 
 	<div class="col-sm-12 col-lg-12 col-md-12">
 
-		<div class="box box-primary">
+		<div class="box box-primary productList1">
 			<div class="box-header with-border">
-				<h3 class="box-title text-bold text-primary"><i class="fa fa-shopping-cart"></i> Danh mục sản phẩm 1</h3>
+				<h3 class="box-title text-bold text-primary"><i class="fa fa-chevron-circle-right"></i> Danh mục sản phẩm 1</h3>
 				<div class="box-tools pull-right">
 					<button class="btn btn-box-tool" type="button"><i class="fa fa-share-square-o"></i> Xem thêm</button>
 				</div><!-- /.box-tools -->
