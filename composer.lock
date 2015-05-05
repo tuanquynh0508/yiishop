@@ -60,16 +60,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "2.1.3",
+            "version": "2.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery.git",
-                "reference": "8f2a9d9272d6ed7f32d3a484740ab342c02541e0"
+                "reference": "7751e69b615c6eca6f783a81e292a55725af6b85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery/zipball/8f2a9d9272d6ed7f32d3a484740ab342c02541e0",
-                "reference": "8f2a9d9272d6ed7f32d3a484740ab342c02541e0",
+                "url": "https://api.github.com/repos/jquery/jquery/zipball/7751e69b615c6eca6f783a81e292a55725af6b85",
+                "reference": "7751e69b615c6eca6f783a81e292a55725af6b85",
                 "shasum": ""
             },
             "require-dev": {
@@ -84,6 +84,7 @@
                 "bower-asset-ignore": [
                     "**/.*",
                     "build",
+                    "dist/cdn",
                     "speed",
                     "test",
                     "*.md",
@@ -103,16 +104,16 @@
         },
         {
             "name": "bower-asset/jquery.inputmask",
-            "version": "3.1.62",
+            "version": "3.1.63",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-                "reference": "da1a274cefa18a52a0519ac7ffe8e8d31e950eae"
+                "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/da1a274cefa18a52a0519ac7ffe8e8d31e950eae",
-                "reference": "da1a274cefa18a52a0519ac7ffe8e8d31e950eae",
+                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
+                "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
                 "shasum": ""
             },
             "require": {
@@ -680,16 +681,16 @@
         },
         {
             "name": "jamband/yii2-schemadump",
-            "version": "v0.9.6",
+            "version": "v0.9.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jamband/yii2-schemadump.git",
-                "reference": "9e81b661ed07ed019323e6792da8d088bec50a85"
+                "reference": "8d0409daf84a772beb15249178470145cbc2aaaa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jamband/yii2-schemadump/zipball/9e81b661ed07ed019323e6792da8d088bec50a85",
-                "reference": "9e81b661ed07ed019323e6792da8d088bec50a85",
+                "url": "https://api.github.com/repos/jamband/yii2-schemadump/zipball/8d0409daf84a772beb15249178470145cbc2aaaa",
+                "reference": "8d0409daf84a772beb15249178470145cbc2aaaa",
                 "shasum": ""
             },
             "require": {
@@ -721,7 +722,7 @@
                 "migration",
                 "yii2"
             ],
-            "time": "2015-04-09 03:17:48"
+            "time": "2015-05-02 13:07:54"
         },
         {
             "name": "phpspec/php-diff",

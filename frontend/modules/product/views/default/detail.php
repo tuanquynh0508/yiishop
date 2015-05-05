@@ -123,15 +123,40 @@ $(function () {
 
 				<hr/>
 
-				Số lượng:
-				<input type="number" value="1"/>
-				<button type="button" class="btn btn-warning btn-lg">
-					<i class="fa fa-shopping-cart"></i>
-					Cho vào giỏ hàng
-				</button>
+				<div class="clearfix">
+						<label>Số lượng:</label>
+						<input type="number" value="1" class="form-control" style="width: 80px;display: inline-block;vertical-align: middle;margin-right: 5px;"/>
+						<button type="button" class="btn btn-success">
+							<i class="fa fa-shopping-cart"></i>
+							Cho vào giỏ hàng
+						</button>
+				</div>
 
 			</div>
-		</div>
+		</div><!-- /.row -->
+
+		<!-- Custom Tabs (Pulled to the right) -->
+			<div class="nav-tabs-justified custom-tab-primary">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#tab_1" data-toggle="tab">Mô tả sản phẩm</a></li>
+					<li><a href="#tab_2" data-toggle="tab">Đánh giá</a></li>
+				</ul>
+
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab_1">
+						<div class="box-body">
+							Chu thich						</div>
+					</div><!-- /.tab-pane -->
+
+					<div class="tab-pane" id="tab_2">
+						<div class="box-body">
+
+						</div>
+					</div><!-- /.tab-pane -->
+
+				</div><!-- /.tab-content -->
+
+			</div><!-- nav-tabs-custom -->
 
 	</div>
 
