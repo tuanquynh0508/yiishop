@@ -7,6 +7,10 @@ and open the template in the editor.
     Created on : Apr 28, 2015, 2:21:44 AM
     Author     : nntuan
 */
+body {
+	font-size: 12px;
+}
+
 .skin-blue .wrapper,
 .skin-blue .main-sidebar,
 .skin-blue .left-side {
@@ -133,7 +137,7 @@ and open the template in the editor.
 }
 #pageMenuTop .navbar-nav > li > a {
 	color: #fff;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: bold;
 	text-transform: uppercase;
 	text-shadow: 1px 1px 0 #333;
@@ -304,4 +308,34 @@ and open the template in the editor.
 }
 .productSumaryBox .price .price-value-old {
 	text-decoration: line-through;
+}
+
+.number-box-30 {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	display: inline-block;
+	text-align: center;
+}
+
+.cart-item-list {
+	background-color: #fcfcfc;
+	padding: 10px;
+}
+
+.cart-item-list h2 {
+	margin-top: 0px;
+}
+
+.cart-item-list .shopping-cart-table {
+	margin-bottom: 0px;
+}
+
+.shopping-cart-table > thead > tr > th,
+.shopping-cart-table > tbody > tr > th,
+.shopping-cart-table > tfoot > tr > th,
+.shopping-cart-table > thead > tr > td,
+.shopping-cart-table > tbody > tr > td,
+.shopping-cart-table > tfoot > tr > td {
+	vertical-align: middle;
 }

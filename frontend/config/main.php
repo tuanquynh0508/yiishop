@@ -22,7 +22,7 @@ return [
 			'theme' => [
 				'pathMap' => [
 					'@app/views' => '@app/themes/cuahangnhua',
-					'@app/modules' => '@app/themes/basic/modules',
+					'@app/modules' => '@app/themes/cuahangnhua/modules',
 					//'@app/widgets' => '@app/themes/basic/widgets',
 				],
 				'baseUrl' => '@web/themes/cuahangnhua',
@@ -48,6 +48,7 @@ return [
 			'suffix' => '.html',
             'rules' => [
 				'/product/<cateslug:[A-Za-z0-9 -_.]+>/<slug:[A-Za-z0-9 -_.]+>' => 'product/default/detail',
+				'/product/shopping_cart' => 'product/default/shopping-cart',
 				'/product/<cateslug:[A-Za-z0-9 -_.]+>' => 'product/default/category',
             ],
         ],

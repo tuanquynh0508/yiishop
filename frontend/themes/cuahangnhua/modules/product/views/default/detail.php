@@ -95,7 +95,7 @@ $(function () {
 
 		<div class="row">
 			<div class="col-sm-4">
-				<p><img class="img-thumbnail" src="http://img.yiishop.local/md_nopicture.jpg"></p>
+				<p><img class="img-thumbnail" src="http://img.yiishop.local/md_nopicture.jpg"/></p>
 			</div>
 			<div class="col-sm-8 productSumaryBox">
 				<h1 class="title">Sản phẩm 1</h1>

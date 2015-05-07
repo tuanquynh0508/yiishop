@@ -20,4 +20,9 @@ class DefaultController extends Controller
     {
         return $this->render('detail');
     }
+
+	public function actionShoppingCart()
+    {
+        return $this->render('shopping_cart');
+    }
 }
