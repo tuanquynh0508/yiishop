@@ -6,6 +6,8 @@ use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\web\HttpException;
+use yii\helpers\Url;
+
 use common\libraries\verot\Upload;
 
 class Utility extends Component {
@@ -108,6 +110,25 @@ class Utility extends Component {
 		} else {
 			return $tmp.Yii::app()->params['currency']['symbol'];
 		}
+	}
+	
+	public function getActiveMenu($listUrls = array()) {
+		$check = false;
+		$currentUrl = Url::current();
+		
+		if(empty($listUrls)) {
+			return $check;
+		}
+				
+		foreach ($listUrls as $route) {
+			$url = Url::to($route);
+			if($url === $currentUrl) {
+				$check = true;
+				break;
+			}
+		}
+		
+		return $check;
 	}
 
 }

@@ -25,18 +25,7 @@ $baseUrl = Yii::$app->request->baseUrl;
   <body class="skin-blue layout-boxed">
     <?php $this->beginBody() ?>
 	  
-	  <header class="main-header">
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top" id="topNavbar" role="navigation">          
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-              <!-- User Account: style can be found in dropdown.less -->
-			  <li><a href="#"><span>Khách hàng, Đăng ký</span></a></li>
-			  <li><a href="#"><span>Đăng nhập</span></a></li>              
-            </ul>
-          </div>
-        </nav>
-      </header>
+	  <?php echo yii\base\View::render('//partials/headerTop',array()); ?>
 	  
     <!-- Site wrapper -->
     <div class="wrapper">      		
@@ -47,7 +36,7 @@ $baseUrl = Yii::$app->request->baseUrl;
 		<div class="bannerTop">
 			<div class="row">
 				<div class="col-sm-6">
-					<a href="<?php echo \Yii::$app->getUrlManager()->createUrl(['/site/index']); ?>" class="siteLogoTop"><span><?= Html::encode($this->title) ?></span></a>
+					<a href="<?php echo Yii::$app->homeUrl; ?>" class="siteLogoTop"><span><?= Html::encode($this->title) ?></span></a>
 				</div>
 				<div class="col-sm-6">
 					<div id="shoppingCart">

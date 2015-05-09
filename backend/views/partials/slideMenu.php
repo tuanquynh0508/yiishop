@@ -19,7 +19,7 @@ $baseUrl = Yii::$app->request->baseUrl;
     </div>
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <?php
-      http://www.bsourcecode.com/yiiframework2/menu-widget-in-yii-framework-2-0/
+      //http://www.bsourcecode.com/yiiframework2/menu-widget-in-yii-framework-2-0/
       echo Menu::widget([
         'items' => [
             ['label' => '<i class="fa fa-dashboard"></i> <span>Trang chủ</span>', 'url' => ['/site/index'],

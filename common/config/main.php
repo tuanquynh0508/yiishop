@@ -12,5 +12,8 @@ return [
 			//'enableStrictParsing' => false,
             //'suffix' => '.html',
         ],
+		'utility' => [
+			'class' => 'common\components\Utility',
+		],
     ],
 ];

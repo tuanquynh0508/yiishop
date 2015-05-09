@@ -2,12 +2,13 @@
 
 namespace frontend\modules\product\controllers;
 
-use yii\web\Controller;
+//use yii\web\Controller;
+use frontend\components\CController;
 
-class DefaultController extends Controller
+class DefaultController extends CController
 {
     public function actionIndex()
-    {
+    {	
         return $this->render('index');
     }
 

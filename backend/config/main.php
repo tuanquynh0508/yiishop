@@ -41,9 +41,6 @@ return [
 		'errorHandler' => [
 			'errorAction' => 'site/error',
 		],
-		'utility' => [
-			'class' => 'common\components\Utility',
-		],
 	],
 	'params' => $params,
 ];
