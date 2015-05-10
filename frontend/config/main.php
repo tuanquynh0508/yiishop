@@ -16,6 +16,9 @@ return [
         'product' => [
             'class' => 'frontend\modules\product\Product',
         ],
+		'content' => [
+            'class' => 'frontend\modules\content\Content',
+        ],
     ],
     'components' => [
 		'view' => [
@@ -42,7 +45,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'error/error',
         ],
 		'urlManager' => [
 			'suffix' => '.html',
@@ -51,6 +54,8 @@ return [
 				'/product/shopping_cart' => 'product/default/shopping-cart',
 				'/product/<cateslug:[A-Za-z0-9 -_.]+>' => 'product/default/category',
 				'/contact' => 'site/contact',
+				'/page/under_construction' => 'error/underConstruction',
+				'/page/<slug:[A-Za-z0-9 -_.]+>' => 'content/page/view',
             ],
         ],
     ],

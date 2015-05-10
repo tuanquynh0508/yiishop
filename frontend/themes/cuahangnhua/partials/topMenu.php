@@ -18,10 +18,10 @@ use yii\widgets\Menu;
 				echo Menu::widget([
 				  'items' => [
 					  ['label' => '<i class="fa fa-home"></i> <span>Trang chủ</span>', 'url' => Yii::$app->homeUrl, 'active'=>$activeMenu['menu1']],
-					  ['label' => '<i class="fa fa-gift"></i> <span>Hướng dẫn mua hàng</span>', 'url' => ['/site/index']],
-					  ['label' => '<i class="fa fa-credit-card"></i> <span>Thanh toán</span>', 'url' => ['/site/index']],
-					  ['label' => '<i class="fa fa-truck"></i> <span>Vận chuyển</span>', 'url' => ['/site/index']],
-					  ['label' => '<i class="fa fa-umbrella"></i> <span>Đổi hàng</span>', 'url' => ['/site/index']],
+					  ['label' => '<i class="fa fa-gift"></i> <span>Hướng dẫn mua hàng</span>', 'url' => ['/content/page/view','slug'=>'huong-dan-mua-hang']],
+					  ['label' => '<i class="fa fa-credit-card"></i> <span>Thanh toán</span>', 'url' => ['/content/page/view','slug'=>'huong-dan-thanh-toan']],
+					  ['label' => '<i class="fa fa-truck"></i> <span>Vận chuyển</span>', 'url' => ['/content/page/view','slug'=>'van-chuyen']],
+					  ['label' => '<i class="fa fa-umbrella"></i> <span>Đổi hàng</span>', 'url' => ['/content/page/view','slug'=>'doi-tra-hang']],
 					  ['label' => '<i class="fa fa-envelope"></i> <span>Liên hệ</span>', 'url' => ['/site/contact']],
 				  ],
 				  'options' => [
@@ -33,7 +33,7 @@ use yii\widgets\Menu;
 				  'activateParents'=>true,
 				  'encodeLabels' => false,
 			  ]);
-			?>			
+			?>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 </nav>
