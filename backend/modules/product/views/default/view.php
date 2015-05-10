@@ -63,7 +63,9 @@ $this->params['breadcrumbs'][] = $this->title;
 						<strong>Giá gốc:</strong> <?= $model->cost ?> |
 						<strong>Giá buôn:</strong> <?= $model->wholesale_prices ?> |
 						<strong>Giá bán lẻ:</strong> <?= $model->retail_price ?> |
+						<?php if(!empty($model->sales)): ?>
 						<strong>Áp dụng giảm giá:</strong> <?= $model->sales[0]->title ?> (<?= $model->sales[0]->sale ?>%)
+						<?php endif; ?>
 					</p>
 					<p><strong>Số lượng:</strong> <?= $model->quantity ?></p>
 

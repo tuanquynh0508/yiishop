@@ -2,8 +2,12 @@
 
 use yii\helpers\Html;
 use yii\web\View;
+use yii\widgets\Breadcrumbs;
 
 $baseUrl = Yii::$app->request->baseUrl;
+
+$this->title = $product->title;
+$this->params['breadcrumbs'][] = $this->title;
 
 $this->registerCssFile($baseUrl . '/cuahangnhua/plugins/ionslider/ion.rangeSlider.css', ['depends' => [\frontend\assets\CuahangnhuaAsset::className()]]);
 $this->registerCssFile($baseUrl . '/cuahangnhua/plugins/ionslider/ion.rangeSlider.skinNice.css', ['depends' => [\frontend\assets\CuahangnhuaAsset::className()]]);
@@ -18,7 +22,7 @@ $(function () {
 <!-- ZONE-1================================================================= -->
 <?php $this->beginBlock('zone-1'); ?>
 
-	<?php echo yii\base\View::render('//partials/categoryMenu',array()); ?>
+	<?= frontend\widgets\categoryMenuWidget::widget([]) ?>
 
 	<div class="box box-default box-solid">
 		<div class="box-header with-border">
@@ -55,46 +59,87 @@ $(function () {
 
 	<?php echo yii\base\View::render('//partials/topMenu',array()); ?>
 	
-	<ul class="breadcrumb">
-		<li><a href="/backend/">Trang chủ</a></li>
-		<li><a href="/backend/product/default/index">Products</a></li>
-		<li><a href="/backend/product/default/index">Danh mục 1</a></li>
-		<li class="active">Sản phẩm 1</li>
-	</ul>
+	<?= Breadcrumbs::widget([
+		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+	]) ?>
 
 	<div class="row">
-		<div class="col-sm-4">
-			<p><img class="img-thumbnail" src="http://img.yiishop.local/md_nopicture.jpg"/></p>
+		<div class="col-sm-4 margin-bottom">
+			<p><img class="img-thumbnail" src="<?= $product->getDefaultImg('m') ?>"/></p>
+			<?php
+				foreach($product->inputImgs as $key => $img):
+				if($img->default) {
+					continue;
+				}
+			?>
+			<img src="<?= Yii::getAlias('@img_path/product/'.Yii::$app->params['upload_var']['small']['prefix'].'/').$img->file ?>" height="50" width="50"/>
+			<?php endforeach; ?>
 		</div>
 		<div class="col-sm-8 productSumaryBox">
-			<h1 class="title">Sản phẩm 1</h1>
+			<h1 class="title"><?= $product->title ?></h1>
 			<p>
-				<strong>Mã hàng:</strong> sp-03 |
-				<strong>Kho:</strong> <span class="text-danger">Còn hàng</span> |
-				<span class="label label-primary">Hàng mới</span>&nbsp;<span class="label label-warning">Đặc biệt</span>					</p>
+				<strong>Mã hàng:</strong> <?= $product->upc ?> |
+				<strong>Kho:</strong> <span class="text-danger"><?= ($product->out_of_stock==0)?'Còn hàng':'Hết hàng' ?></span> |
+				<?php
+					if ($product->is_new == 1) {
+						echo  '<span class="label label-primary">Hàng mới</span>&nbsp;';
+					}
+					if ($product->is_special == 1) {
+						echo '<span class="label label-warning">Đặc biệt</span>';
+					}
+				?>
+			</p>
 			<hr>
 			<span class="price">
-					<small>Giá bán:</small>
-					<strong class="price-value text-red">280.000 VND</strong>
+				<small>Giá bán:</small>				
+				<?php if($product->retail_price == 0): ?>
+					<strong class="price-value text-red">Liên hệ</strong>
+				<?php else: ?>
+					<?php if($product->getSalePrice() != 0): ?>
+					<strong class="price-value text-red"><?= $product->getSalePrice() ?> <u>đ</u></strong>
 					-
-					<strong class="price-value-old text-red">280.000 VND</strong>
-				</span>
+					<strong class="price-value-old text-red"><?= $product->retail_price ?> <u>đ</u></strong>
+					<?php else: ?>
+					<strong class="price-value text-red"><?= $product->retail_price ?> <u>đ</u></strong>
+					<?php endif; ?>
+				<?php endif; ?>
+			</span>
 			<hr>
 
+			<?php
+				$listOptions = $product->getListOptionsGroup();
+				if(!empty($listOptions->group)):
+				foreach ($listOptions->group as $optionGroup):
+			?>
 			<p>
-				<strong>Kích thước sản phẩm:</strong>
-				Chiều rộng 30 cm, Chiều dài 40 cm, Chiều cao 50 cm					</p>
-			<p>
-				<strong>Màu sắc:</strong>
-				<i class="fa fa-square fa-lg" style="color:#000000;"></i> &nbsp;<i class="fa fa-square fa-lg" style="color:#b5b5b5;"></i> &nbsp;<i class="fa fa-square fa-lg" style="color:#ff0000;"></i> &nbsp;<i class="fa fa-square fa-lg" style="color:#0056ff;"></i> &nbsp;<i class="fa fa-square fa-lg" style="color:#1dd100;"></i> &nbsp;					</p>
+				<strong><?= $optionGroup->title ?>:</strong>
+				<?php
+					$arrayOption = array();
+					$sperator = ", ";
+					foreach ($listOptions->options[$optionGroup->id] as $option) {
+						if($optionGroup->option_type == 'color') {
+							$arrayOption[] = '<i class="fa fa-square fa-lg" style="color:'.$option->title.';"></i> &nbsp;';
+							$sperator = "";
+						} else {
+							$arrayOption[] = $option->title.' '.$listOptions->values[$optionGroup->id.'-'.$option->id];
+						}
+					}
+					echo implode($sperator, $arrayOption);
+				?>
+			</p>
+			<?php
+				endforeach;
+				endif;
+			?>
 
-			<p><strong>Xuất sứ:</strong> Việt Nam - zxcxczv</p>
+			<p><strong>Xuất sứ:</strong> <?= $product->getFullMade() ?></p>
 
 			<hr/>
 
 			<div class="clearfix">
 					<label>Số lượng:</label>
 					<input type="number" value="1" class="form-control" style="width: 80px;display: inline-block;vertical-align: middle;margin-right: 5px;"/>
+					 / <?= $product->quantity ?>
 					<button type="button" class="btn btn-success">
 						<i class="fa fa-shopping-cart"></i>
 						Cho vào giỏ hàng
@@ -108,13 +153,14 @@ $(function () {
 		<div class="nav-tabs-justified custom-tab-primary">
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#tab_1" data-toggle="tab">Mô tả sản phẩm</a></li>
-				<li><a href="#tab_2" data-toggle="tab">Đánh giá</a></li>
+<!--				<li><a href="#tab_2" data-toggle="tab">Đánh giá</a></li>-->
 			</ul>
 
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_1">
 					<div class="box-body">
-						Chu thich						</div>
+						<?= $product->description ?>
+					</div>
 				</div><!-- /.tab-pane -->
 
 				<div class="tab-pane" id="tab_2">

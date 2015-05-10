@@ -1,7 +1,6 @@
 <?php
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
-use yii\captcha\Captcha;
+
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -13,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <!-- ZONE-1================================================================= -->
 <?php $this->beginBlock('zone-1'); ?>
 
-	<?php echo yii\base\View::render('//partials/categoryMenu',array()); ?>
+	<?= frontend\widgets\categoryMenuWidget::widget([]) ?>
 
 <?php $this->endBlock(); ?>
 
@@ -21,12 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $this->beginBlock('zone-2'); ?>
 
 	<?php echo yii\base\View::render('//partials/topMenu',array()); ?>
-
-	<ul class="breadcrumb">
-		<li><a href="/backend/">Trang chủ</a></li>
-		<li><a href="/backend/product/default/index">Products</a></li>
-		<li class="active">Sản phẩm 3</li>
-	</ul>
+	
+	<?= Breadcrumbs::widget([
+		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+	]) ?>
 
 	<div class="page-header">
 		<h1><?= $pageModel->title ?></h1>

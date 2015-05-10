@@ -40,11 +40,13 @@ class DefaultController extends CController
     public function actionCreate()
     {
         $model = new Product();
+		$model->addNewInit();
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			Yii::$app->session->setFlash('success', Yii::t('app', 'Create successful.'));
 			return $this->redirect(['view', 'id' => $model->id]);
         }
+		
 		return $this->render('create', [
 			'model' => $model,
 			'listOptionGroups' => $this->findAllOptionGroups(),

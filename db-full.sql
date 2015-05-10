@@ -253,7 +253,7 @@ CREATE TABLE `tbl_product` (
 
 /*Data for the table `tbl_product` */
 
-insert  into `tbl_product`(`id`,`firm_id`,`upc`,`slug`,`title`,`description`,`wholesale_prices`,`retail_price`,`cost`,`made`,`quantity`,`out_of_stock`,`is_new`,`is_special`,`views`,`created_at`,`updated_at`,`del_flg`) values (1,1,'sp-01','san-pham-1','Sản phẩm 1','Chú thích',0,0,0,'vn',0,0,0,0,0,'2015-04-13 15:25:06','2015-04-14 23:09:17',0),(3,1,'sp-02','san-pham-2','Sản phẩm 2','Chú thích ',0,0,0,'vn',0,0,0,0,0,'2015-04-13 16:08:13','2015-04-26 09:47:17',0),(4,1,'sp-03','san-pham-3','Sản phẩm 3','<p>- Quy cách: Ghế tựa<br>- Kích thước ghế:&nbsp;<strong>33 x 30 x 23 x 46 (cm) (Chiều cao từ đất tới chỗ ngồi là 23 cm)</strong><br>- Chất liệu: Nhựa PP 100% nguyên chất</p><p>- Tính năng:&nbsp;</p><p>+ Chiều cao phù hợp với trẻ em từ 3 - 8 tuổi (chiều cao từ chân đến mặt ghế là 26 cm)</p><p>+ Sản phẩm bắt mắt giúp trẻ thích thú học tập cũng như chơi đùa</p><p>+ Được làm từ nhựa PP 100% nguyên chất nên không ảnh hưởng tới da trẻ em (có chứng nhận kiểm định)</p><p>+ Kiểu cách trẻ trung, trang nhã</p><p>+ Chịu được va đập, chịu lực tác dụng tốt</p><p>+ Bốn chân ghế vững chắc giúp ghế chịu được tải trọng lớn</p><p>+ Bề mặt ghế sáng bóng dễ dàng lau chùi, rửa</p><p>+ Tuổi thọ sản phẩm cao dù có để ở ngoài môi trường tự nhiên</p><p>- Màu sắc: Đỏ, xanh<br>- Xuất xứ: Công Ty TNHH Song Long</p>',0,0,0,'vn',0,0,1,1,0,'2015-04-15 14:39:47','2015-04-27 18:00:27',0);
+insert  into `tbl_product`(`id`,`firm_id`,`upc`,`slug`,`title`,`description`,`wholesale_prices`,`retail_price`,`cost`,`made`,`quantity`,`out_of_stock`,`is_new`,`is_special`,`views`,`created_at`,`updated_at`,`del_flg`) values (1,1,'sp-01','san-pham-1','Sản phẩm 1','Chú thích',0,0,0,'vn',0,0,0,0,0,'2015-04-13 15:25:06','2015-04-14 23:09:17',0),(3,1,'sp-02','san-pham-2','Sản phẩm 2','Chú thích',0,0,0,'vn',0,0,1,0,0,'2015-04-13 16:08:13','2015-05-10 07:13:37',0),(4,1,'sp-03','san-pham-3','Sản phẩm 3','<p>- Quy cách: Ghế tựa<br>- Kích thước ghế:&nbsp;<strong>33 x 30 x 23 x 46 (cm) (Chiều cao từ đất tới chỗ ngồi là 23 cm)</strong><br>- Chất liệu: Nhựa PP 100% nguyên chất</p><p>- Tính năng:&nbsp;</p><p>+ Chiều cao phù hợp với trẻ em từ 3 - 8 tuổi (chiều cao từ chân đến mặt ghế là 26 cm)</p><p>+ Sản phẩm bắt mắt giúp trẻ thích thú học tập cũng như chơi đùa</p><p>+ Được làm từ nhựa PP 100% nguyên chất nên không ảnh hưởng tới da trẻ em (có chứng nhận kiểm định)</p><p>+ Kiểu cách trẻ trung, trang nhã</p><p>+ Chịu được va đập, chịu lực tác dụng tốt</p><p>+ Bốn chân ghế vững chắc giúp ghế chịu được tải trọng lớn</p><p>+ Bề mặt ghế sáng bóng dễ dàng lau chùi, rửa</p><p>+ Tuổi thọ sản phẩm cao dù có để ở ngoài môi trường tự nhiên</p><p>- Màu sắc: Đỏ, xanh<br>- Xuất xứ: Công Ty TNHH Song Long</p>',0,30000,0,'vn',0,0,1,1,0,'2015-04-15 14:39:47','2015-05-10 03:32:24',0);
 
 /*Table structure for table `tbl_product_img` */
 
@@ -278,7 +278,7 @@ CREATE TABLE `tbl_product_img` (
 
 /*Data for the table `tbl_product_img` */
 
-insert  into `tbl_product_img`(`id`,`product_id`,`file`,`width`,`height`,`size`,`ext`,`is_default`,`created_at`,`updated_at`,`del_flg`) values (1,4,'1.jpg',378,500,21505,'jpg',0,'2015-04-26 08:28:05','2015-04-27 18:00:27',0),(2,4,'1403-ghenhuaduytanxanh.jpg',500,500,24030,'jpg',0,'2015-04-26 08:28:05','2015-04-27 18:00:27',0),(3,4,'gh1ebf-nh1ef1a-11101ea1i-11101ed3ng-ti1ebfn-f4-f021004-zps605abc90.gif',500,400,49620,'gif',1,'2015-04-26 08:28:05','2015-04-27 18:00:27',0),(4,3,'b1.jpg',450,500,19753,'jpg',1,'2015-04-26 09:47:17',NULL,0);
+insert  into `tbl_product_img`(`id`,`product_id`,`file`,`width`,`height`,`size`,`ext`,`is_default`,`created_at`,`updated_at`,`del_flg`) values (1,4,'1.jpg',378,500,21505,'jpg',0,'2015-04-26 08:28:05','2015-05-10 03:32:25',0),(2,4,'1403-ghenhuaduytanxanh.jpg',500,500,24030,'jpg',0,'2015-04-26 08:28:05','2015-05-10 03:32:25',0),(3,4,'gh1ebf-nh1ef1a-11101ea1i-11101ed3ng-ti1ebfn-f4-f021004-zps605abc90.gif',500,400,49620,'gif',1,'2015-04-26 08:28:05','2015-05-10 03:32:25',0),(4,3,'b1.jpg',450,500,19753,'jpg',1,'2015-04-26 09:47:17','2015-05-10 07:13:37',0);
 
 /*Table structure for table `tbl_product_option` */
 
@@ -299,7 +299,7 @@ CREATE TABLE `tbl_product_option` (
 
 /*Data for the table `tbl_product_option` */
 
-insert  into `tbl_product_option`(`product_id`,`option_id`,`option_value`,`created_at`,`updated_at`,`del_flg`) values (4,1,'30 cm','2015-04-27 18:00:27',NULL,0),(4,2,'40 cm','2015-04-27 18:00:27',NULL,0),(4,3,'50 cm','2015-04-27 18:00:27',NULL,0),(4,9,'','2015-04-27 18:00:27',NULL,0),(4,12,'','2015-04-27 18:00:27',NULL,0),(4,25,'','2015-04-27 18:00:27',NULL,0),(4,29,'','2015-04-27 18:00:27',NULL,0),(4,30,'','2015-04-27 18:00:27',NULL,0);
+insert  into `tbl_product_option`(`product_id`,`option_id`,`option_value`,`created_at`,`updated_at`,`del_flg`) values (3,25,'','2015-05-10 07:13:37',NULL,0),(3,29,'','2015-05-10 07:13:37',NULL,0),(4,1,'30 cm','2015-05-10 03:32:24',NULL,0),(4,2,'40 cm','2015-05-10 03:32:25',NULL,0),(4,3,'50 cm','2015-05-10 03:32:25',NULL,0),(4,9,'','2015-05-10 03:32:25',NULL,0),(4,12,'','2015-05-10 03:32:25',NULL,0),(4,25,'','2015-05-10 03:32:25',NULL,0),(4,29,'','2015-05-10 03:32:25',NULL,0),(4,30,'','2015-05-10 03:32:25',NULL,0);
 
 /*Table structure for table `tbl_product_order` */
 

@@ -26,7 +26,7 @@ return [
 				'pathMap' => [
 					'@app/views' => '@app/themes/cuahangnhua',
 					'@app/modules' => '@app/themes/cuahangnhua/modules',
-					'@app/widgets' => '@app/themes/basic/widgets',
+					'@app/widgets' => '@app/themes/cuahangnhua/widgets',
 				],
 				'baseUrl' => '@web/themes/cuahangnhua',
 			],
@@ -50,7 +50,7 @@ return [
 		'urlManager' => [
 			'suffix' => '.html',
             'rules' => [
-				'/product/<cateslug:[A-Za-z0-9 -_.]+>/<slug:[A-Za-z0-9 -_.]+>' => 'product/default/detail',
+				'/product/detail/<slug:[A-Za-z0-9 -_.]+>' => 'product/default/detail',
 				'/product/shopping_cart' => 'product/default/shopping-cart',
 				'/product/<cateslug:[A-Za-z0-9 -_.]+>' => 'product/default/category',
 				'/contact' => 'site/contact',

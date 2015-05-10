@@ -1,7 +1,11 @@
+<?php
+use common\models\Product;
+?>
+
 <!-- ZONE-1================================================================= -->
 <?php $this->beginBlock('zone-1'); ?>
 
-	<?php echo yii\base\View::render('//partials/categoryMenu',array()); ?>
+	<?= frontend\widgets\categoryMenuWidget::widget([]) ?>
 
 <?php $this->endBlock(); ?>
 
@@ -12,352 +16,65 @@
 
 	<?php echo yii\base\View::render('//partials/slideShow',array()); ?>
 
-	<!-- Custom Tabs -->
-	<div class="nav-tabs-justified custom-tab-primary">
-		<ul class="nav nav-tabs margin-bottom">
-			<li class="active"><a href="#tab_1" data-toggle="tab">Sản phẩm mới</a></li>
-			<li><a href="#tab_2" data-toggle="tab">Sản phẩm xem nhiều nhất</a></li>
-			<li><a href="#tab_3" data-toggle="tab">Sản phẩm khuyến mãi</a></li>
-		</ul>
-		<div class="tab-content">
-			<div class="tab-pane active" id="tab_1">
-
-				<div class="row">
-
-					<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-						<div class="thumbnail">
-							<img src="http://img.yiishop.local/md_nopicture.jpg">
-							<div class="caption">
-								<h4 class="text-center"><a href="#">Tên sản phẩm sẽ nằm ở đây nha</a></h4>
-								<p class="text-center"><strong>Giá bán: <span class="text-red">280.000 VND</span></strong></p>
-							</div>
-							<div class="button clearfix">
-								<button class="btn btn-default btn-sm pull-left" type="button">
-									<i class="fa fa-shopping-cart"></i> Đặt hàng
-								</button>
-								<button class="btn btn-default btn-sm pull-right" type="button">
-									<i class="fa fa-search"></i> Chi tiết
-								</button>
-							</div>
-						</div>
-					</div><!-- /.product-item -->
-
-					<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-						<div class="thumbnail">
-							<img src="http://img.yiishop.local/md_nopicture.jpg">
-							<div class="caption">
-								<h4 class="text-center"><a href="#">Tên sản phẩm sẽ nằm ở đây nha</a></h4>
-								<p class="text-center"><strong>Giá bán: <span class="text-red">280.000 VND</span></strong></p>
-							</div>
-							<div class="button clearfix">
-								<button class="btn btn-default btn-sm pull-left" type="button">
-									<i class="fa fa-shopping-cart"></i> Đặt hàng
-								</button>
-								<button class="btn btn-default btn-sm pull-right" type="button">
-									<i class="fa fa-search"></i> Chi tiết
-								</button>
-							</div>
-						</div>
-					</div><!-- /.product-item -->
-
-					<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-						<div class="thumbnail">
-							<img src="http://img.yiishop.local/md_nopicture.jpg">
-							<div class="caption">
-								<h4 class="pull-right text-red">$24.99</h4>
-								<h4><a href="#">Mã SP: XXXX</a></h4>
-								<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-							</div>
-							<div class="button clearfix">
-								<button class="btn btn-default btn-sm pull-left" type="button">
-									<i class="fa fa-shopping-cart"></i> Đặt hàng
-								</button>
-								<button class="btn btn-default btn-sm pull-right" type="button">
-									<i class="fa fa-search"></i> Chi tiết
-								</button>
-							</div>
-						</div>
-					</div><!-- /.product-item -->
-
-					<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-						<div class="thumbnail">
-							<img src="http://img.yiishop.local/md_nopicture.jpg">
-							<div class="caption">
-								<h4 class="pull-right text-red">$24.99</h4>
-								<h4><a href="#">Mã SP: XXXX</a></h4>
-								<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-							</div>
-							<div class="button clearfix">
-								<button class="btn btn-default btn-sm pull-left" type="button">
-									<i class="fa fa-shopping-cart"></i> Đặt hàng
-								</button>
-								<button class="btn btn-default btn-sm pull-right" type="button">
-									<i class="fa fa-search"></i> Chi tiết
-								</button>
-							</div>
-						</div>
-					</div><!-- /.product-item -->
-
-					<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-						<div class="thumbnail">
-							<img src="http://img.yiishop.local/md_nopicture.jpg">
-							<div class="caption">
-								<h4 class="pull-right text-red">$24.99</h4>
-								<h4><a href="#">Mã SP: XXXX</a></h4>
-								<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-							</div>
-							<div class="button clearfix">
-								<button class="btn btn-default btn-sm pull-left" type="button">
-									<i class="fa fa-shopping-cart"></i> Đặt hàng
-								</button>
-								<button class="btn btn-default btn-sm pull-right" type="button">
-									<i class="fa fa-search"></i> Chi tiết
-								</button>
-							</div>
-						</div>
-					</div><!-- /.product-item -->
-
-					<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-						<div class="thumbnail">
-							<img src="http://img.yiishop.local/md_nopicture.jpg">
-							<div class="caption">
-								<h4 class="pull-right text-red">$24.99</h4>
-								<h4><a href="#">Mã SP: XXXX</a></h4>
-								<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-							</div>
-							<div class="button clearfix">
-								<button class="btn btn-default btn-sm pull-left" type="button">
-									<i class="fa fa-shopping-cart"></i> Đặt hàng
-								</button>
-								<button class="btn btn-default btn-sm pull-right" type="button">
-									<i class="fa fa-search"></i> Chi tiết
-								</button>
-							</div>
-						</div>
-					</div><!-- /.product-item -->
-
-					<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-						<div class="thumbnail">
-							<img src="http://img.yiishop.local/md_nopicture.jpg">
-							<div class="caption">
-								<h4 class="pull-right text-red">$24.99</h4>
-								<h4><a href="#">Mã SP: XXXX</a></h4>
-								<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-							</div>
-							<div class="button clearfix">
-								<button class="btn btn-default btn-sm pull-left" type="button">
-									<i class="fa fa-shopping-cart"></i> Đặt hàng
-								</button>
-								<button class="btn btn-default btn-sm pull-right" type="button">
-									<i class="fa fa-search"></i> Chi tiết
-								</button>
-							</div>
-						</div>
-					</div><!-- /.product-item -->
-
-					<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-						<div class="thumbnail">
-							<img src="http://img.yiishop.local/md_nopicture.jpg">
-							<div class="caption">
-								<h4 class="pull-right text-red">$24.99</h4>
-								<h4><a href="#">Mã SP: XXXX</a></h4>
-								<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-							</div>
-							<div class="button clearfix">
-								<button class="btn btn-default btn-sm pull-left" type="button">
-									<i class="fa fa-shopping-cart"></i> Đặt hàng
-								</button>
-								<button class="btn btn-default btn-sm pull-right" type="button">
-									<i class="fa fa-search"></i> Chi tiết
-								</button>
-							</div>
-						</div>
-					</div><!-- /.product-item -->
-
-
-				</div>
-
-			</div><!-- /.tab-pane -->
-
-			<div class="tab-pane" id="tab_2">
-				The European languages are members of the same family. Their separate existence is a myth.
-				For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
-				in their grammar, their pronunciation and their most common words. Everyone realizes why a
-				new common language would be desirable: one could refuse to pay expensive translators. To
-				achieve this, it would be necessary to have uniform grammar, pronunciation and more common
-				words. If several languages coalesce, the grammar of the resulting language is more simple
-				and regular than that of the individual languages.
-			</div><!-- /.tab-pane -->
-		</div><!-- /.tab-content -->
-	</div><!-- nav-tabs-custom -->
+	<?= frontend\widgets\tabProductWidget::widget([]) ?>
 
 <?php $this->endBlock(); ?>
 
 <!-- ZONE-3================================================================= -->
 <?php $this->beginBlock('zone-3'); ?>
 
+<?php if(!empty($listCategory)): ?>
+<?php foreach ($listCategory as $category): ?>
 <div class="col-sm-12 col-lg-12 col-md-12">
 	<div class="box box-primary productList1">
 		<div class="box-header with-border">
-			<h3 class="box-title text-bold text-primary"><i class="fa fa-chevron-circle-right"></i> Danh mục sản phẩm 1</h3>
+			<h3 class="box-title text-bold text-primary"><i class="fa fa-chevron-circle-right"></i> <?= $category->title ?></h3>
 			<div class="box-tools pull-right">
-				<button class="btn btn-box-tool" type="button"><i class="fa fa-share-square-o"></i> Xem thêm</button>
+				<a href="<?= Yii::$app->urlManager->createUrl(['/product/default/category', 'cateslug' => $category->slug]) ?>" class="btn btn-box-tool" type="button"><i class="fa fa-share-square-o"></i> Xem thêm</a>
 			</div><!-- /.box-tools -->
 		</div><!-- /.box-header -->
 		<div class="box-body">
 
 			<div class="row">
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
+				<?php $listProduct = Product::getProductByCategory($category->id); ?>
+				<?php foreach ($listProduct as $item): ?>
+				<div class="col-sm-3 col-lg-3 col-md-3 product-item">					
 					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
+						<?php if($item->getSalePrice() != 0): ?>
+						<div class="sign-sale"><span>Sale</span></div>
+						<?php else: ?>
+							<?php if($item->is_new == 1): ?>
+							<div class="sign-new"><span>New</span></div>
+							<?php endif; ?>
+						<?php endif; ?>
+						<img src="<?= $item->getDefaultImg('m') ?>" height="150" style="height: 150px !important;"/>
 						<div class="caption">
-							<h4 class="text-center"><a href="#">Tên sản phẩm sẽ nằm ở đây nha</a></h4>
-							<p class="text-center"><strong>Giá bán: <span class="text-red">280.000 VND</span></strong></p>
+							<h4 class="text-center"><a href="<?= Yii::$app->urlManager->createUrl(['product/default/detail', 'slug' => $item->slug]) ?>"><?= $item->title ?></a></h4>
+							
+							<?php if($item->retail_price == 0): ?>
+								<p class="text-center"><strong>Giá bán: <span class="text-red">Liên hệ</strong></p>
+							<?php else: ?>
+								<?php if($item->getSalePrice() != 0): ?>
+								<p class="text-center">
+									<strong>Giá khuyến mãi: <span class="text-red"><?= $item->getSalePrice() ?> <u>đ</u></span></strong>
+									(<span style="text-decoration: line-through;"><?= $item->retail_price ?> <u>đ</u></span>)
+								</p>
+								<?php else: ?>
+								<p class="text-center"><strong>Giá bán: <span class="text-red"><?= $item->retail_price ?> <u>đ</u></span></strong></p>
+								<?php endif; ?>
+							<?php endif; ?>
 						</div>
 						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
+							<a href="<?= Yii::$app->urlManager->createUrl(['error/under-construction']) ?>" class="btn btn-default btn-sm pull-left">
 								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
+							</a>
+							<a href="<?= Yii::$app->urlManager->createUrl(['product/default/detail', 'slug' => $item->slug]) ?>" class="btn btn-default btn-sm pull-right">
 								<i class="fa fa-search"></i> Chi tiết
-							</button>
+							</a>
 						</div>
 					</div>
 				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
+				<?php endforeach; ?>
 
 			</div>
 
@@ -365,177 +82,7 @@
 	</div><!-- /.box -->
 
 </div><!-- /.col-sm-12 col-lg-12 col-md-12 -->
-
-<div class="col-sm-12 col-lg-12 col-md-12">
-
-	<div class="box box-primary productList1">
-		<div class="box-header with-border">
-			<h3 class="box-title text-bold text-primary"><i class="fa fa-chevron-circle-right"></i> Danh mục sản phẩm 1</h3>
-			<div class="box-tools pull-right">
-				<button class="btn btn-box-tool" type="button"><i class="fa fa-share-square-o"></i> Xem thêm</button>
-			</div><!-- /.box-tools -->
-		</div><!-- /.box-header -->
-		<div class="box-body">
-
-			<div class="row">
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-				<div class="col-sm-3 col-lg-3 col-md-3 product-item">
-					<div class="thumbnail">
-						<img src="http://img.yiishop.local/md_nopicture.jpg">
-						<div class="caption">
-							<h4 class="pull-right text-red">$24.99</h4>
-							<h4><a href="#">Mã SP: XXXX</a></h4>
-							<p>Tên sản phẩm sẽ nằm ở đây nha</p>
-						</div>
-						<div class="button clearfix">
-							<button class="btn btn-default btn-sm pull-left" type="button">
-								<i class="fa fa-shopping-cart"></i> Đặt hàng
-							</button>
-							<button class="btn btn-default btn-sm pull-right" type="button">
-								<i class="fa fa-search"></i> Chi tiết
-							</button>
-						</div>
-					</div>
-				</div><!-- /.product-item -->
-
-			</div>
-
-		</div><!-- /.box-body -->
-	</div><!-- /.box -->
-
-</div><!-- /.col-sm-12 col-lg-12 col-md-12 -->
+<?php endforeach; ?>
+<?php endif; ?>
 
 <?php $this->endBlock(); ?>

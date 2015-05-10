@@ -102,7 +102,19 @@ class Product extends CActiveRecord
 	/**
      * @inheritdoc
      */
-	public function init()
+//	public function init()
+//    {
+//		parent::init();
+//		$this->upc = 'sp-';
+//		$this->wholesale_prices = 0;
+//		$this->retail_price = 0;
+//		$this->cost = 0;
+//		$this->quantity = 0;
+//		$this->views = 0;
+//		$this->made = 'vn';
+//	}
+	
+	public function addNewInit()
     {
 		parent::init();
 		$this->upc = 'sp-';
@@ -384,4 +396,29 @@ class Product extends CActiveRecord
 		);
 		return $made[$this->made].' - '.$this->firm->title;
 	}
+	
+	public function getSalePrice() {		
+		if(empty($this->sales)) {
+			return 0;
+		}
+		
+		$sale = $this->sales[0]->sale;
+		
+		return $this->retail_price - ($this->retail_price*$sale)/100;
+	}
+	
+	public static function getProductByCategory($categoryId, $limit = 8) {
+		$categoriesId = [$categoryId];
+		$categoriesId = array_merge($categoriesId, Category::getListChildId($categoryId));		
+		return Product::find()
+				//->joinWith('categoryProducts', false, 'LEFT JOIN')
+				->joinWith('categories', false, 'LEFT JOIN')
+				->where(['{{%category}}.id' => $categoriesId])
+				//->andWhere('is_special = :is_special', [':is_special' => 0])
+				->orderBy(['created_at' => SORT_DESC])
+				->visible(0, self::tableName().'.')
+				->limit($limit)
+				->all();
+	}
+			
 }

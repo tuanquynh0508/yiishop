@@ -5,9 +5,9 @@ use yii\db\ActiveQuery;
 
 class CActiveQuery extends ActiveQuery
 {
-    public function visible($del_flg = 0)
+    public function visible($del_flg = 0, $tableName = '')
     {
-        $this->andWhere('del_flg = :del_flg',[':del_flg'=>$del_flg]);
+        $this->andWhere($tableName.'del_flg = :del_flg',[':del_flg'=>$del_flg]);
         return $this;
     }
 }

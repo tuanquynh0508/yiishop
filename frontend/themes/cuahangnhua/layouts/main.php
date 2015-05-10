@@ -40,7 +40,7 @@ $baseUrl = Yii::$app->request->baseUrl;
 				</div>
 				<div class="col-sm-6">
 					<div id="shoppingCart">
-						<span class="cart-text">Giỏ hàng có <span class="text-danger">2</span> <span class="text-success">sản phẩm</span></span>
+						<span class="cart-text">Giỏ hàng có <span class="text-danger">0</span> <span class="text-success">sản phẩm</span></span>
 					</div>
 					<div class="input-group">
 						<div class="input-group-btn">

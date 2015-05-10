@@ -131,7 +131,11 @@ class Category extends CActiveRecord {
 		foreach ($categories as $category) {
 			$item = new \stdClass();
 			$item->id = $category->id;
-			$item->title = str_pad($category->title, 3 * $level + strlen($category->title), $suffix, STR_PAD_LEFT);
+			if(!empty($suffix)) {
+				$item->title = str_pad($category->title, 3 * $level + strlen($category->title), $suffix, STR_PAD_LEFT);
+			} else {
+				$item->title = $category->title;
+			}
 			$item->parent_id = $category->parent_id;
 			$item->slug = $category->slug;
 			$item->level = $level;
@@ -142,6 +146,22 @@ class Category extends CActiveRecord {
 				$list[] = $item;
 				$list = array_merge($list, Category::staticGetTreeCategory($category->id, $level + 1, $suffix, $recursive, $skipId));
 			}
+		}
+		return $list;
+	}
+	
+	public static function getListChildId($parentId = 0) {
+		$list = array();
+		$categories = Category::find()
+				->where('IFNULL(parent_id,0) = :parentId AND del_flg = :delFlag', [
+					':parentId' => $parentId,
+					':delFlag' => 0,
+				])
+				->all();
+		foreach ($categories as $category) {
+			$list[] = $category->id;			
+			$childs = Category::getListChildId($category->id);
+			$list = array_merge($list, $childs);			
 		}
 		return $list;
 	}
