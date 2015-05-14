@@ -2,7 +2,7 @@
 
 namespace backend\modules\content\controllers;
 
-use Yii;
+use \Yii;
 use common\models\Page;
 use backend\models\PageSearch;
 use backend\components\CController;

@@ -2,7 +2,7 @@
 
 namespace frontend\modules\content\controllers;
 
-use Yii;
+use \Yii;
 use yii\web\NotFoundHttpException;
 use common\models\Page;
 use frontend\components\CController;

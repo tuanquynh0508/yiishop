@@ -61,14 +61,13 @@ class Product extends CActiveRecord
     {
         return [
             [['firm_id', 'upc', 'slug', 'title'], 'required'],
+			[['upc', 'slug'], 'unique'],
             [['firm_id', 'quantity', 'out_of_stock', 'is_new', 'is_special', 'views', 'del_flg'], 'integer'],
             [['description'], 'string'],
             [['wholesale_prices', 'retail_price', 'cost'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['upc', 'slug', 'title'], 'string', 'max' => 255],
             [['made'], 'string', 'max' => 2],
-            [['upc'], 'unique'],
-            [['slug'], 'unique']
         ];
     }
 
@@ -113,7 +112,7 @@ class Product extends CActiveRecord
 //		$this->views = 0;
 //		$this->made = 'vn';
 //	}
-	
+
 	public function addNewInit()
     {
 		parent::init();
@@ -396,20 +395,20 @@ class Product extends CActiveRecord
 		);
 		return $made[$this->made].' - '.$this->firm->title;
 	}
-	
-	public function getSalePrice() {		
+
+	public function getSalePrice() {
 		if(empty($this->sales)) {
 			return 0;
 		}
-		
+
 		$sale = $this->sales[0]->sale;
-		
+
 		return $this->retail_price - ($this->retail_price*$sale)/100;
 	}
-	
+
 	public static function getProductByCategory($categoryId, $limit = 8) {
 		$categoriesId = [$categoryId];
-		$categoriesId = array_merge($categoriesId, Category::getListChildId($categoryId));		
+		$categoriesId = array_merge($categoriesId, Category::getListChildId($categoryId));
 		return Product::find()
 				//->joinWith('categoryProducts', false, 'LEFT JOIN')
 				->joinWith('categories', false, 'LEFT JOIN')
@@ -420,5 +419,5 @@ class Product extends CActiveRecord
 				->limit($limit)
 				->all();
 	}
-			
+
 }

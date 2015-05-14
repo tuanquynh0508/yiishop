@@ -3,7 +3,7 @@ namespace backend\models;
 
 use common\models\User;
 use yii\base\Model;
-use Yii;
+use \Yii;
 
 /**
  * Signup form
@@ -12,7 +12,7 @@ class ChangePasswordForm extends Model
 {
     public $passwordOld;
 	public $password;
-    public $passwordConfirm;    
+    public $passwordConfirm;
 
     /**
      * @inheritdoc
@@ -24,10 +24,10 @@ class ChangePasswordForm extends Model
 			[['passwordConfirm'], 'compare', 'compareAttribute' => 'password'],
             ['password', 'string', 'min' => 6],
 			['passwordOld', 'oldPasswordValidation'],
-			
+
         ];
     }
-	
+
 	/**
      * @inheritdoc
      */
@@ -39,13 +39,13 @@ class ChangePasswordForm extends Model
 			'passwordOld' => Yii::t('user', 'Password Old'),
         ];
     }
-	
+
 	public function oldPasswordValidation($attribute, $params){
 		// add custom validation
 		if(!Yii::$app->user->identity->validatePassword($this->$attribute))
 			$this->addError($attribute,Yii::t('user', 'Nhập sai mật khẩu cũ'));
 	}
-	
+
     /**
      * Change password User
      */

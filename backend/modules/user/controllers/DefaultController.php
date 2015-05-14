@@ -2,7 +2,7 @@
 
 namespace backend\modules\user\controllers;
 
-use Yii;
+use \Yii;
 //use yii\filters\AccessControl;
 //use yii\web\Controller;
 use common\models\User;
@@ -15,7 +15,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 
 class DefaultController extends CController {
-	
+
 	public function behaviors()
     {
         return [
@@ -34,7 +34,7 @@ class DefaultController extends CController {
             ],
         ];
     }
-	
+
 	public function actionLogin() {
 		$this->layout = '//adminlte_login';
 
@@ -156,7 +156,7 @@ class DefaultController extends CController {
             throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
         }
     }
-	
+
 	public function actionChangePassword()
     {
         $model = new ChangePasswordForm();

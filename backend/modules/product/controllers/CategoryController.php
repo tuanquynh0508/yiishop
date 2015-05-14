@@ -2,7 +2,7 @@
 
 namespace backend\modules\product\controllers;
 
-use Yii;
+use \Yii;
 //use yii\web\Controller;
 use backend\components\CController;
 use common\models\Category;
@@ -12,7 +12,7 @@ use yii\web\NotFoundHttpException;
 class CategoryController extends CController {
 
 	public function actionIndex() {
-		$model = new Category();		
+		$model = new Category();
 
 		return $this->render('index', [
 				'list' => $model->getTreeCategory(0, 1, '_')
@@ -31,7 +31,7 @@ class CategoryController extends CController {
 			]);
 		}
 	}
-	
+
 	/**
      * Updates an existing Category model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -64,7 +64,7 @@ class CategoryController extends CController {
 		Yii::$app->session->setFlash('warning', Yii::t('app', 'Delete successful.'));
         return $this->redirect(['index']);
     }
-	
+
 	/**
      * Displays a single Category model.
      * @param integer $id
@@ -76,7 +76,7 @@ class CategoryController extends CController {
             'model' => $this->findModel($id),
         ]);
     }
-	
+
     /**
      * Finds the Category model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

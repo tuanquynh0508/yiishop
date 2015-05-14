@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\web\View;
 use yii\helpers\StringHelper;
@@ -64,11 +64,15 @@ $formName = StringHelper::basename(get_class($model));
 	<div class="tab-content">
 		<div class="tab-pane active" id="tab_1">
 			<div class="box-body">
-				<?= $form->field($model, 'upc')->textInput(['maxlength' => 255])->hint('Mã hàng phải là duy nhất, không được trùng lặp') ?>
+				<?= $form->field($model, 'upc')->textInput()->hint('Mã hàng phải là duy nhất, không được trùng lặp') ?>
 
-				<?= $form->field($model, 'slug')->textInput(['maxlength' => 255]) ?>
+				<?= $form->field($model, 'title', [
+					'inputTemplate' => '<div class="input-group">{input}<span class="input-group-btn"><button class="btn btn-default" type="button">Tạo Slug</button></span></div>',
+				])->textInput([
+					'maxlength' => 255,
+				])->hint('Để tạo Slug, nhập Tiêu đề trước. Rồi bấm vào nút Tạo Slug.') ?>
 
-				<?= $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
+				<?= $form->field($model, 'slug')->textInput() ?>
 
 				<?= $form->field($model, 'description')->textarea(['class' => 'textarea', 'style' => 'width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;']) ?>
 			</div>

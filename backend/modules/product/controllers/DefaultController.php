@@ -2,7 +2,7 @@
 
 namespace backend\modules\product\controllers;
 
-use Yii;
+use \Yii;
 use backend\components\CController;
 use common\models\Product;
 use backend\models\ProductSearch;
@@ -46,7 +46,7 @@ class DefaultController extends CController
 			Yii::$app->session->setFlash('success', Yii::t('app', 'Create successful.'));
 			return $this->redirect(['view', 'id' => $model->id]);
         }
-		
+
 		return $this->render('create', [
 			'model' => $model,
 			'listOptionGroups' => $this->findAllOptionGroups(),
@@ -97,7 +97,7 @@ class DefaultController extends CController
     {
 		$model = $this->findModel($id);
 		$model->getImgList();
-		
+
         return $this->render('view', [
             'model' => $model,
         ]);

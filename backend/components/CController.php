@@ -1,7 +1,7 @@
 <?php
 namespace backend\components;
 
-use Yii;
+use \Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;

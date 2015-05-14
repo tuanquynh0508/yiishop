@@ -1,6 +1,6 @@
 <?php
 
-use Yii;
+use \Yii;
 use yii\helpers\Html;
 use backend\components\CGridView;
 use common\models\User;
@@ -51,7 +51,7 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
 					} else {
 						$isSuper = '<i class="fa fa-user"></i>';
 					}
-					return $isSuper.'-'.$data->username;					
+					return $isSuper.'-'.$data->username;
 				},
 			],
             'first_name',

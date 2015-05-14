@@ -1,6 +1,6 @@
 <?php
 
-use Yii;
+use \Yii;
 use yii\helpers\Html;
 //use yii\grid\GridView;
 use backend\components\CGridView;

@@ -2,7 +2,7 @@
 
 namespace backend\modules\product\controllers;
 
-use Yii;
+use \Yii;
 use backend\components\CController;
 use common\models\Firm;
 use backend\models\FirmSearch;

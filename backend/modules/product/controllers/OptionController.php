@@ -2,7 +2,7 @@
 
 namespace backend\modules\product\controllers;
 
-use Yii;
+use \Yii;
 use common\models\OptionGroup;
 use backend\models\OptionGroupSearch;
 use backend\components\CController;
@@ -59,7 +59,7 @@ class OptionController extends CController
         $model = $this->findModel($id);
 		$model->getOptionsList();
 
-		if ($model->load(Yii::$app->request->post()) && $model->save()) {			
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			Yii::$app->session->setFlash('success', Yii::t('app', 'Update successful.'));
 			return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -108,5 +108,5 @@ class OptionController extends CController
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
         }
-    }	
+    }
 }

@@ -1,11 +1,11 @@
 <?php
 namespace frontend\components;
 
-use Yii;
+use \Yii;
 use yii\web\Controller;
 
 class CController extends Controller
 {
-	public $layout = '//layoutZone';    
+	public $layout = '//layoutZone';
 }
 

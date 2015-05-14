@@ -2,7 +2,7 @@
 
 namespace backend\modules\product\controllers;
 
-use Yii;
+use \Yii;
 use common\models\Sale;
 use backend\models\SaleSearch;
 use backend\components\CController;

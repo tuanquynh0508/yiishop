@@ -1,6 +1,6 @@
 <?php
 
-use Yii;
+use \Yii;
 use yii\helpers\Html;
 use backend\components\CGridView;
 
@@ -39,7 +39,7 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
 			[
 				'attribute' => 'image',
 				'format' => 'html',
-				'value' => function ($data) {					
+				'value' => function ($data) {
 					return Html::img($data->getDefaultImg('s'), ['height' => 30]);
 				},
 				'enableSorting' => false,
@@ -59,7 +59,7 @@ $this->registerCssFile($baseUrl . '/adminlte/plugins/datatables/dataTables.boots
 				'attribute' => 'quantity',
 				'value' => function($data) {return $data->quantity;},
 				'headerOptions' => ['width' => '5%', 'nowrap' => ''],
-			],			
+			],
 			'title',
 			'slug',
 			[

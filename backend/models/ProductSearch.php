@@ -2,7 +2,7 @@
 
 namespace backend\models;
 
-use Yii;
+use \Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Product;

@@ -1,7 +1,7 @@
 <?php
 namespace frontend\controllers;
 
-use Yii;
+use \Yii;
 
 use frontend\models\ContactForm;
 use frontend\components\CController;
