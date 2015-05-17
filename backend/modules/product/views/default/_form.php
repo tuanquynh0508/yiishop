@@ -44,6 +44,11 @@ $(function () {
 
 	//bootstrap WYSIHTML5 - text editor
 	$('.textarea').wysihtml5();
+
+	$('#btnSlugGenerator').click(function(){
+		var slug = Utility.Slugify($('#product-title').val());
+		$('#product-slug').val(slug);
+	});
 });
 ", View::POS_END);
 
@@ -67,7 +72,7 @@ $formName = StringHelper::basename(get_class($model));
 				<?= $form->field($model, 'upc')->textInput()->hint('Mã hàng phải là duy nhất, không được trùng lặp') ?>
 
 				<?= $form->field($model, 'title', [
-					'inputTemplate' => '<div class="input-group">{input}<span class="input-group-btn"><button class="btn btn-default" type="button">Tạo Slug</button></span></div>',
+					'inputTemplate' => '<div class="input-group">{input}<span class="input-group-btn"><button class="btn btn-default" type="button" id="btnSlugGenerator">Tạo Slug</button></span></div>',
 				])->textInput([
 					'maxlength' => 255,
 				])->hint('Để tạo Slug, nhập Tiêu đề trước. Rồi bấm vào nút Tạo Slug.') ?>

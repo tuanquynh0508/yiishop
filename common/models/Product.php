@@ -256,7 +256,10 @@ class Product extends CActiveRecord
 	public function save($runValidation = true, $attributeNames = null) {
 		$transaction = $this->getDb()->beginTransaction();
 		try {
-			parent::save($runValidation, $attributeNames);
+			$valid = parent::save($runValidation, $attributeNames);
+			if($valid === false) {
+				return $valid;
+			}
 
 			//Remove old category link
 			$this->unlinkAll('categoryProducts', true);
@@ -268,10 +271,12 @@ class Product extends CActiveRecord
 			$this->unlinkImgs($this->inputImgs);
 
 			//Add Categories
-			foreach ($this->inputCategories as $categoryId) {
-				$categoryProduct = new CategoryProduct();
-				$categoryProduct->category_id = $categoryId;
-				$this->link('categoryProducts', $categoryProduct);
+			if(!empty($this->inputCategories)) {
+				foreach ($this->inputCategories as $categoryId) {
+					$categoryProduct = new CategoryProduct();
+					$categoryProduct->category_id = $categoryId;
+					$this->link('categoryProducts', $categoryProduct);
+				}
 			}
 
 			//Add Sales
@@ -282,33 +287,37 @@ class Product extends CActiveRecord
 			}
 
 			//Add Options
-			foreach ($this->inputOption as $optionId => $optionValue) {
-				$productOption = new ProductOption();
-				$productOption->option_id = $optionId;
-				$productOption->option_value = $optionValue;
-				$this->link('productOptions', $productOption);
+			if(!empty($this->inputOption)) {
+				foreach ($this->inputOption as $optionId => $optionValue) {
+					$productOption = new ProductOption();
+					$productOption->option_id = $optionId;
+					$productOption->option_value = $optionValue;
+					$this->link('productOptions', $productOption);
+				}
 			}
 
 			//Add Images
-			foreach ($this->inputImgs as $imgId => $img) {
-				if(intval($imgId) < 0) {
-					$fullImgPath = Yii::getAlias(Yii::$app->params['upload_path']['product']).$img->file;
-					$path_parts = pathinfo($fullImgPath);
-					list($width, $height) = getimagesize($fullImgPath);
-					$imageItem = new ProductImg();
-					$imageItem->file = $img->file;
-					$imageItem->is_default = ($img->default)?1:0;
-					$imageItem->product_id = $this->id;
-					$imageItem->width = (float) $width;
-					$imageItem->height = (float) $height;
-					$imageItem->size = (float) filesize($fullImgPath);
-					$imageItem->ext = $path_parts['extension'];
-
-					$imageItem->save();
-				} else {
-					if (($imageItem = ProductImg::findOne($imgId)) !== null) {
+			if(!empty($this->inputImgs)) {
+				foreach ($this->inputImgs as $imgId => $img) {
+					if(intval($imgId) < 0) {
+						$fullImgPath = Yii::getAlias(Yii::$app->params['upload_path']['product']).$img->file;
+						$path_parts = pathinfo($fullImgPath);
+						list($width, $height) = getimagesize($fullImgPath);
+						$imageItem = new ProductImg();
+						$imageItem->file = $img->file;
 						$imageItem->is_default = ($img->default)?1:0;
+						$imageItem->product_id = $this->id;
+						$imageItem->width = (float) $width;
+						$imageItem->height = (float) $height;
+						$imageItem->size = (float) filesize($fullImgPath);
+						$imageItem->ext = $path_parts['extension'];
+
 						$imageItem->save();
+					} else {
+						if (($imageItem = ProductImg::findOne($imgId)) !== null) {
+							$imageItem->is_default = ($img->default)?1:0;
+							$imageItem->save();
+						}
 					}
 				}
 			}

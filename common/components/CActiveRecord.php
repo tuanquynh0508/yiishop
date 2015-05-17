@@ -13,7 +13,7 @@ class CActiveRecord extends \yii\db\ActiveRecord {
 	public function CBehaviors() {
 		return [];
 	}
-	
+
 	/**
      * @inheritdoc
      */
@@ -37,7 +37,7 @@ class CActiveRecord extends \yii\db\ActiveRecord {
 
 		return $defaultBehaviors;
 	}
-	
+
 	/**
      * @inheritdoc
      */
@@ -49,7 +49,7 @@ class CActiveRecord extends \yii\db\ActiveRecord {
 	  {
 	  return parent::find()->where(['del_flg' => 0]);
 	  } */
-	
+
 	/**
      * @inheritdoc
      */
@@ -57,8 +57,12 @@ class CActiveRecord extends \yii\db\ActiveRecord {
 		$this->del_flg = 1;
 		return $this->save();
 	}
-	
+
 	public function removeEmptyData($data) {
+		if(empty($data)) {
+			return $data;
+		}
+		
 		foreach($data as $key => $value) {
 			if(trim($value)=='') {
 				unset($data[$key]);

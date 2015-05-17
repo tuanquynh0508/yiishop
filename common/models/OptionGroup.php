@@ -72,7 +72,7 @@ class OptionGroup extends CActiveRecord
 			'color' => 'Kiểu Màu sắc',
 		];
 	}
-	
+
 	/**
      * @inheritdoc
      */
@@ -84,15 +84,17 @@ class OptionGroup extends CActiveRecord
 			//Delete option old
 			$this->unlinkOption($this->optionsList);
 
-			foreach ($this->optionsList as $optionId => $optionTitle) {
-				if($optionId<0) {
-					$option = new Option();
-					$option->title = $optionTitle;
-					$this->link('options', $option);
-				} else {
-					if (($option = Option::findOne($optionId)) !== null) {
+			if(!empty($this->optionsList)) {
+				foreach ($this->optionsList as $optionId => $optionTitle) {
+					if($optionId<0) {
+						$option = new Option();
 						$option->title = $optionTitle;
-						$option->save();
+						$this->link('options', $option);
+					} else {
+						if (($option = Option::findOne($optionId)) !== null) {
+							$option->title = $optionTitle;
+							$option->save();
+						}
 					}
 				}
 			}
@@ -105,7 +107,7 @@ class OptionGroup extends CActiveRecord
 			return null;
 		}
 	}
-	
+
 	public function unlinkOption($list, $unlinkAll=false, $delete = true) {
 		if($unlinkAll) {
 			$this->unlinkAll('options', $delete);
@@ -117,18 +119,18 @@ class OptionGroup extends CActiveRecord
 			}
 		}
 	}
-	
+
 	public function getOptionsList() {
 		foreach ($this->options as $option) {
 			$this->optionsList[$option->id] = $option->title;
 		}
 	}
-	
+
 	/**
      * @inheritdoc
      */
 	public function load($data, $formName = null)
-    {		
+    {
 		if(isset($data['Options'])) {
 			$this->optionsList = $this->removeEmptyData($data['Options']);
 		}

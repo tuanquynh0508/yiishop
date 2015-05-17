@@ -34,6 +34,7 @@ class AdminlteAsset extends AssetBundle
 
         $this->js = [
             'adminlte/dist/js/app'.$postfix.'.js',
+			'adminlte/dist/js/utility.js',
             //'adminlte/dist/js/demo.js',
         ];
 
