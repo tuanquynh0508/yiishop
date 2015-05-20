@@ -9,12 +9,39 @@ $baseUrl = Yii::$app->request->baseUrl;
 $this->title = $product->title;
 $this->params['breadcrumbs'][] = $this->title;
 
+/* ElevateZoom + Fancybox */
+$this->registerCssFile($baseUrl . '/cuahangnhua/plugins/fancybox/jquery.fancybox.css?v=2.1.5', ['depends' => [\frontend\assets\CuahangnhuaAsset::className()]]);
+$this->registerCssFile($baseUrl . '/cuahangnhua/plugins/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5', ['depends' => [\frontend\assets\CuahangnhuaAsset::className()]]);
+$this->registerCssFile($baseUrl . '/cuahangnhua/plugins/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7', ['depends' => [\frontend\assets\CuahangnhuaAsset::className()]]);
+$this->registerJsFile($baseUrl . '/cuahangnhua/plugins/elevatezoom/jquery.elevateZoom-3.0.8.min.js', ['depends' => [\yii\bootstrap\BootstrapPluginAsset::className()]]);
+$this->registerJsFile($baseUrl . '/cuahangnhua/plugins/fancybox/jquery.mousewheel-3.0.6.pack.js', ['depends' => [\yii\bootstrap\BootstrapPluginAsset::className()]]);
+$this->registerJsFile($baseUrl . '/cuahangnhua/plugins/fancybox/jquery.fancybox.pack.js?v=2.1.5', ['depends' => [\yii\bootstrap\BootstrapPluginAsset::className()]]);
+$this->registerJsFile($baseUrl . '/cuahangnhua/plugins/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5', ['depends' => [\yii\bootstrap\BootstrapPluginAsset::className()]]);
+$this->registerJsFile($baseUrl . '/cuahangnhua/plugins/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7', ['depends' => [\yii\bootstrap\BootstrapPluginAsset::className()]]);
+$this->registerJsFile($baseUrl . '/cuahangnhua/plugins/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6', ['depends' => [\yii\bootstrap\BootstrapPluginAsset::className()]]);
+
 $this->registerCssFile($baseUrl . '/cuahangnhua/plugins/ionslider/ion.rangeSlider.css', ['depends' => [\frontend\assets\CuahangnhuaAsset::className()]]);
 $this->registerCssFile($baseUrl . '/cuahangnhua/plugins/ionslider/ion.rangeSlider.skinNice.css', ['depends' => [\frontend\assets\CuahangnhuaAsset::className()]]);
 $this->registerJsFile($baseUrl . '/cuahangnhua/plugins/ionslider/ion.rangeSlider.min.js', ['depends' => [\yii\bootstrap\BootstrapPluginAsset::className()]]);
 $this->registerJs("
 $(function () {
 	$(\"#searchByPrice\").ionRangeSlider();
+        
+	$('#imageDefault').elevateZoom({
+		gallery:'gallery_01', 
+		cursor: 'pointer', 
+		galleryActiveClass: 'active', 
+		imageCrossfade: true, 
+		loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
+	}); 
+
+	$('#imageDefault').bind('click', function(e) {
+	  var ez =   $('#imageDefault').data('elevateZoom');
+	  ez.closeAll(); //NEW: This function force hides the lens, tint and window	
+	  $.fancybox(ez.getGalleryList());
+	  return false;
+	});
+
 });
 ", View::POS_END);
 ?>
@@ -63,19 +90,18 @@ $(function () {
 		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 	]) ?>
 
-	<div class="row">
-		<div class="col-sm-4 margin-bottom">
-			<p><img class="img-thumbnail" src="<?= $product->getDefaultImg('m') ?>"/></p>
-			<?php
-				foreach($product->inputImgs as $key => $img):
-				if($img->default) {
-					continue;
-				}
-			?>
-			<img src="<?= Yii::getAlias('@img_path/product/'.Yii::$app->params['upload_var']['small']['prefix'].'/').$img->file ?>" height="50" width="50"/>
-			<?php endforeach; ?>
+	<div class="row margin-bottom">
+		<div class="pull-left" style="width:300px;">
+			<p><img id="imageDefault" src="<?= $product->getDefaultImg('m') ?>" data-zoom-image="<?= $product->getDefaultImg('n') ?>" width="300"/></p>
+			<div id="gallery_01">
+				<?php foreach($product->inputImgs as $key => $img): ?>
+				<a  href="#" class="elevatezoom-gallery" data-image="<?= Yii::getAlias('@img_path/product/'.Yii::$app->params['upload_var']['medium']['prefix'].'/').$img->file ?>" data-zoom-image="<?= Yii::getAlias('@img_path/product/'.Yii::$app->params['upload_var']['normal']['prefix'].'/').$img->file ?>">
+					<img src="<?= Yii::getAlias('@img_path/product/'.Yii::$app->params['upload_var']['small']['prefix'].'/').$img->file ?>" height="80"/>
+				</a>
+				<?php endforeach; ?>
+			</div>
 		</div>
-		<div class="col-sm-8 productSumaryBox">
+		<div class="pull-left productSumaryBox" style="width:650px;margin-left:10px;">
 			<h1 class="title"><?= $product->title ?></h1>
 			<p>
 				<strong>Mã hàng:</strong> <?= $product->upc ?> |
