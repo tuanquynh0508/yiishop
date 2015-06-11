@@ -24,11 +24,11 @@ return [
 		'view' => [
 			'theme' => [
 				'pathMap' => [
-					'@app/views' => '@app/themes/cuahangnhua',
-					'@app/modules' => '@app/themes/cuahangnhua/modules',
-					'@app/widgets' => '@app/themes/cuahangnhua/widgets',
+					'@app/views' => '@app/themes/yiishop',
+					'@app/modules' => '@app/themes/yiishop/modules',
+					'@app/widgets' => '@app/themes/yiishop/widgets',
 				],
-				'baseUrl' => '@web/themes/cuahangnhua',
+				'baseUrl' => '@web/themes/yiishop',
 			],
 		],
         'user' => [
@@ -56,6 +56,17 @@ return [
 				'/contact' => 'site/contact',
 				'/page/under_construction' => 'error/underConstruction',
 				'/page/<slug:[A-Za-z0-9 -_.]+>' => 'content/page/view',
+            ],
+        ],
+		'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => null,   // do not publish the bundle
+                    'js' => [
+                        'yiishop/js/jquery.min.js',
+												'yiishop/js/jquery-migrate.min.js',
+                    ]
+                ],
             ],
         ],
     ],

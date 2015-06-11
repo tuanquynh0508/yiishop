@@ -6,6 +6,6 @@ use yii\web\Controller;
 
 class CController extends Controller
 {
-	public $layout = '//layoutZone';
+	//public $layout = '//layoutZone';
 }
 

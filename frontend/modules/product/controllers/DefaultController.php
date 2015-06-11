@@ -8,80 +8,77 @@ use yii\web\NotFoundHttpException;
 use frontend\components\CController;
 use common\models\Product;
 use common\models\Category;
-
 use yii\data\Pagination;
 
-class DefaultController extends CController
-{
-    public function actionIndex()
-    {
-		$listCategory = Category::find()
-				->where('parent_id IS NULL')
-				->visible()
-				->all();
+class DefaultController extends CController {
 
-        return $this->render('index', [
-			'listCategory' => $listCategory
-		]);
-    }
+		public function actionIndex() {
+				$this->layout = '//oneColumn';
+				$listCategory = Category::find()
+								->where('parent_id IS NULL')
+								->visible()
+								->all();
 
-	public function actionCategory()
-    {
-		//http://www.yiiframework.com/doc-2.0/yii-data-pagination.html
-		$categorySlug = Yii::$app->getRequest()->getQueryParam('cateslug');
+				return $this->render('index', [
+										'listCategory' => $listCategory
+				]);
+		}
 
-		$category = Category::find()->where('slug = :slug', [':slug' => $categorySlug])->visible()->one();
-		if (null === $category) {
-            throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
-        }
+		public function actionCategory() {
+				//http://www.yiiframework.com/doc-2.0/yii-data-pagination.html
+				$categorySlug = Yii::$app->getRequest()->getQueryParam('cateslug');
 
-		//Get all child category
-		$categoriesId = [$category->id];
-		$categoriesId = array_merge($categoriesId, Category::getListChildId($category->id));
+				$category = Category::find()->where('slug = :slug', [':slug' => $categorySlug])->visible()->one();
+				if (null === $category) {
+						throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
+				}
 
-		$query = Product::find()
-				->joinWith('categories', false, 'LEFT JOIN')
-				->where(['{{%category}}.id' => $categoriesId])
-				->orderBy([Product::tableName().'.created_at' => SORT_DESC])
-				->visible(0, Product::tableName().'.');
+				//Get all child category
+				$categoriesId = [$category->id];
+				$categoriesId = array_merge($categoriesId, Category::getListChildId($category->id));
 
-		$countQuery = clone $query;
+				$query = Product::find()
+								->joinWith('categories', false, 'LEFT JOIN')
+								->where(['{{%category}}.id' => $categoriesId])
+								->orderBy([Product::tableName() . '.created_at' => SORT_DESC])
+								->visible(0, Product::tableName() . '.');
 
-		$pagination = new Pagination([
-			'totalCount' => $countQuery->count(),
-			'pageSize' => 10,
-		]);
+				$countQuery = clone $query;
 
-		$products = $query->offset($pagination->offset)
-					->limit($pagination->limit)
-					->all();
+				$pagination = new Pagination([
+						'totalCount' => $countQuery->count(),
+						'pageSize' => 10,
+				]);
 
-        return $this->render('category', [
-			'category' => $category,
-			'products' => $products,
-			'pagination' => $pagination
-		]);
-    }
+				$products = $query->offset($pagination->offset)
+								->limit($pagination->limit)
+								->all();
 
-	public function actionDetail()
-    {
-		$slug = Yii::$app->getRequest()->getQueryParam('slug');
+				return $this->render('category', [
+										'category' => $category,
+										'products' => $products,
+										'pagination' => $pagination
+				]);
+		}
 
-		$product = Product::find()->where('slug = :slug', [':slug' => $slug])->visible()->one();
+		public function actionDetail() {
+				$slug = Yii::$app->getRequest()->getQueryParam('slug');
 
-		if (null === $product) {
-            throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
-        }
+				$product = Product::find()->where('slug = :slug', [':slug' => $slug])->visible()->one();
 
-		$product->getImgList();
+				if (null === $product) {
+						throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
+				}
 
-        return $this->render('detail', [
-			'product' => $product
-		]);
-    }
+				$product->getImgList();
 
-	public function actionShoppingCart()
-    {
-        return $this->render('shopping_cart');
-    }
+				return $this->render('detail', [
+										'product' => $product
+				]);
+		}
+
+		public function actionShoppingCart() {
+				return $this->render('shopping_cart');
+		}
+
 }
