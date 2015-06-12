@@ -41,7 +41,7 @@ class DefaultController extends CController {
 								->joinWith('categories', false, 'LEFT JOIN')
 								->where(['{{%category}}.id' => $categoriesId])
 								->orderBy([Product::tableName() . '.created_at' => SORT_DESC])
-								->visible(0, Product::tableName() . '.');
+								->visible(0, Product::tableName());
 
 				$countQuery = clone $query;
 

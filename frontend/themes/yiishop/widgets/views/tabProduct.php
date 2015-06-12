@@ -1,5 +1,4 @@
 <?php
-use yii\helpers\Html;
 use yii\web\View;
 
 $baseUrl = Yii::$app->request->baseUrl;
@@ -28,34 +27,11 @@ $('.box-tab-1').tqTab({
 						<div class="categories-product categories-product-tab">
 								<div class="categories-product-list">
 										<div class="clearfix">
-												<?php foreach ($newProducts as $item): ?>
-												<div class="categories-product-item">
-														<div class="categories-product-item-warpper">
-																<?php if($item->getSalePrice() != 0): ?>
-																<span class="sale-price">0%</span>
-																<?php endif; ?>
-																<div class="categories-product-item-thumb">
-																		<a href="<?= Yii::$app->urlManager->createUrl(['product/default/detail', 'slug' => $item->slug]) ?>" title="<?= $item->title ?>">
-																				<?php echo Html::img($item->getDefaultImg('m'), []); ?>
-																		</a>
-																</div>
-																<div class="categories-product-item-text">
-																		<p>
-																			<a href="<?= Yii::$app->urlManager->createUrl(['product/default/detail', 'slug' => $item->slug]) ?>" class="font-16 color-grey-dard">
-																				<?= $item->title ?>
-																			</a>
-																		</p>
-																		<p class="font-18">
-																				<strong><span class="color-red-dard">63000 <u>đ</u></span></strong>
-																				<span class="color-grey-high">(<span class="text-cross">65000 <u>đ</u></span>)</span>
-																		</p>
-																</div>
-																<div class="categories-product-item-button">
-																		<button class="btn btn-shopping-cart"><span>Cho vào giỏ hàng</span></button>
-																</div>
-														</div><!-- /.categories-product-item-warpper -->
-												</div><!-- /.categories-product-item -->
-												<?php endforeach; ?>
+												<?php
+													foreach ($newProducts as $item) {
+														echo yii\base\View::render('//partials/productItem',array('product' => $item));
+													}
+												?>
 										</div>
 								</div><!-- /.categories-product-list -->
 						</div><!-- /.category-product-tab -->
@@ -63,11 +39,35 @@ $('.box-tab-1').tqTab({
 				</div><!-- /#tab-1 -->
 
 				<div id="tab-2">
-						Tab 2
+						<?php if(!empty($popularProduct)): ?>
+						<div class="categories-product categories-product-tab">
+								<div class="categories-product-list">
+										<div class="clearfix">
+												<?php
+													foreach ($popularProduct as $item) {
+														echo yii\base\View::render('//partials/productItem',array('product' => $item));
+													}
+												?>
+										</div>
+								</div><!-- /.categories-product-list -->
+						</div><!-- /.category-product-tab -->
+						<?php endif; ?>
 				</div><!-- /#tab-2 -->
 
 				<div id="tab-3">
-						Tab 3
+						<?php if(!empty($saleProduct)): ?>
+						<div class="categories-product categories-product-tab">
+								<div class="categories-product-list">
+										<div class="clearfix">
+												<?php
+													foreach ($saleProduct as $item) {
+														echo yii\base\View::render('//partials/productItem',array('product' => $item));
+													}
+												?>
+										</div>
+								</div><!-- /.categories-product-list -->
+						</div><!-- /.category-product-tab -->
+						<?php endif; ?>
 				</div><!-- /#tab-3 -->
 
 		</div><!-- /.box-tab-content -->

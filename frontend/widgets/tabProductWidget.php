@@ -14,18 +14,22 @@ class tabProductWidget extends Widget
 
 	public function run(){
 		$listNewProduct = Product::find()
+				//->leftJoin('{{%sale}}', 'tbl_category.createdby = tbl_user.userid')
 				->where('is_new = :is_new', [':is_new' => 1])
 				->andWhere('is_special = :is_special', [':is_special' => 0])
 				->orderBy(['created_at' => SORT_DESC])
 				->visible()
-				->limit(8)
+				->limit(10)
 				->all();
 
 		$listSaleProduct = Product::find()
+				->joinWith('sales')
 				->where('is_special = :is_special', [':is_special' => 1])
+				->andWhere('{{%sale}}.start_date < NOW()')
+				->andWhere('{{%sale}}.end_date > NOW()')
 				->orderBy(['created_at' => SORT_DESC])
-				->visible()
-				->limit(8)
+				->visible(0, Product::tableName())
+				->limit(10)
 				->all();
 
 		$listPopularProduct = Product::find()
@@ -33,7 +37,7 @@ class tabProductWidget extends Widget
 				->andWhere('is_special = :is_special', [':is_special' => 0])
 				->orderBy(['views' => SORT_DESC, 'created_at' => SORT_DESC])
 				->visible()
-				->limit(8)
+				->limit(10)
 				->all();
 
 		return $this->render('tabProduct', [

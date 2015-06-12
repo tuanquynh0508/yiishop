@@ -45,181 +45,18 @@ $('#slideTopWrapper').carouFredSel({
 
 <?= frontend\widgets\tabProductWidget::widget([]) ?>
 
+<?php if(!empty($listCategory)): ?>
+<?php foreach ($listCategory as $category): ?>
 <div class="categories-product margin-vertical-bottom grid_15">
-		<div class="categories-product-head"><h2>Tên danh mục 1 nằm ở đây</h2></div>
+		<div class="categories-product-head"><h2><?= $category->title ?></h2></div>
 		<div class="categories-product-list">
 				<div class="clearfix">
-						<div class="categories-product-item">
-								<div class="categories-product-item-warpper">
-										<span class="sale-price">10%</span>
-										<div class="categories-product-item-thumb">
-												<a href="#" title=""><?php echo Html::img($baseUrl . '/yiishop/img/nopicture.jpg', []); ?></a>
-										</div>
-										<div class="categories-product-item-text">
-												<p><a href="#" class="font-16 color-grey-dard">universal multifunction charger cable connectors with usb port</a></p>
-												<p class="font-18">
-														<strong><span class="color-red-dard">63000 <u>đ</u></span></strong>
-														<span class="color-grey-high">(<span class="text-cross">65000 <u>đ</u></span>)</span>
-												</p>
-										</div>
-										<div class="categories-product-item-button">
-												<button class="btn btn-shopping-cart"><span>Cho vào giỏ hàng</span></button>
-										</div>
-								</div><!-- /.categories-product-item-warpper -->
-						</div><!-- /.categories-product-item -->
-						<div class="categories-product-item">
-								<div class="categories-product-item-warpper">
-										<div class="categories-product-item-thumb">
-												<?php echo Html::img($baseUrl . '/yiishop/img/nopicture.jpg', []); ?>
-										</div>
-										<div class="categories-product-item-text">
-												<p><a href="#" class="font-16 color-grey-dard">universal multifunction charger cable connectors with usb port</a></p>
-												<p class="font-18">
-														<strong><span class="color-red-dard">63000 <u>đ</u></span></strong>
-														<span class="color-grey-high">(<span class="text-cross">65000 <u>đ</u></span>)</span>
-												</p>
-										</div>
-										<div class="categories-product-item-button">
-												<button class="btn btn-shopping-cart"><span>Cho vào giỏ hàng</span></button>
-										</div>
-								</div><!-- /.categories-product-item-warpper -->
-						</div><!-- /.categories-product-item -->
-						<div class="categories-product-item">
-								<div class="categories-product-item-warpper">
-										<div class="categories-product-item-thumb">
-												<?php echo Html::img($baseUrl . '/yiishop/img/nopicture.jpg', []); ?>
-										</div>
-										<div class="categories-product-item-text">
-												<p><a href="#" class="font-16 color-grey-dard">universal multifunction charger cable connectors with usb port</a></p>
-												<p class="font-18">
-														<strong><span class="color-red-dard">63000 <u>đ</u></span></strong>
-														<span class="color-grey-high">(<span class="text-cross">65000 <u>đ</u></span>)</span>
-												</p>
-										</div>
-										<div class="categories-product-item-button">
-												<button class="btn btn-shopping-cart"><span>Cho vào giỏ hàng</span></button>
-										</div>
-								</div><!-- /.categories-product-item-warpper -->
-						</div><!-- /.categories-product-item -->
-						<div class="categories-product-item">
-								<div class="categories-product-item-warpper">
-										<div class="categories-product-item-thumb">
-												<?php echo Html::img($baseUrl . '/yiishop/img/nopicture.jpg', []); ?>
-										</div>
-										<div class="categories-product-item-text">
-												<p><a href="#" class="font-16 color-grey-dard">universal multifunction charger cable connectors with usb port</a></p>
-												<p class="font-18">
-														<strong><span class="color-red-dard">63000 <u>đ</u></span></strong>
-														<span class="color-grey-high">(<span class="text-cross">65000 <u>đ</u></span>)</span>
-												</p>
-										</div>
-										<div class="categories-product-item-button">
-												<button class="btn btn-shopping-cart"><span>Cho vào giỏ hàng</span></button>
-										</div>
-								</div><!-- /.categories-product-item-warpper -->
-						</div><!-- /.categories-product-item -->
-						<div class="categories-product-item">
-								<div class="categories-product-item-warpper">
-										<div class="categories-product-item-thumb">
-												<?php echo Html::img($baseUrl . '/yiishop/img/nopicture.jpg', []); ?>
-										</div>
-										<div class="categories-product-item-text">
-												<p><a href="#" class="font-16 color-grey-dard">universal multifunction charger cable connectors with usb port</a></p>
-												<p class="font-18">
-														<strong><span class="color-red-dard">63000 <u>đ</u></span></strong>
-														<span class="color-grey-high">(<span class="text-cross">65000 <u>đ</u></span>)</span>
-												</p>
-										</div>
-										<div class="categories-product-item-button">
-												<button class="btn btn-shopping-cart"><span>Cho vào giỏ hàng</span></button>
-										</div>
-								</div><!-- /.categories-product-item-warpper -->
-						</div><!-- /.categories-product-item -->
-						<div class="categories-product-item">
-								<div class="categories-product-item-warpper">
-										<div class="categories-product-item-thumb">
-												<?php echo Html::img($baseUrl . '/yiishop/img/nopicture.jpg', []); ?>
-										</div>
-										<div class="categories-product-item-text">
-												<p><a href="#" class="font-16 color-grey-dard">universal multifunction charger cable connectors with usb port</a></p>
-												<p class="font-18">
-														<strong><span class="color-red-dard">63000 <u>đ</u></span></strong>
-														<span class="color-grey-high">(<span class="text-cross">65000 <u>đ</u></span>)</span>
-												</p>
-										</div>
-										<div class="categories-product-item-button">
-												<button class="btn btn-shopping-cart"><span>Cho vào giỏ hàng</span></button>
-										</div>
-								</div><!-- /.categories-product-item-warpper -->
-						</div><!-- /.categories-product-item -->
-						<div class="categories-product-item">
-								<div class="categories-product-item-warpper">
-										<div class="categories-product-item-thumb">
-												<?php echo Html::img($baseUrl . '/yiishop/img/nopicture.jpg', []); ?>
-										</div>
-										<div class="categories-product-item-text">
-												<p><a href="#" class="font-16 color-grey-dard">universal multifunction charger cable connectors with usb port</a></p>
-												<p class="font-18">
-														<strong><span class="color-red-dard">63000 <u>đ</u></span></strong>
-														<span class="color-grey-high">(<span class="text-cross">65000 <u>đ</u></span>)</span>
-												</p>
-										</div>
-										<div class="categories-product-item-button">
-												<button class="btn btn-shopping-cart"><span>Cho vào giỏ hàng</span></button>
-										</div>
-								</div><!-- /.categories-product-item-warpper -->
-						</div><!-- /.categories-product-item -->
-						<div class="categories-product-item">
-								<div class="categories-product-item-warpper">
-										<div class="categories-product-item-thumb">
-												<?php echo Html::img($baseUrl . '/yiishop/img/nopicture.jpg', []); ?>
-										</div>
-										<div class="categories-product-item-text">
-												<p><a href="#" class="font-16 color-grey-dard">universal multifunction charger cable connectors with usb port</a></p>
-												<p class="font-18">
-														<strong><span class="color-red-dard">63000 <u>đ</u></span></strong>
-														<span class="color-grey-high">(<span class="text-cross">65000 <u>đ</u></span>)</span>
-												</p>
-										</div>
-										<div class="categories-product-item-button">
-												<button class="btn btn-shopping-cart"><span>Cho vào giỏ hàng</span></button>
-										</div>
-								</div><!-- /.categories-product-item-warpper -->
-						</div><!-- /.categories-product-item -->
-						<div class="categories-product-item">
-								<div class="categories-product-item-warpper">
-										<div class="categories-product-item-thumb">
-												<?php echo Html::img($baseUrl . '/yiishop/img/nopicture.jpg', []); ?>
-										</div>
-										<div class="categories-product-item-text">
-												<p><a href="#" class="font-16 color-grey-dard">universal multifunction charger cable connectors with usb port</a></p>
-												<p class="font-18">
-														<strong><span class="color-red-dard">63000 <u>đ</u></span></strong>
-														<span class="color-grey-high">(<span class="text-cross">65000 <u>đ</u></span>)</span>
-												</p>
-										</div>
-										<div class="categories-product-item-button">
-												<button class="btn btn-shopping-cart"><span>Cho vào giỏ hàng</span></button>
-										</div>
-								</div><!-- /.categories-product-item-warpper -->
-						</div><!-- /.categories-product-item -->
-						<div class="categories-product-item">
-								<div class="categories-product-item-warpper">
-										<div class="categories-product-item-thumb">
-												<?php echo Html::img($baseUrl . '/yiishop/img/nopicture.jpg', []); ?>
-										</div>
-										<div class="categories-product-item-text">
-												<p><a href="#" class="font-16 color-grey-dard">universal multifunction charger cable connectors with usb port</a></p>
-												<p class="font-18">
-														<strong><span class="color-red-dard">63000 <u>đ</u></span></strong>
-														<span class="color-grey-high">(<span class="text-cross">65000 <u>đ</u></span>)</span>
-												</p>
-										</div>
-										<div class="categories-product-item-button">
-												<button class="btn btn-shopping-cart"><span>Cho vào giỏ hàng</span></button>
-										</div>
-								</div><!-- /.categories-product-item-warpper -->
-						</div><!-- /.categories-product-item -->
+					<?php
+						$listProduct = Product::getProductByCategory($category->id);
+						foreach ($listProduct as $item) {
+							echo yii\base\View::render('//partials/productItem',array('product' => $item));
+						}
+					?>
 				</div>
 		</div><!-- /.categories-product-list -->
 		<div class="categories-product-footer">
@@ -233,13 +70,15 @@ $('#slideTopWrapper').carouFredSel({
 								</div>
 						</div>
 						<div class="grid_5 omega text-right">
-								<a href="#" class="btn btn-more"><span>Xem thêm</span></a>
+								<a href="<?= Yii::$app->urlManager->createUrl(['/product/default/category', 'cateslug' => $category->slug]) ?>" class="btn btn-more"><span>Xem thêm</span></a>
 						</div>
 				</div>
 		</div><!-- /.categories-product-footer -->
 </div><!-- /.category-product-item -->
 
 <div class="clear"></div>
+<?php endforeach; ?>
+<?php endif; ?>
 
 <div class="box-1 margin-vertical-high-bottom">
 		<div class="box-1-head grid_15"><h2>Chính sách bán hàng</h2></div>

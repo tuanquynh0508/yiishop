@@ -250,7 +250,9 @@ class Product extends CActiveRecord
      */
     public function getSales()
     {
-        return $this->hasMany(Sale::className(), ['id' => 'sale_id'])->viaTable('{{%product_sale}}', ['product_id' => 'id']);
+        return $this->hasMany(Sale::className(), ['id' => 'sale_id'])->viaTable('{{%product_sale}}', ['product_id' => 'id'])
+        ->andWhere('{{%sale}}.start_date < NOW()')
+        ->andWhere('{{%sale}}.end_date > NOW()');
     }
 
 	public function save($runValidation = true, $attributeNames = null) {
@@ -424,7 +426,7 @@ class Product extends CActiveRecord
 				->where(['{{%category}}.id' => $categoriesId])
 				//->andWhere('is_special = :is_special', [':is_special' => 0])
 				->orderBy(['created_at' => SORT_DESC])
-				->visible(0, self::tableName().'.')
+				->visible(0, self::tableName())
 				->limit($limit)
 				->all();
 	}

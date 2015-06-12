@@ -7,8 +7,12 @@ class CActiveQuery extends ActiveQuery
 {
     public function visible($del_flg = 0, $tableName = '')
     {
-        $this->andWhere($tableName.'del_flg = :del_flg',[':del_flg'=>$del_flg]);
-        return $this;
+      if(!empty($tableName)) {
+        $tableName = $tableName.'.';
+      }
+      $this->andWhere($tableName.'del_flg = :del_flg',[':del_flg'=>$del_flg]);
+
+      return $this;
     }
 }
 
