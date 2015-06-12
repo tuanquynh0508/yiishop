@@ -14,9 +14,8 @@ class tabProductWidget extends Widget
 
 	public function run(){
 		$listNewProduct = Product::find()
-				//->leftJoin('{{%sale}}', 'tbl_category.createdby = tbl_user.userid')
 				->where('is_new = :is_new', [':is_new' => 1])
-				->andWhere('is_special = :is_special', [':is_special' => 0])
+				//->andWhere('is_special = :is_special', [':is_special' => 0])
 				->orderBy(['created_at' => SORT_DESC])
 				->visible()
 				->limit(10)
@@ -24,7 +23,7 @@ class tabProductWidget extends Widget
 
 		$listSaleProduct = Product::find()
 				->joinWith('sales')
-				->where('is_special = :is_special', [':is_special' => 1])
+				//->where('is_special = :is_special', [':is_special' => 1])
 				->andWhere('{{%sale}}.start_date < NOW()')
 				->andWhere('{{%sale}}.end_date > NOW()')
 				->orderBy(['created_at' => SORT_DESC])

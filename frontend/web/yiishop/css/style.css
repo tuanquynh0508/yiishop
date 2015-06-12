@@ -427,6 +427,7 @@ input[type="textbox"] {
 }
 .dropdown-menu-item > li > a {
   display: block;
+  max-width: 100%;
   color: #666666;
   font-weight: 400;
   font-size: 14px;
@@ -844,27 +845,24 @@ input[type="textbox"] {
   width: 388px;
   height: 298px;
   overflow: hidden;
+  text-align: center;
   /*  display: table-cell;
   vertical-align: middle;*/
 }
 .box-product-top-thumb img {
-  width: 100%;
-  -webkit-transform: scale(2);
-  -moz-transform: scale(2);
-  -o-transform: scale(2);
-  transform: scale(2);
+  width: 80%;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
 .box-product-top:hover .box-product-top-thumb img {
-  -webkit-transform: scale(1.8);
-  -moz-transform: scale(1.8);
-  -o-transform: scale(1.8);
-  transform: scale(1.8);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
 }
 .box-product-top-text {
-  width: 378px;
+  width: 368px;
   position: absolute;
   bottom: 0px;
   right: 0px;

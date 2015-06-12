@@ -60,7 +60,7 @@ class Category extends CActiveRecord {
 			'parentName' => 'Danh mục cha',
 		];
 	}
-	
+
 	public function checkParentValidation($attribute, $params){
 		// add custom validation
 		if(!empty($this->$attribute) && $this->$attribute==$this->id)
@@ -117,7 +117,7 @@ class Category extends CActiveRecord {
 		}
 		return $list;
 	}
-	
+
 	public static function staticGetTreeCategory($parentId = 0, $level = 1, $suffix = "", $recursive = false, $skipId = 0) {
 		$list = array();
 		$categories = Category::find()
@@ -140,7 +140,7 @@ class Category extends CActiveRecord {
 			$item->slug = $category->slug;
 			$item->level = $level;
 			if ($recursive) {
-				$item->childrent = Category::staticGetTreeCategory($category->id, $level + 1);
+				$item->childrent = Category::staticGetTreeCategory($category->id, $level + 1, $suffix, $recursive, $skipId);
 				$list[] = $item;
 			} else {
 				$list[] = $item;
@@ -149,7 +149,7 @@ class Category extends CActiveRecord {
 		}
 		return $list;
 	}
-	
+
 	public static function getListChildId($parentId = 0) {
 		$list = array();
 		$categories = Category::find()
@@ -159,9 +159,9 @@ class Category extends CActiveRecord {
 				])
 				->all();
 		foreach ($categories as $category) {
-			$list[] = $category->id;			
+			$list[] = $category->id;
 			$childs = Category::getListChildId($category->id);
-			$list = array_merge($list, $childs);			
+			$list = array_merge($list, $childs);
 		}
 		return $list;
 	}
