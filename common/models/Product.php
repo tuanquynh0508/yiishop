@@ -404,7 +404,7 @@ class Product extends CActiveRecord
 			'vn' => 'Việt Nam',
 			'cn' => 'Trung Quốc',
 		);
-		return $made[$this->made].' - '.$this->firm->title;
+		return $made[$this->made];
 	}
 
 	public function getSalePrice() {

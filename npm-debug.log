@@ -1,0 +1,148 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install', '-g', 'less' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.38
+4 verbose node symlink /usr/bin/node
+5 verbose cache add [ 'less', null ]
+6 verbose cache add name=undefined spec="less" args=["less",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'less',
+7 verbose parsed url   path: 'less',
+7 verbose parsed url   href: 'less' }
+8 silly lockFile 0b439cf4-less less
+9 verbose lock less /home/nntuan/.npm/0b439cf4-less.lock
+10 silly lockFile 0b439cf4-less less
+11 silly lockFile 0b439cf4-less less
+12 verbose addNamed [ 'less', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile e13833ab-less less@
+15 verbose lock less@ /home/nntuan/.npm/e13833ab-less.lock
+16 silly addNameRange { name: 'less', range: '*', hasData: false }
+17 verbose request where is /less
+18 verbose request registry https://registry.npmjs.org/
+19 verbose request id 2892f130a0a88c6b
+20 verbose url raw /less
+21 verbose url resolving [ 'https://registry.npmjs.org/', './less' ]
+22 verbose url resolved https://registry.npmjs.org/less
+23 verbose request where is https://registry.npmjs.org/less
+24 info trying registry request attempt 1 at 21:31:07
+25 verbose etag "70BTVMZLLNR9R900ATYG1DYIU"
+26 http GET https://registry.npmjs.org/less
+27 http 304 https://registry.npmjs.org/less
+28 silly registry.get cb [ 304,
+28 silly registry.get   { date: 'Sat, 13 Jun 2015 14:31:08 GMT',
+28 silly registry.get     via: '1.1 varnish',
+28 silly registry.get     'cache-control': 'max-age=60',
+28 silly registry.get     etag: '"70BTVMZLLNR9R900ATYG1DYIU"',
+28 silly registry.get     age: '2',
+28 silly registry.get     connection: 'keep-alive',
+28 silly registry.get     'x-served-by': 'cache-sjc3130-SJC',
+28 silly registry.get     'x-cache': 'HIT',
+28 silly registry.get     'x-cache-hits': '1',
+28 silly registry.get     'x-timer': 'S1434205868.492652,VS0,VE0',
+28 silly registry.get     vary: 'Accept' } ]
+29 verbose etag https://registry.npmjs.org/less from cache
+30 silly addNameRange number 2 { name: 'less', range: '*', hasData: true }
+31 silly addNameRange versions [ 'less',
+31 silly addNameRange   [ '1.0.10',
+31 silly addNameRange     '1.0.11',
+31 silly addNameRange     '1.0.14',
+31 silly addNameRange     '1.0.18',
+31 silly addNameRange     '1.0.19',
+31 silly addNameRange     '1.0.21',
+31 silly addNameRange     '1.0.32',
+31 silly addNameRange     '1.0.36',
+31 silly addNameRange     '1.0.5',
+31 silly addNameRange     '1.0.40',
+31 silly addNameRange     '1.0.41',
+31 silly addNameRange     '1.0.44',
+31 silly addNameRange     '1.1.0',
+31 silly addNameRange     '1.1.1',
+31 silly addNameRange     '1.1.2',
+31 silly addNameRange     '1.1.4',
+31 silly addNameRange     '1.1.5',
+31 silly addNameRange     '1.1.6',
+31 silly addNameRange     '1.2.0',
+31 silly addNameRange     '1.2.1',
+31 silly addNameRange     '1.2.2',
+31 silly addNameRange     '1.3.0',
+31 silly addNameRange     '1.3.1',
+31 silly addNameRange     '1.3.2',
+31 silly addNameRange     '1.3.3',
+31 silly addNameRange     '1.4.0-b1',
+31 silly addNameRange     '1.4.0-b2',
+31 silly addNameRange     '1.4.0-b3',
+31 silly addNameRange     '1.4.0-b4',
+31 silly addNameRange     '1.4.0',
+31 silly addNameRange     '1.4.1',
+31 silly addNameRange     '1.4.2',
+31 silly addNameRange     '1.5.0-b1',
+31 silly addNameRange     '1.5.0-b2',
+31 silly addNameRange     '1.5.0-b3',
+31 silly addNameRange     '1.5.0-b4',
+31 silly addNameRange     '1.5.0',
+31 silly addNameRange     '1.5.1',
+31 silly addNameRange     '1.6.0',
+31 silly addNameRange     '1.6.1',
+31 silly addNameRange     '1.6.2',
+31 silly addNameRange     '1.6.3',
+31 silly addNameRange     '1.7.0',
+31 silly addNameRange     '1.7.1',
+31 silly addNameRange     '1.7.3',
+31 silly addNameRange     '1.7.4',
+31 silly addNameRange     '1.7.5',
+31 silly addNameRange     '2.0.0-b1',
+31 silly addNameRange     '2.0.0-b2',
+31 silly addNameRange     '2.0.0-b3',
+31 silly addNameRange     '2.0.0',
+31 silly addNameRange     '2.1.0',
+31 silly addNameRange     '2.1.1',
+31 silly addNameRange     '2.1.2',
+31 silly addNameRange     '2.2.0',
+31 silly addNameRange     '2.3.0',
+31 silly addNameRange     '2.3.1',
+31 silly addNameRange     '2.4.0',
+31 silly addNameRange     '2.5.0',
+31 silly addNameRange     '2.5.1' ] ]
+32 verbose addNamed [ 'less', '2.5.1' ]
+33 verbose addNamed [ '2.5.1', '2.5.1' ]
+34 silly lockFile 1cb10dbf-less-2-5-1 less@2.5.1
+35 verbose lock less@2.5.1 /home/nntuan/.npm/1cb10dbf-less-2-5-1.lock
+36 silly lockFile 367817fe-ry-npmjs-org-less-less-2-5-1-tgz https://registry.npmjs.org/less/-/less-2.5.1.tgz
+37 verbose lock https://registry.npmjs.org/less/-/less-2.5.1.tgz /home/nntuan/.npm/367817fe-ry-npmjs-org-less-less-2-5-1-tgz.lock
+38 verbose addRemoteTarball [ 'https://registry.npmjs.org/less/-/less-2.5.1.tgz',
+38 verbose addRemoteTarball   '8b489cc01d021e49360fd5ae03581896e722b726' ]
+39 info retry fetch attempt 1 at 21:31:08
+40 verbose fetch to= /tmp/npm-5113-pBokEVP2/registry.npmjs.org/less/-/less-2.5.1.tgz
+41 http GET https://registry.npmjs.org/less/-/less-2.5.1.tgz
+42 http 200 https://registry.npmjs.org/less/-/less-2.5.1.tgz
+43 silly lockFile 367817fe-ry-npmjs-org-less-less-2-5-1-tgz https://registry.npmjs.org/less/-/less-2.5.1.tgz
+44 silly lockFile 367817fe-ry-npmjs-org-less-less-2-5-1-tgz https://registry.npmjs.org/less/-/less-2.5.1.tgz
+45 silly lockFile 1cb10dbf-less-2-5-1 less@2.5.1
+46 silly lockFile 1cb10dbf-less-2-5-1 less@2.5.1
+47 silly lockFile e13833ab-less less@
+48 silly lockFile e13833ab-less less@
+49 error Error: EACCES, mkdir '/home/nntuan/.npm/less/2.5.1'
+49 error  { [Error: EACCES, mkdir '/home/nntuan/.npm/less/2.5.1']
+49 error   errno: 3,
+49 error   code: 'EACCES',
+49 error   path: '/home/nntuan/.npm/less/2.5.1' }
+50 error Please try running this command again as root/Administrator.
+51 error System Linux 3.16.0-38-generic
+52 error command "/usr/bin/node" "/usr/bin/npm" "install" "-g" "less"
+53 error cwd /home/nntuan/Gits/yiishop
+54 error node -v v0.10.38
+55 error npm -v 1.4.28
+56 error path /home/nntuan/.npm/less/2.5.1
+57 error code EACCES
+58 error errno 3
+59 error stack Error: EACCES, mkdir '/home/nntuan/.npm/less/2.5.1'
+60 verbose exit [ 3, true ]

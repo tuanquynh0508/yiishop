@@ -96,6 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					?>
 
 					<p><strong>Xuất sứ:</strong> <?= $model->getFullMade() ?></p>
+					<p><strong>Thương hiệu:</strong> <?= $model->firm->title ?></p>
 					<p><strong>Lượt xem:</strong> <?= $model->views ?></p>
 				</div>
 			</div>

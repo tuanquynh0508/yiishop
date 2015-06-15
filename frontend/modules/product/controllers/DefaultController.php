@@ -62,6 +62,7 @@ class DefaultController extends CController {
 		}
 
 		public function actionDetail() {
+				$this->layout = '//twoRightColumn';
 				$slug = Yii::$app->getRequest()->getQueryParam('slug');
 
 				$product = Product::find()->where('slug = :slug', [':slug' => $slug])->visible()->one();

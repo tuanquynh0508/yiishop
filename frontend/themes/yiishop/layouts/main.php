@@ -51,7 +51,7 @@ $('[data-tooltip!=\"\"]').qtip({
 				</div><!-- /#topMenu -->
 
 				<div id="topLogo" class="grid_15 margin-vertical-bottom">
-					<a href="#" class="btn-link-img btn-logo"><span>Logo here</span></a>
+					<a href="<?php echo Yii::$app->homeUrl; ?>" class="btn-link-img btn-logo"><span>Logo here</span></a>
 				</div><!-- /#topLogo -->
 
 				<div class="clear"></div>
@@ -99,7 +99,7 @@ $('[data-tooltip!=\"\"]').qtip({
 			<p><?php echo Html::img($baseUrl . '/yiishop/img/register-shop.png', []); ?></p>
 		</footer><!-- /#footerWrapper -->
 
-		<a href="#" class="shooping-cart"><span>100</span></a>
+		<a href="#" class="shooping-cart" data-tooltip="Trong giỏ hàng có 100 sản phẩm."><span>100</span></a>
 
 		<?php $this->endBody() ?>
 	</body>

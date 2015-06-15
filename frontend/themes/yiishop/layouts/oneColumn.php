@@ -9,6 +9,7 @@
 <?php if (isset($this->blocks['zone-body'])): ?>
 <div id="bodyWrapper" class="clearfix">
 	<?= $this->blocks['zone-body'] ?>
+	<?php echo yii\base\View::render('//partials/infoBottom',array()); ?>
 </div><!-- /#bodyWrapper -->
 <?php endif; ?>
 
