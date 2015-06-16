@@ -103,13 +103,9 @@ class Utility extends Component {
 		return $tmp;
 	}
 	
-	public function formatCurrency($number) {
-		$tmp = number_format($number, 0, '.', ',');
-		if(Yii::app()->params['currency']['position']=='prefix') {
-			return Yii::app()->params['currency']['symbol'].$tmp;
-		} else {
-			return $tmp.Yii::app()->params['currency']['symbol'];
-		}
+	public function asCurrency($number) {
+		$money = number_format($number, 0, ',', '.').' VNĐ';
+		return $money;
 	}
 	
 	public function getActiveMenu($listUrls = array()) {

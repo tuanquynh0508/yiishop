@@ -64,7 +64,7 @@ return [
                     'sourcePath' => null,   // do not publish the bundle
                     'js' => [
                         'yiishop/js/jquery.min.js',
-						'yiishop/js/jquery-migrate.min.js',
+												'yiishop/js/jquery-migrate.min.js',
                     ]
                 ],
             ],

@@ -140,10 +140,10 @@ $('#boxProductThumbnailShow').elevateZoom({
 					<p>Giá bán: <span class="color-warning font-30">Liên hệ</span></p>
 				<?php else: ?>
 					<?php if($product->getSalePrice() != 0): ?>
-					<p>Giá bán: <span class="color-warning font-30"><?= $product->getSalePrice() ?> <u>đ</u></span></p>
-					<p class="color-grey-high">Giá cũ: <span class="text-cross"><?= $product->retail_price ?> <u>đ</u></span></p>
+					<p>Giá bán: <span class="color-warning font-30"><?= Yii::$app->utility->asCurrency($product->getSalePrice()) ?></span></p>
+					<p class="color-grey-high">Giá cũ: <span class="text-cross"><?= Yii::$app->utility->asCurrency($product->retail_price) ?></span></p>
 					<?php else: ?>
-					<p>Giá bán: <span class="color-warning font-30"><?= $product->retail_price ?> <u>đ</u></span></p>
+					<p>Giá bán: <span class="color-warning font-30"><?= Yii::$app->utility->asCurrency($product->retail_price) ?></span></p>
 					<?php endif; ?>
 				<?php endif; ?>
 				

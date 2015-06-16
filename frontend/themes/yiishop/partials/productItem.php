@@ -25,10 +25,10 @@ use yii\helpers\Html;
               <strong><span class="color-red-dard font-14">Liên hệ để biết giá</span></strong>
             <?php else: ?>
               <?php if($product->getSalePrice() != 0): ?>
-                <strong><span class="color-red-dard"><?= $product->getSalePrice() ?> <u>đ</u></span></strong>
-                <span class="color-grey-high">(<span class="text-cross"><?= $product->retail_price ?> <u>đ</u></span>)</span>
+                <strong><span class="color-red-dard"><?= Yii::$app->utility->asCurrency($product->getSalePrice()) ?></span></strong>
+                <span class="color-grey-high">(<span class="text-cross"><?= Yii::$app->utility->asCurrency($product->retail_price) ?></span>)</span>
               <?php else: ?>
-                <strong><span class="color-red-dard"><?= $product->retail_price ?> <u>đ</u></span></strong>
+                <strong><span class="color-red-dard"><?= Yii::$app->utility->asCurrency($product->retail_price) ?></span></strong>
               <?php endif; ?>
             <?php endif; ?>
           </p>
