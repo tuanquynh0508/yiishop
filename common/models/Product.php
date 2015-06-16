@@ -131,7 +131,7 @@ class Product extends CActiveRecord
 	public function load($data, $formName = null)
     {
 		if(isset($data['Product']['categories'])) {
-			$this->inputCategories = $this->removeEmptyData($data['Product']['categories']);
+			$this->inputCategories = $data['Product']['categories'];
 		}
 		if(isset($data['Product']['sales'])) {
 			$this->inputSales = $data['Product']['sales'];
@@ -274,11 +274,14 @@ class Product extends CActiveRecord
 
 			//Add Categories
 			if(!empty($this->inputCategories)) {
-				foreach ($this->inputCategories as $categoryId) {
+//				foreach ($this->inputCategories as $categoryId) {
+//					$categoryProduct = new CategoryProduct();
+//					$categoryProduct->category_id = $categoryId;
+//					$this->link('categoryProducts', $categoryProduct);
+//				}
 					$categoryProduct = new CategoryProduct();
-					$categoryProduct->category_id = $categoryId;
+					$categoryProduct->category_id = $this->inputCategories;
 					$this->link('categoryProducts', $categoryProduct);
-				}
 			}
 
 			//Add Sales
@@ -429,6 +432,11 @@ class Product extends CActiveRecord
 				->visible(0, self::tableName())
 				->limit($limit)
 				->all();
+	}
+
+	public function incrementViews() {
+			$this->views = $this->views + 1;
+			$this->save();
 	}
 
 }

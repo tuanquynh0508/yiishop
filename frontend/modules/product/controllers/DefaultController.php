@@ -71,7 +71,9 @@ class DefaultController extends CController {
 						throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
 				}
 
+				$product->getInputOption();
 				$product->getImgList();
+				$product->incrementViews();
 
 				return $this->render('detail', [
 										'product' => $product
