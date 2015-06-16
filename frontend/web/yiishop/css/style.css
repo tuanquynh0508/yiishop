@@ -1019,6 +1019,7 @@ input[type="textbox"] {
   width: 390px;
   height: 60px;
   position: relative;
+  z-index: 999999;
 }
 #boxProductThumbnailListWrapper {
   width: 390px;

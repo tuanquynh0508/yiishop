@@ -168,6 +168,11 @@ $formName = StringHelper::basename(get_class($model));
 				)
 				?>
 				<?=
+				$form->field($model, 'categories')->dropDownList(
+						ArrayHelper::map(Category::staticGetTreeCategory(0, 1, "----", false), 'id', 'title'), array('prompt' => 'Chọn danh mục sản phẩm')
+				)
+				?>
+				<?php /*
 				$form->field($model, 'categories')->listBox(
 						ArrayHelper::map(Category::staticGetTreeCategory(0, 1, "----", false), 'id', 'title'), array(
 					'prompt' => 'Chọn danh mục sản phẩm',
@@ -175,7 +180,7 @@ $formName = StringHelper::basename(get_class($model));
 					'size' => '10'
 						)
 				)->hint('Chọn một hoặc nhiều danh mục. Bấm Ctrl+Click để chọn nhiều danh mục.')
-				?>
+				*/ ?>
 				<?= $form->field($model, 'is_new')->checkbox() ?>
 				<?= $form->field($model, 'is_special')->checkbox() ?>
 			</div>

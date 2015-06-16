@@ -10,13 +10,13 @@ return [
 		],
 		'medium' => [
 			'prefix' => 'md_',
-			'width' => 300,
-			'height' => 300,
+			'width' => 400,
+			'height' => 400,
 		],
 		'normal' => [
 			'prefix' => '',
-			'width' => 600,
-			'height' => 600,
+			'width' => 1280,
+			'height' => 1280,
 		],
 	],
 	'upload_path' => [
