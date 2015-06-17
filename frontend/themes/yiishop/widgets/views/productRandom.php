@@ -6,13 +6,13 @@ $baseUrl = Yii::$app->request->baseUrl;
 
 <div class="box-product-top">
 		<div class="box-product-top-thumb">
-				<a href="<?= Yii::$app->urlManager->createUrl(['product/default/detail', 'slug' => $product->slug]) ?>" title="Product">
+				<a href="<?= Yii::$app->urlManager->createUrl(['product/default/detail', 'cateslug' =>$product->categories[0]->slug, 'slug' => $product->slug]) ?>" title="Product">
 						<?php echo Html::img($product->getDefaultImg('m'), []); ?>
 				</a>
 		</div><!-- /.box-product-top-img-thumb -->
 		<div class="box-product-top-text">
 				<p>
-					<a href="<?= Yii::$app->urlManager->createUrl(['product/default/detail', 'slug' => $product->slug]) ?>" class="font-18 font-bold color-base-text">
+					<a href="<?= Yii::$app->urlManager->createUrl(['product/default/detail', 'cateslug' =>$product->categories[0]->slug, 'slug' => $product->slug]) ?>" class="font-18 font-bold color-base-text">
 						<?= $product->title ?>
 					</a>
 				</p>

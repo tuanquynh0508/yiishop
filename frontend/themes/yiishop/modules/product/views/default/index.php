@@ -1,7 +1,9 @@
 <?php
-use common\models\Product;
 use yii\helpers\Html;
 use yii\web\View;
+
+use common\models\Product;
+use common\models\Category;
 
 $baseUrl = Yii::$app->request->baseUrl;
 
@@ -63,10 +65,14 @@ $('#slideTopWrapper').carouFredSel({
 				<div class="clearfix">
 						<div class="grid_10 alpha">
 								<div class="categories-product-sub">
-										<a href="#">Sub danh mục 1</a> |
-										<a href="#">Sub danh mục 2</a> |
-										<a href="#">Sub danh mục 3</a> |
-										<a href="#">Sub danh mục 4</a>
+								<?php
+									$listSubCategories = Category::staticGetTreeCategory($category->id, 1, "", true);
+									$listSubHtml = array();
+									foreach ($listSubCategories as $subCategory) {
+										$listSubHtml[] = '<a href="'.Yii::$app->urlManager->createUrl(['/product/default/category', 'cateslug' => $subCategory->slug]).'">'.$subCategory->title.'</a>';
+									}
+									echo implode(" | ", $listSubHtml);
+								?>
 								</div>
 						</div>
 						<div class="grid_5 omega text-right">

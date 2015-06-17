@@ -48,14 +48,14 @@ return [
             'errorAction' => 'error/error',
         ],
 		'urlManager' => [
-			'suffix' => '.html',
+			//'suffix' => '.html',
             'rules' => [
-				'/product/detail/<slug:[A-Za-z0-9 -_.]+>' => 'product/default/detail',
-				'/product/shopping_cart' => 'product/default/shopping-cart',
+				'/product/<cateslug:[A-Za-z0-9 -_.]+>/<slug:[A-Za-z0-9 -_.]+>.html' => 'product/default/detail',
+				'/product/shopping_cart.html' => 'product/default/shopping-cart',
 				'/product/<cateslug:[A-Za-z0-9 -_.]+>' => 'product/default/category',
-				'/contact' => 'site/contact',
-				'/page/under_construction' => 'error/underConstruction',
-				'/page/<slug:[A-Za-z0-9 -_.]+>' => 'content/page/view',
+				'/contact.html' => 'site/contact',
+				'/page/under_construction.html' => 'error/underConstruction',
+				'/page/<slug:[A-Za-z0-9 -_.]+>.html' => 'content/page/view',
             ],
         ],
 		'assetManager' => [

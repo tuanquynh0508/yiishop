@@ -9,6 +9,7 @@ use frontend\components\CController;
 use common\models\Product;
 use common\models\Category;
 use yii\data\Pagination;
+use yii\web\Session;
 
 class DefaultController extends CController {
 
@@ -62,7 +63,6 @@ class DefaultController extends CController {
 		}
 
 		public function actionDetail() {
-				$this->layout = '//twoRightColumn';
 				$slug = Yii::$app->getRequest()->getQueryParam('slug');
 
 				$product = Product::find()->where('slug = :slug', [':slug' => $slug])->visible()->one();
@@ -71,9 +71,9 @@ class DefaultController extends CController {
 						throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
 				}
 
-				$product->getInputOption();
-				$product->getImgList();
 				$product->incrementViews();
+
+				$this->addProductSession($product->id);
 
 				return $this->render('detail', [
 										'product' => $product
@@ -82,6 +82,34 @@ class DefaultController extends CController {
 
 		public function actionShoppingCart() {
 				return $this->render('shopping_cart');
+		}
+
+		// PRIVATE-----------------------------------------------------
+		private function addProductSession($productId)
+		{
+			$session = new Session;
+
+			if (!$session->isActive) {
+				$session->open();
+			}
+
+			// Get from session
+			$listProductView = $session->get('list_product_view');
+			if(null === $listProductView) {
+				$listProductView = array();
+			}
+
+			// Add in list if not existed
+			if(!in_array($productId, $listProductView)) {
+				array_unshift($listProductView, $productId);
+			}
+
+			// Remove item if list length great than 8
+			if(count($listProductView) > 8) {
+				array_pop($listProductView);
+			}
+
+			$session->set('list_product_view', $listProductView);
 		}
 
 }

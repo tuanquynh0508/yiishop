@@ -62,8 +62,6 @@ class DefaultController extends CController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-		$model->getInputOption();
-		$model->getImgList();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			Yii::$app->session->setFlash('success', Yii::t('app', 'Update successful.'));

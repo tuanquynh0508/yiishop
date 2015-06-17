@@ -60,7 +60,7 @@ class Product extends CActiveRecord
     public function rules()
     {
         return [
-            [['firm_id', 'upc', 'slug', 'title'], 'required'],
+            [['firm_id', 'upc', 'slug', 'title', 'inputCategories'], 'required'],
 			[['upc', 'slug'], 'unique'],
             [['firm_id', 'quantity', 'out_of_stock', 'is_new', 'is_special', 'views', 'del_flg'], 'integer'],
             [['description'], 'string'],
@@ -131,10 +131,14 @@ class Product extends CActiveRecord
 	public function load($data, $formName = null)
     {
 		if(isset($data['Product']['categories'])) {
-			$this->inputCategories = $data['Product']['categories'];
+      $this->inputCategories = [];
+			$this->inputCategories[] = $data['Product']['categories'];
+      $this->inputCategories = $this->removeEmptyData($this->inputCategories);
 		}
 		if(isset($data['Product']['sales'])) {
-			$this->inputSales = $data['Product']['sales'];
+      $this->inputSales = [];
+			$this->inputSales[] = $data['Product']['sales'];
+      $this->inputSales = $this->removeEmptyData($this->inputSales);
 		}
 		if(isset($data['Product']['options'])) {
 			$this->inputOption = [];
@@ -274,21 +278,20 @@ class Product extends CActiveRecord
 
 			//Add Categories
 			if(!empty($this->inputCategories)) {
-//				foreach ($this->inputCategories as $categoryId) {
-//					$categoryProduct = new CategoryProduct();
-//					$categoryProduct->category_id = $categoryId;
-//					$this->link('categoryProducts', $categoryProduct);
-//				}
+				foreach ($this->inputCategories as $categoryId) {
 					$categoryProduct = new CategoryProduct();
-					$categoryProduct->category_id = $this->inputCategories;
+					$categoryProduct->category_id = $categoryId;
 					$this->link('categoryProducts', $categoryProduct);
+				}
 			}
 
 			//Add Sales
 			if(!empty($this->inputSales)) {
-				$productSale = new ProductSale();
-				$productSale->sale_id = $this->inputSales;
-				$this->link('productSales', $productSale);
+        foreach ($this->inputSales as $saleId) {
+  				$productSale = new ProductSale();
+  				$productSale->sale_id = $saleId;
+  				$this->link('productSales', $productSale);
+        }
 			}
 
 			//Add Options
@@ -335,6 +338,28 @@ class Product extends CActiveRecord
 			return null;
 		}
 	}
+
+  public function getInputCategories() {
+    foreach ($this->categories as $category) {
+      $this->inputCategories[] = $category->id;
+    }
+  }
+
+  public function getInputSales() {
+    foreach ($this->sales as $sale) {
+      $this->inputSales[] = $sale->id;
+    }
+  }
+
+  public function afterFind()
+  {
+    parent::afterFind();
+
+    $this->getInputCategories();
+    $this->getInputSales();
+    $this->getInputOption();
+    $this->getImgList();
+  }
 
 	public function unlinkImgs($list) {
 		foreach ($this->productImgs as $img) {

@@ -89,10 +89,10 @@ $('[data-tooltip!=\"\"]').qtip({
 			</p>
 			<p>
 				<strong>
-					<a href="#">Giới thiệu</a> -
-					<a href="#">Thỏa thuận dịch vụ</a> -
-					<a href="#">Tin tức</a> -
-					<a href="#">Tuyển dụng</a>
+					<a href="<?= Yii::$app->urlManager->createUrl(['content/page/view', 'slug' => 'gioi-thieu']) ?>">Giới thiệu</a> -
+					<a href="<?= Yii::$app->urlManager->createUrl(['content/page/view', 'slug' => 'thoa-thuan-dich-vu']) ?>">Thỏa thuận dịch vụ</a> -
+					<a href="<?= Yii::$app->urlManager->createUrl(['error/under-construction']) ?>">Tin tức</a> -
+					<a href="<?= Yii::$app->urlManager->createUrl(['error/under-construction']) ?>">Tuyển dụng</a>
 				</strong>
 			</p>
 			<p><strong>&copy; <?php echo date('Y'); ?> YiiShop. All rights reserved.</strong> Edit by <a href="#" target="_blank">i-designer.net</a></p>

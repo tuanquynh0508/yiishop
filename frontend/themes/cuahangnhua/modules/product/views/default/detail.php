@@ -26,18 +26,18 @@ $this->registerJsFile($baseUrl . '/cuahangnhua/plugins/ionslider/ion.rangeSlider
 $this->registerJs("
 $(function () {
 	$(\"#searchByPrice\").ionRangeSlider();
-        
+
 	$('#imageDefault').elevateZoom({
-		gallery:'gallery_01', 
-		cursor: 'pointer', 
-		galleryActiveClass: 'active', 
-		imageCrossfade: true, 
+		gallery:'gallery_01',
+		cursor: 'pointer',
+		galleryActiveClass: 'active',
+		imageCrossfade: true,
 		loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
-	}); 
+	});
 
 	$('#imageDefault').bind('click', function(e) {
 	  var ez =   $('#imageDefault').data('elevateZoom');
-	  ez.closeAll(); //NEW: This function force hides the lens, tint and window	
+	  ez.closeAll(); //NEW: This function force hides the lens, tint and window
 	  $.fancybox(ez.getGalleryList());
 	  return false;
 	});
@@ -85,7 +85,7 @@ $(function () {
 <?php $this->beginBlock('zone-2'); ?>
 
 	<?php echo yii\base\View::render('//partials/topMenu',array()); ?>
-	
+
 	<?= Breadcrumbs::widget([
 		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 	]) ?>
@@ -117,7 +117,7 @@ $(function () {
 			</p>
 			<hr>
 			<span class="price">
-				<small>Giá bán:</small>				
+				<small>Giá bán:</small>
 				<?php if($product->retail_price == 0): ?>
 					<strong class="price-value text-red">Liên hệ</strong>
 				<?php else: ?>

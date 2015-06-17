@@ -8,21 +8,21 @@ use yii\helpers\Html;
         <span class="sale-price">-<?= $product->sales[0]->sale ?>%</span>
         <?php endif; ?>
         <div class="categories-product-item-thumb">
-            <a href="<?= Yii::$app->urlManager->createUrl(['product/default/detail', 'slug' => $product->slug]) ?>" title="<?= $product->title ?>">
+            <a href="<?= Yii::$app->urlManager->createUrl(['product/default/detail', 'cateslug' =>$product->categories[0]->slug, 'slug' => $product->slug]) ?>" title="<?= $product->title ?>">
                 <?php echo Html::img($product->getDefaultImg('m'), []); ?>
             </a>
         </div>
         <div class="categories-product-item-text">
             <p>
-              <a href="<?= Yii::$app->urlManager->createUrl(['product/default/detail', 'slug' => $product->slug]) ?>" class="font-16 color-grey-dard">
+              <a href="<?= Yii::$app->urlManager->createUrl(['product/default/detail', 'cateslug' =>$product->categories[0]->slug, 'slug' => $product->slug]) ?>" class="font-16 color-grey-dard">
                 <?= $product->title ?>
               </a>
             </p>
         </div>
         <div class="categories-product-item-button">
-          <p class="font-18">
+          <p class="font-14">
             <?php if($product->retail_price == 0): ?>
-              <strong><span class="color-red-dard font-14">Liên hệ để biết giá</span></strong>
+              <strong><span class="color-red-dard font-12">Liên hệ để biết giá</span></strong>
             <?php else: ?>
               <?php if($product->getSalePrice() != 0): ?>
                 <strong><span class="color-red-dard"><?= Yii::$app->utility->asCurrency($product->getSalePrice()) ?></span></strong>
