@@ -1,6 +1,4 @@
 <?php
-use yii\widgets\Breadcrumbs;
-
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \frontend\models\ContactForm */

@@ -8,7 +8,7 @@ use frontend\components\CController;
  */
 class ErrorController extends CController
 {
-	public $layout = '//blank';
+	public $layout = '//errorLayout';
 
     /**
      * @inheritdoc
@@ -24,6 +24,6 @@ class ErrorController extends CController
 
 	public function actionUnderConstruction()
     {
-        return $this->render('underConstruction');
+      return $this->render('underConstruction');
     }
 }

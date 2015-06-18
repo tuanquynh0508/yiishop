@@ -62,7 +62,14 @@ class SiteController extends CController
 //            ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+								'minLength' => 6,
+								'maxLength' => 6,
+								'height' => 30,
+								'padding' => 0,
+								'offset' => 2,
+								'foreColor' => 0xFF6600,
+								'fontFile' => '@common/assets/fonts/supercell.ttf',
+								'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
     }

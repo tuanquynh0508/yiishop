@@ -54,7 +54,7 @@ return [
 				'/product/shopping_cart.html' => 'product/default/shopping-cart',
 				'/product/<cateslug:[A-Za-z0-9 -_.]+>' => 'product/default/category',
 				'/contact.html' => 'site/contact',
-				'/page/under_construction.html' => 'error/underConstruction',
+				'/under_construction.html' => 'error/under-construction',
 				'/page/<slug:[A-Za-z0-9 -_.]+>.html' => 'content/page/view',
             ],
         ],

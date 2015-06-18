@@ -265,6 +265,7 @@ input {
   border-top: 1px solid #dddddd;
 }
 input[type="textbox"],
+input[type="text"],
 textarea {
   border: 1px solid #dddddd;
   -webkit-border-radius: 3px;
@@ -278,31 +279,44 @@ textarea {
   -webkit-appearance: none;
   outline: none;
   vertical-align: middle;
+	font-family: inherit;
 }
 input[type="textbox"]:hover,
 input[type="textbox"]:focus,
+input[type="text"]:hover,
+input[type="text"]:focus,
 textarea:hover,
 textarea:focus {
   -webkit-box-shadow: inset 1px 1px 5px 0 #999999;
   box-shadow: inset 1px 1px 5px 0 #999999;
   border-color: #6685d7;
 }
-input[type="textbox"].input-xsmall {
+input[type="textbox"].input-xsmall,
+input[type="text"].input-xsmall{
   height: 20px;
   font-size: 11px;
   padding: 0px 5px;
 }
-input[type="textbox"].input-small {
+input[type="textbox"].input-small,
+input[type="text"].input-small{
   height: 24px;
   font-size: 11px;
 }
-input[type="textbox"].input-medium {
-  height: 30px;
-  font-size: 12px;
+input[type="textbox"].input-medium,
+input[type="text"].input-medium{
+  height: 20px;
+  font-size: 14px;
+	padding: 5px;
 }
-input[type="textbox"] {
-  height: 40px;
-  font-size: 13px;
+input[type="textbox"],
+input[type="text"]{
+  height: 30px;
+  font-size: 16px;
+	padding: 5px;
+}
+textarea {
+	padding: 5px;
+	font-size: 14px;
 }
 .align-middle {
   vertical-align: middle;
@@ -357,6 +371,9 @@ input[type="textbox"] {
   outline: none;
   outline: 0;
   border: 1px solid #cccccc;
+	-webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
   -webkit-border-top-left-radius: 3px;
   -webkit-border-bottom-left-radius: 3px;
   -moz-border-radius-topleft: 3px;
@@ -1131,5 +1148,59 @@ input[type="textbox"] {
 }
 .zoomWindow {
   margin-top: -1px !important;
+}
+
+#contactBox p {
+	margin-bottom: 5px;
+}
+#contactBox label.control-label {
+	display: block;
+	font-weight: bold;
+	font-size: 13px;
+}
+#contactBox input[type="text"],
+#contactBox textarea {
+	width: 400px;
+}
+#contactBox #contactform-verifycode {
+	width: 100px;
+}
+#contactBox .help-block {
+	color: #999;
+}
+#contactBox .help-block-error {
+	color: #F76054;
+}
+#contactBox .form-group {
+	margin-bottom: 15px;
+}
+
+.alert-box {
+	font-size: 12px;
+	border: 1px dashed;
+	padding: 10px;
+	margin: 10px 0px;
+}
+.alert-box.alert-success {
+	border-color: #73B13E;
+	color: #73B13E;
+}
+.alert-box.alert-error {
+	border-color: #F75448;
+	color: #F75448;
+}
+
+body#errorLayout {
+	background-color: #F5F5F5;
+}
+.error-page {
+	text-align: center;
+	margin: 30px 0px;
+	border: 1px dashed #F75448;
+}
+.error-page h1 {
+	font-size: 40px;
+	color: #FF6600;
+	margin: 20px 0px;
 }
 /*# sourceMappingURL=style.css.map */

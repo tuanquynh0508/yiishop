@@ -2,9 +2,6 @@
 use frontend\assets\YiishopAsset;
 use yii\helpers\Html;
 use yii\web\View;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -46,7 +43,8 @@ $('[data-tooltip!=\"\"]').qtip({
 			<header id="headerWrapper">
 
 				<div id="topMenu" class="grid_15 text-right">
-					<a href="#">Đăng ký</a> |
+					<a href="<?= Yii::$app->urlManager->createUrl(['site/contact']) ?>">Liên hệ</a> | 
+					<a href="#">Đăng ký</a> | 
 					<a href="#">Đăng nhập</a>
 				</div><!-- /#topMenu -->
 
@@ -91,8 +89,9 @@ $('[data-tooltip!=\"\"]').qtip({
 				<strong>
 					<a href="<?= Yii::$app->urlManager->createUrl(['content/page/view', 'slug' => 'gioi-thieu']) ?>">Giới thiệu</a> -
 					<a href="<?= Yii::$app->urlManager->createUrl(['content/page/view', 'slug' => 'thoa-thuan-dich-vu']) ?>">Thỏa thuận dịch vụ</a> -
-					<a href="<?= Yii::$app->urlManager->createUrl(['error/underConstruction']) ?>">Tin tức</a> -
-					<a href="<?= Yii::$app->urlManager->createUrl(['error/underConstruction']) ?>">Tuyển dụng</a>
+					<a href="<?= Yii::$app->urlManager->createUrl(['error/under-construction']) ?>">Tin tức</a> -
+					<a href="<?= Yii::$app->urlManager->createUrl(['error/under-construction']) ?>">Tuyển dụng</a> -
+					<a href="<?= Yii::$app->urlManager->createUrl(['site/contact']) ?>">Liên hệ</a>
 				</strong>
 			</p>
 			<p><strong>&copy; <?php echo date('Y'); ?> YiiShop. All rights reserved.</strong> Edit by <a href="#" target="_blank">i-designer.net</a></p>
