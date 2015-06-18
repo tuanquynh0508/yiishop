@@ -13,103 +13,104 @@ use yii\web\Session;
 
 class DefaultController extends CController {
 
-		public function actionIndex() {
-				$this->layout = '//oneColumn';
-				$listCategory = Category::find()
-								->where('parent_id IS NULL')
-								->visible()
-								->all();
+	public function actionIndex() {
+		$this->layout = '//oneColumn';
+		$listCategory = Category::find()
+						->where('parent_id IS NULL')
+						->visible()
+						->all();
 
-				return $this->render('index', [
-										'listCategory' => $listCategory
-				]);
+		return $this->render('index', [
+								'listCategory' => $listCategory
+		]);
+	}
+
+	public function actionCategory() {
+		$this->layout = '//twoLeftColumn';
+		//http://www.yiiframework.com/doc-2.0/yii-data-pagination.html
+		$categorySlug = Yii::$app->getRequest()->getQueryParam('cateslug');
+
+		$category = Category::find()->where('slug = :slug', [':slug' => $categorySlug])->visible()->one();
+		if (null === $category) {
+			throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
 		}
 
-		public function actionCategory() {
-				//http://www.yiiframework.com/doc-2.0/yii-data-pagination.html
-				$categorySlug = Yii::$app->getRequest()->getQueryParam('cateslug');
+		//Get all child category
+		$categoriesId = [$category->id];
+		$categoriesId = array_merge($categoriesId, Category::getListChildId($category->id));
 
-				$category = Category::find()->where('slug = :slug', [':slug' => $categorySlug])->visible()->one();
-				if (null === $category) {
-						throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
-				}
+		$query = Product::find()
+						->joinWith('categories', false, 'LEFT JOIN')
+						->where(['{{%category}}.id' => $categoriesId])
+						->orderBy([Product::tableName() . '.created_at' => SORT_DESC])
+						->visible(0, Product::tableName());
 
-				//Get all child category
-				$categoriesId = [$category->id];
-				$categoriesId = array_merge($categoriesId, Category::getListChildId($category->id));
+		$countQuery = clone $query;
+		$totalItem = $countQuery->count();
+		$pagination = new Pagination([
+				'totalCount' => $totalItem,
+				'pageSize' => 10,
+		]);
 
-				$query = Product::find()
-								->joinWith('categories', false, 'LEFT JOIN')
-								->where(['{{%category}}.id' => $categoriesId])
-								->orderBy([Product::tableName() . '.created_at' => SORT_DESC])
-								->visible(0, Product::tableName());
+		$products = $query->offset($pagination->offset)
+						->limit($pagination->limit)
+						->all();
 
-				$countQuery = clone $query;
+		return $this->render('category', [
+								'category' => $category,
+								'products' => $products,
+								'pagination' => $pagination,
+								'totalItem' => $totalItem
+		]);
+	}
 
-				$pagination = new Pagination([
-						'totalCount' => $countQuery->count(),
-						'pageSize' => 10,
-				]);
+	public function actionDetail() {
+		$slug = Yii::$app->getRequest()->getQueryParam('slug');
 
-				$products = $query->offset($pagination->offset)
-								->limit($pagination->limit)
-								->all();
+		$product = Product::find()->where('slug = :slug', [':slug' => $slug])->visible()->one();
 
-				return $this->render('category', [
-										'category' => $category,
-										'products' => $products,
-										'pagination' => $pagination
-				]);
+		if (null === $product) {
+			throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
 		}
 
-		public function actionDetail() {
-				$slug = Yii::$app->getRequest()->getQueryParam('slug');
+		$product->incrementViews();
 
-				$product = Product::find()->where('slug = :slug', [':slug' => $slug])->visible()->one();
+		$this->addProductSession($product->id);
 
-				if (null === $product) {
-						throw new NotFoundHttpException(Yii::t('app', 'Record not found.'));
-				}
+		return $this->render('detail', [
+								'product' => $product
+		]);
+	}
 
-				$product->incrementViews();
+	public function actionShoppingCart() {
+		return $this->render('shopping_cart');
+	}
 
-				$this->addProductSession($product->id);
+	// PRIVATE-----------------------------------------------------
+	private function addProductSession($productId) {
+		$session = new Session;
 
-				return $this->render('detail', [
-										'product' => $product
-				]);
+		if (!$session->isActive) {
+			$session->open();
 		}
 
-		public function actionShoppingCart() {
-				return $this->render('shopping_cart');
+		// Get from session
+		$listProductView = $session->get('list_product_view');
+		if (null === $listProductView) {
+			$listProductView = array();
 		}
 
-		// PRIVATE-----------------------------------------------------
-		private function addProductSession($productId)
-		{
-			$session = new Session;
-
-			if (!$session->isActive) {
-				$session->open();
-			}
-
-			// Get from session
-			$listProductView = $session->get('list_product_view');
-			if(null === $listProductView) {
-				$listProductView = array();
-			}
-
-			// Add in list if not existed
-			if(!in_array($productId, $listProductView)) {
-				array_unshift($listProductView, $productId);
-			}
-
-			// Remove item if list length great than 8
-			if(count($listProductView) > 8) {
-				array_pop($listProductView);
-			}
-
-			$session->set('list_product_view', $listProductView);
+		// Add in list if not existed
+		if (!in_array($productId, $listProductView)) {
+			array_unshift($listProductView, $productId);
 		}
+
+		// Remove item if list length great than 8
+		if (count($listProductView) > 8) {
+			array_pop($listProductView);
+		}
+
+		$session->set('list_product_view', $listProductView);
+	}
 
 }

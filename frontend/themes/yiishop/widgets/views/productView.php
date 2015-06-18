@@ -1,6 +1,6 @@
 <?php if(!empty($products)): ?>
 <div class="box-1 margin-vertical-high-bottom">
-  <div class="box-1-head"><h2>Sản phẩm vừa xem</h2></div>
+  <div class="box-1-head"><h2>Sản phẩm đã xem</h2></div>
   <div class="clear"></div>
   <div class="box-1-body clearfix">
 

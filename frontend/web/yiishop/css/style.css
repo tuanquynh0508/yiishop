@@ -931,7 +931,8 @@ input[type="textbox"] {
   float: left;
   margin: 2px;
 }
-#paginationBox ul li a {
+#paginationBox ul li a,
+#paginationBox ul li span {
   display: inline-block;
   cursor: pointer;
   width: 40px;
@@ -951,8 +952,9 @@ input[type="textbox"] {
   color: #ff6600;
   text-decoration: none;
 }
-#paginationBox ul li.disable a,
-#paginationBox ul li.disable a:hover {
+#paginationBox ul li.disabled a,
+#paginationBox ul li.disabled a:hover,
+#paginationBox ul li.disabled span {
   border-color: #dae2ed;
   color: #999999;
   text-decoration: none;
