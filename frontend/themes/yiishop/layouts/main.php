@@ -22,6 +22,9 @@ $('[data-tooltip!=\"\"]').qtip({
 			at: 'top center'
 		}
 });
+
+$('.classy-scroll').ClassyScroll();
+	
 ", View::POS_END);
 ?>
 <?php $this->beginPage() ?>
@@ -97,9 +100,9 @@ $('[data-tooltip!=\"\"]').qtip({
 			<p><strong>&copy; <?php echo date('Y'); ?> YiiShop. All rights reserved.</strong> Edit by <a href="#" target="_blank">i-designer.net</a></p>
 			<p><?php echo Html::img($baseUrl . '/yiishop/img/register-shop.png', []); ?></p>
 		</footer><!-- /#footerWrapper -->
-
-		<a href="#" class="shooping-cart" data-tooltip="Trong giỏ hàng có 100 sản phẩm."><span>100</span></a>
-
+		
+		<?= frontend\widgets\shoppingCartWidget::widget([]) ?>
+		
 		<?php $this->endBody() ?>
 	</body>
 </html>

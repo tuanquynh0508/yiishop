@@ -25,13 +25,21 @@ class YiishopAsset extends AssetBundle {
 						'yiishop/css/reset.css',
 						'yiishop/css/text.css',
 						'yiishop/css/grid.css',
+						'yiishop/js/qtip/jquery.qtip.min.css',
+						'yiishop/js/fancybox/jquery.fancybox.css',
+						'yiishop/js/classyscroll/jquery.classyscroll.css',
+						'yiishop/js/toast/simply-toast.min.css', //http://codepen.io/ericprieto/full/OPKjed/
 						'yiishop/css/style.css',
-						'yiishop/js/qtip/jquery.qtip.min.css'
 				];
 
 				$this->js = [
+						'js/utility.js',
+						'yiishop/js/jquery.mousewheel.min.js',
 						'yiishop/js/jquery.scrollUp.min.js',
 						'yiishop/js/qtip/jquery.qtip.min.js',
+						'yiishop/js/fancybox/jquery.fancybox.pack.js',
+						'yiishop/js/classyscroll/jquery.classyscroll.js',
+						'yiishop/js/toast/simply-toast.min.js',
 				];
 
 				parent::init();

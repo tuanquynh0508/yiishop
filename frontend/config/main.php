@@ -7,68 +7,69 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-frontend',
-    'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
-    'controllerNamespace' => 'frontend\controllers',
-	'defaultRoute' => '/product/default/index',
-	'modules' => [
-        'product' => [
-            'class' => 'frontend\modules\product\Product',
-        ],
-		'content' => [
-            'class' => 'frontend\modules\content\Content',
-        ],
-    ],
-    'components' => [
-		'view' => [
-			'theme' => [
-				'pathMap' => [
-					'@app/views' => '@app/themes/yiishop',
-					'@app/modules' => '@app/themes/yiishop/modules',
-					'@app/widgets' => '@app/themes/yiishop/widgets',
+		'id' => 'app-frontend',
+		'basePath' => dirname(__DIR__),
+		'bootstrap' => ['log'],
+		'controllerNamespace' => 'frontend\controllers',
+		'defaultRoute' => '/product/default/index',
+		'modules' => [
+				'product' => [
+						'class' => 'frontend\modules\product\Product',
 				],
-				'baseUrl' => '@web/themes/yiishop',
-			],
+				'content' => [
+						'class' => 'frontend\modules\content\Content',
+				],
 		],
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-        ],
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
-        'errorHandler' => [
-            'errorAction' => 'error/error',
-        ],
-		'urlManager' => [
-			//'suffix' => '.html',
-            'rules' => [
-				'/product/<cateslug:[A-Za-z0-9 -_.]+>/<slug:[A-Za-z0-9 -_.]+>.html' => 'product/default/detail',
-				'/product/shopping_cart.html' => 'product/default/shopping-cart',
-				'/product/<cateslug:[A-Za-z0-9 -_.]+>' => 'product/default/category',
-				'/contact.html' => 'site/contact',
-				'/under_construction.html' => 'error/under-construction',
-				'/page/<slug:[A-Za-z0-9 -_.]+>.html' => 'content/page/view',
-            ],
-        ],
-		'assetManager' => [
-            'bundles' => [
-                'yii\web\JqueryAsset' => [
-                    'sourcePath' => null,   // do not publish the bundle
-                    'js' => [
-                        'yiishop/js/jquery.min.js',
+		'components' => [
+				'view' => [
+						'theme' => [
+								'pathMap' => [
+										'@app/views' => '@app/themes/yiishop',
+										'@app/modules' => '@app/themes/yiishop/modules',
+										'@app/widgets' => '@app/themes/yiishop/widgets',
+								],
+								'baseUrl' => '@web/themes/yiishop',
+						],
+				],
+				'user' => [
+						'identityClass' => 'common\models\User',
+						'enableAutoLogin' => true,
+				],
+				'log' => [
+						'traceLevel' => YII_DEBUG ? 3 : 0,
+						'targets' => [
+								[
+										'class' => 'yii\log\FileTarget',
+										'levels' => ['error', 'warning'],
+								],
+						],
+				],
+				'errorHandler' => [
+						'errorAction' => 'error/error',
+				],
+				'urlManager' => [
+						//'suffix' => '.html',
+						'rules' => [
+								'/product/<cateslug:[A-Za-z0-9 -_.]+>/<slug:[A-Za-z0-9 -_.]+>.html' => 'product/default/detail',
+								'/cart/<action:(add|update|delete)>.json' => 'product/cart/<action>',
+								'/cart/list.json' => 'product/cart/list',
+								'/product/<cateslug:[A-Za-z0-9 -_.]+>' => 'product/default/category',
+								'/contact.html' => 'site/contact',
+								'/under_construction.html' => 'error/under-construction',
+								'/page/<slug:[A-Za-z0-9 -_.]+>.html' => 'content/page/view',
+						],
+				],
+				'assetManager' => [
+						'bundles' => [
+								'yii\web\JqueryAsset' => [
+										'sourcePath' => null, // do not publish the bundle
+										'js' => [
+												'yiishop/js/jquery.min.js',
 												'yiishop/js/jquery-migrate.min.js',
-                    ]
-                ],
-            ],
-        ],
-    ],
-    'params' => $params,
+										]
+								],
+						],
+				],
+		],
+		'params' => $params,
 ];

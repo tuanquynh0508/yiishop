@@ -82,11 +82,7 @@ class DefaultController extends CController {
 		]);
 	}
 
-	public function actionShoppingCart() {
-		return $this->render('shopping_cart');
-	}
-
-	// PRIVATE-----------------------------------------------------
+	// PRIVATE--------------------------------------------------------------------
 	private function addProductSession($productId) {
 		$session = new Session;
 

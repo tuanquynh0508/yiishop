@@ -34,7 +34,7 @@ use yii\helpers\Html;
           </p>
         <?php if($product->out_of_stock == 0): ?>
           <p><span class="tq-icon tq-icon-16 tq-icon-instock"></span></p>
-          <button class="btn btn-shopping-cart"><span>Cho vào giỏ hàng</span></button>
+          <button class="btn btn-shopping-cart" data-id="<?= $product->id ?>"><span>Cho vào giỏ hàng</span></button>
         <?php else: ?>
           <p><span class="tq-icon tq-icon-16 tq-icon-outstock"></span></p>
           <button class="btn btn-shopping-cart btn-disable"><span>Cho vào giỏ hàng</span></button>
