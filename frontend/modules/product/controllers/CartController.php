@@ -66,6 +66,7 @@ class CartController extends CController {
 		$form->scenario = 'delete';
 		if ($form->load($request->post())) {			
 			if($form->validate()) {
+				$jsonSuccess['product'] = $this->getProduct($form->productId);
 				$form->deleteCart();
 				return $jsonSuccess;
 			} else {
@@ -122,6 +123,7 @@ class CartController extends CController {
 		$quantity = $cartList[$product->id];
 		
 		$oProduct = new \stdClass();
+		$oProduct->id = $product->id;
 		$oProduct->title = $product->title;
 		$oProduct->thumb = $product->getDefaultImg('s');
 		$oProduct->url = Yii::$app->urlManager->createUrl(['product/default/detail', 'cateslug' =>$product->categories[0]->slug, 'slug' => $product->slug]);

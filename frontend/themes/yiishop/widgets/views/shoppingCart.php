@@ -5,8 +5,8 @@ use yii\helpers\Html;
 $baseUrl = Yii::$app->request->baseUrl;
 
 $urlAdd = Yii::$app->urlManager->createUrl('product/cart/add');
-$urlUpdate = Yii::$app->urlManager->createUrl('product/cart/add');
-$urlDelete = Yii::$app->urlManager->createUrl('product/cart/add');
+$urlUpdate = Yii::$app->urlManager->createUrl('product/cart/update');
+$urlDelete = Yii::$app->urlManager->createUrl('product/cart/delete');
 $csrf = Yii::$app->request->getCsrfToken();
 //http://fancyapps.com/fancybox/
 $this->registerJs("
@@ -23,9 +23,17 @@ $('#shoppingCartButton').fancybox({
 
 $('.shopping-cart-list').ClassyScroll();
 
-$('.btn-shopping-cart').click(function(e){
+$('.btn-shopping-cart, .btn-detail-add-cart').click(function(e){
 	e.preventDefault();
 	addCart($(this).attr('data-id'));
+});
+
+$(document).on('click','.btn-delete-cart',function(e){
+	e.preventDefault();
+	if(confirm('Bạn có muốn xóa sản phẩm khỏi giỏ hàng không?.'))
+	{
+		deleteCart($(this).attr('data-id'));
+	}
 });
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +49,8 @@ function addCart(productId) {
 	var sendCB = function(){};
 	var failCB = function(){};
 	var successCB = function(data){
-		refreshCart(data.product);
+		addProduct(data.product);
+		refreshCart();
 		$.simplyToast(data.message, 'success', {
 			align: 'center',
 			delay: 5000
@@ -62,7 +71,8 @@ function updateCart(productId) {
 	var sendCB = function(){};
 	var failCB = function(){};
 	var successCB = function(data){
-		refreshCart(data.product);
+		addProduct(data.product);
+		refreshCart();
 		$.simplyToast(data.message, 'success', {
 			align: 'center',
 			delay: 5000
@@ -83,7 +93,8 @@ function deleteCart(productId) {
 	var sendCB = function(){};
 	var failCB = function(){};
 	var successCB = function(data){
-		refreshCart(null);
+		deleteProduct(data.product);
+		refreshCart();
 		$.simplyToast(data.message, 'warning', {
 			align: 'center',
 			delay: 5000
@@ -92,16 +103,79 @@ function deleteCart(productId) {
 	callService(url, 'POST', 'JSON', data, sendCB, successCB, failCB);
 }
 
-function refreshCart(product) {
-	if(typeof product !== 'undefined' && product !== null) {
-		
+function refreshCart() {
+	var totalQuantity = 0;
+	var totalPrice = 0;
+	
+	$('.shopping-cart-list .shopping-cart-table-row .field-quantity input').each(function(){
+		totalQuantity += parseInt($(this).val());
+	});
+	
+	$('.shopping-cart-list .shopping-cart-table-row .field-total-price').each(function(){
+		console.log($(this).attr('data-value'));
+		totalPrice += parseInt($(this).attr('data-value'));
+	});
+	
+	$('#shoppingCartButton > span').html(totalQuantity);
+
+	$('.field-total-value > div').html(totalPrice.asCurrency());
+}
+
+function deleteProduct(product) {
+	if($('#cartItem'+product.id).length > 0) {
+		$('#cartItem'+product.id).remove();
+	}
+}
+
+function addProduct(product) {
+	if(typeof product === 'undefined' || product === null) {
+		return false;
 	}
 	
+	if($('#cartItem'+product.id).length > 0) {
+		$('#cartItem'+product.id+' .field-quantity input').val(product.quantity);
+		$('#cartItem'+product.id+' .field-price').attr('data-value', product.price);
+		$('#cartItem'+product.id+' .field-price > div').html(product.price.asCurrency());
+		$('#cartItem'+product.id+' .field-total-price').attr('data-value', product.totalPrice);
+		$('#cartItem'+product.id+' .field-total-price > div').html(product.totalPrice.asCurrency());
+		return false;
+	}
+	
+	var html = '';
+	html += '<div class=\"shopping-cart-table-row row-product\" id=\"cartItem' + product.id + '\">';
+	html += '	<ul class=\"clearfix\">';
+	html += '		<li class=\"field-num\"><div class=\"text-center\">1</div></li>';
+	html += '		<li class=\"field-product\">';
+	html += '			<div>';
+	html += '				<div class=\"clearfix\">';
+	html += '					<div class=\"pull-left\" style=\"margin-right: 10px;width: 80px;overflow: hidden;\">';
+	html += '						<a href=\"' + product.url + '\" title=\"' + product.title + '\">';
+	html += '							<img src=\"' + product.thumb + '\" height=\"60\" alt=\"\">';
+	html += '						</a>';
+	html += '					</div>';
+	html += '					<div class=\"pull-left\">';
+	html += '						<p><a href=\"' + product.url + '\" class=\"color-grey-dard\">' + product.title + '</a></p>';
+	html += '						<p><a href=\"#\" class=\"color-warning btn-delete-cart\" data-id=\"' + product.id + '\">Xóa</a></p>';
+	html += '					</div>';
+	html += '				</div>';
+	html += '			</div>';
+	html += '		</li>';
+	html += '		<li class=\"field-price\" data-value=\"' + product.price + '\"><div>' + product.price.asCurrency() + '</div></li>';
+	html += '		<li class=\"field-quantity\">';
+	html += '			<div class=\"text-center\">';
+	html += '				<input type=\"number\" class=\"text-box input-xsmall text-center\" value=\"' + product.quantity + '\">';
+	html += '			</div>';
+	html += '		</li>';
+	html += '		<li class=\"field-total-price\" data-value=\"' + product.totalPrice + '\"><div>' + product.totalPrice.asCurrency() + '</div></li>';
+	html += '	</ul>';
+	html += '</div>';
+	
+	$('.shopping-cart-list').append(html);
 }
 ", View::POS_END);
 ?>
 
-<a href="#shoppingCartPopup" id="shoppingCartButton" class="shooping-cart" data-tooltip="Trong giỏ hàng có <?= $totalProduct ?> sản phẩm."><span><?= $totalProduct ?></span></a>
+<a href="#shoppingCartPopup" id="shoppingCartButton" class="shooping-cart" data-tooltip="Click vào đây để xem giỏ hàng của bạn."><span><?= $totalProduct ?></span></a>
 <div id="shoppingCartPopupWrapper">
 	<div class="shopping-cart-box" id="shoppingCartPopup">
 			<div class="shopping-cart-table-row row-head">
@@ -148,7 +222,7 @@ function refreshCart(product) {
 									</div>
 									<div class="pull-left">
 										<p><a href="<?= $url ?>" class="color-grey-dard"><?= $product->title ?></a></p>
-										<p><a href="#" class="color-warning">Xóa</a></p>
+										<p><a href="#" class="color-warning btn-delete-cart" data-id="<?= $product->id ?>">Xóa</a></p>
 									</div>
 								</div>								
 							</div>
@@ -159,7 +233,7 @@ function refreshCart(product) {
 								<input type="number" class="text-box input-xsmall text-center" value="<?= $quantity ?>"/>
 							</div>
 						</li>
-						<li class="field-total-price"><div><?= Yii::$app->utility->asCurrency($totalItemPrice) ?></div></li>
+						<li class="field-total-price" data-value="<?= $totalItemPrice ?>"><div><?= Yii::$app->utility->asCurrency($totalItemPrice) ?></div></li>
 					</ul>
 				</div><!-- /.shopping-cart-table-row -->
 				<?php endforeach; ?>

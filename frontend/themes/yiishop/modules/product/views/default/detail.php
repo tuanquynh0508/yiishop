@@ -147,7 +147,7 @@ $('#boxProductThumbnailShow').elevateZoom({
 
 				<p><span class="tq-icon tq-icon-24 tq-icon-ship"></span> Ship hàng toàn quốc</p>
 				<p>
-					<button type="button" class="btn btn-medium btn-base">
+					<button type="button" class="btn btn-medium btn-base btn-detail-add-cart" data-id="<?= $product->id ?>">
 						<span class="tq-icon tq-icon-32 tq-icon-white-cart-32"></span>
 						Cho vào giỏ hàng
 					</button>
