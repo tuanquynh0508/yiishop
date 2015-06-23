@@ -29,7 +29,24 @@ class CartController extends CController {
 				],
 		];
 	}
-
+	
+	public function actionCheckout() {		
+		$cart = new CartForm();
+		$cartList = $cart->getCart();
+		
+		$productList = Product::find()
+			->where(['in','id',array_keys($cartList)])
+			->visible()
+			->all();
+		
+		return $this->render('checkout', [
+			'totalProduct' => array_sum($cartList),
+			'cartList' => $cartList,
+			'productList' => $productList,
+		]);
+	}
+	
+	// AJAX ACTION----------------------------------------------------------------
 	//https://github.com/samdark/yii2-cookbook/blob/master/book/response-formats.md
 	public function actionAdd() {
 		//$this->enableCsrfValidation = false;

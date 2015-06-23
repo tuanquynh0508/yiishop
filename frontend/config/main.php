@@ -51,8 +51,8 @@ return [
 						//'suffix' => '.html',
 						'rules' => [
 								'/product/<cateslug:[A-Za-z0-9 -_.]+>/<slug:[A-Za-z0-9 -_.]+>.html' => 'product/default/detail',
-								'/cart/<action:(add|update|delete)>.json' => 'product/cart/<action>',
-								'/cart/list.json' => 'product/cart/list',
+								'/cart/<action:(add|update|delete|list)>.json' => 'product/cart/<action>',
+								'/cart/checkout.html' => 'product/cart/checkout',
 								'/product/<cateslug:[A-Za-z0-9 -_.]+>' => 'product/default/category',
 								'/contact.html' => 'site/contact',
 								'/under_construction.html' => 'error/under-construction',

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 $baseUrl = Yii::$app->request->baseUrl;
 
+$urlCheckout = Yii::$app->urlManager->createUrl('product/cart/checkout');
 $urlAdd = Yii::$app->urlManager->createUrl('product/cart/add');
 $urlUpdate = Yii::$app->urlManager->createUrl('product/cart/update');
 $urlDelete = Yii::$app->urlManager->createUrl('product/cart/delete');
@@ -50,6 +51,10 @@ $(document).on('propertychange change keyup keydown paste input', '.shopping-car
 $('.shopping-cart-list .shopping-cart-table-row .field-quantity input').numeric();
 
 ////////////////////////////////////////////////////////////////////////////////
+function gotoCheckout() {
+	window.location.href = '$urlCheckout';
+}
+
 function addCart(productId) {
 	var url = '$urlAdd';
 	var data = {
@@ -132,7 +137,7 @@ function refreshCart() {
 	$('#shoppingCartButton > span').html(totalQuantity);
 
 	$('.field-total-number').html(totalPrice.asCurrency());
-	$('.field-total-string i').html(totalPrice.docSo());
+	$('.field-total-string i').html(totalPrice.docSo() + ' đồng');
 }
 
 function deleteProduct(product) {
@@ -149,9 +154,9 @@ function addProduct(product) {
 	if($('#cartItem'+product.id).length > 0) {
 		$('#cartItem'+product.id+' .field-quantity input').val(product.quantity);
 		$('#cartItem'+product.id+' .field-price').attr('data-value', product.price);
-		$('#cartItem'+product.id+' .field-price > div').html(product.price.asCurrency());
+		$('#cartItem'+product.id+' .field-price > div').html(((product.price!=0)?product.price.asCurrency():'Liên hệ'));
 		$('#cartItem'+product.id+' .field-total-price').attr('data-value', product.totalPrice);
-		$('#cartItem'+product.id+' .field-total-price > div').html(product.totalPrice.asCurrency());
+		$('#cartItem'+product.id+' .field-total-price > div').html(((product.totalPrice!=0)?product.totalPrice.asCurrency():'Liên hệ'));
 		return false;
 	}
 	
@@ -174,13 +179,13 @@ function addProduct(product) {
 	html += '				</div>';
 	html += '			</div>';
 	html += '		</li>';
-	html += '		<li class=\"field-price\" data-value=\"' + product.price + '\"><div>' + product.price.asCurrency() + '</div></li>';
+	html += '		<li class=\"field-price\" data-value=\"' + product.price + '\"><div>' + ((product.price!=0)?product.price.asCurrency():'Liên hệ') + '</div></li>';
 	html += '		<li class=\"field-quantity\">';
 	html += '			<div class=\"text-center\">';
 	html += '				<input type=\"number\" class=\"text-box input-xsmall text-center\" data-id=\"' + product.id + '\" value=\"' + product.quantity + '\">';
 	html += '			</div>';
 	html += '		</li>';
-	html += '		<li class=\"field-total-price\" data-value=\"' + product.totalPrice + '\"><div>' + product.totalPrice.asCurrency() + '</div></li>';
+	html += '		<li class=\"field-total-price\" data-value=\"' + product.totalPrice + '\"><div>' + ((product.totalPrice!=0)?product.totalPrice.asCurrency():'Liên hệ') + '</div></li>';
 	html += '	</ul>';
 	html += '</div>';
 	
@@ -242,13 +247,13 @@ function addProduct(product) {
 								</div>								
 							</div>
 						</li>
-						<li class="field-price" data-value="<?= $price ?>"><div><?= Yii::$app->utility->asCurrency($price) ?></div></li>
+						<li class="field-price" data-value="<?= $price ?>"><div><?= ($price!=0)?Yii::$app->utility->asCurrency($price):'Liên hệ' ?></div></li>
 						<li class="field-quantity">
 							<div class="text-center">
 								<input type="number" class="text-box input-xsmall text-center" data-id="<?= $product->id ?>" value="<?= $quantity ?>"/>
 							</div>
 						</li>
-						<li class="field-total-price" data-value="<?= $totalItemPrice ?>"><div><?= Yii::$app->utility->asCurrency($totalItemPrice) ?></div></li>
+						<li class="field-total-price" data-value="<?= $totalItemPrice ?>"><div><?= ($totalItemPrice!=0)?Yii::$app->utility->asCurrency($totalItemPrice):'Liên hệ' ?></div></li>
 					</ul>
 				</div><!-- /.shopping-cart-table-row -->
 				<?php endforeach; ?>
@@ -266,7 +271,7 @@ function addProduct(product) {
 					<li class="field-total-value">
 						<div class="text-right">
 							<p class="font-18 color-warning field-total-number"><?= Yii::$app->utility->asCurrency($totalPrice) ?></p>
-							<p class="field-total-string">(<i><?= Yii::$app->utility->docSo($totalPrice) ?></i>)</p>
+							<p class="field-total-string">(<i><?= Yii::$app->utility->docSo($totalPrice) ?> đồng</i>)</p>
 						</div>
 					</li>
 				</ul>
@@ -277,7 +282,7 @@ function addProduct(product) {
 					<span class="tq-icon tq-icon-32 tq-icon-white-cart-32"></span>
 					Tiếp tục mua hàng
 				</button>
-				<button type="button" class="btn btn-medium btn-active">
+				<button type="button" class="btn btn-medium btn-active" onclick="gotoCheckout();">
 					<span class="tq-icon tq-icon-32 tq-icon-credit"></span>
 					Đặt hàng ngay
 				</button>
