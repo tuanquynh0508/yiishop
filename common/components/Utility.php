@@ -9,6 +9,7 @@ use yii\web\HttpException;
 use yii\helpers\Url;
 
 use common\libraries\verot\Upload;
+use common\components\Vietnamese;
 
 class Utility extends Component {
 
@@ -108,6 +109,11 @@ class Utility extends Component {
 		return $money;
 	}
 	
+	public function docSo($number) {
+		$vietnam = new Vietnamese();
+		return $vietnam->docso($number);
+	}
+
 	public function getActiveMenu($listUrls = array()) {
 		$check = false;
 		$currentUrl = Url::current();

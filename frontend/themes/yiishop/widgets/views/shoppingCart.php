@@ -8,6 +8,8 @@ $urlAdd = Yii::$app->urlManager->createUrl('product/cart/add');
 $urlUpdate = Yii::$app->urlManager->createUrl('product/cart/update');
 $urlDelete = Yii::$app->urlManager->createUrl('product/cart/delete');
 $csrf = Yii::$app->request->getCsrfToken();
+
+$this->registerJsFile($baseUrl.'/yiishop/js/jquery.numeric.min.js', ['depends' => [\frontend\assets\YiishopAsset::className()]]);
 //http://fancyapps.com/fancybox/
 $this->registerJs("
 $('#shoppingCartButton').fancybox({	
@@ -36,6 +38,17 @@ $(document).on('click','.btn-delete-cart',function(e){
 	}
 });
 
+$(document).on('propertychange change keyup keydown paste input', '.shopping-cart-list .shopping-cart-table-row .field-quantity input', function(){
+	if (this.value != this.value.replace(/[^0-9]/g, '')) {
+    this.value = this.value.replace(/[^0-9]/g, '');
+  }	
+	var quantity = $(this).val();
+	var productId = $(this).attr('data-id');
+	updateCart(productId, quantity);
+});
+
+$('.shopping-cart-list .shopping-cart-table-row .field-quantity input').numeric();
+
 ////////////////////////////////////////////////////////////////////////////////
 function addCart(productId) {
 	var url = '$urlAdd';
@@ -59,12 +72,12 @@ function addCart(productId) {
 	callService(url, 'POST', 'JSON', data, sendCB, successCB, failCB);
 }
 
-function updateCart(productId) {
+function updateCart(productId, quantity) {
 	var url = '$urlUpdate';
 	var data = {
 		CartForm: {
 			productId: productId,
-			quantity: 1
+			quantity: quantity
 		},
 		_csrf: '$csrf'
 	};
@@ -118,7 +131,8 @@ function refreshCart() {
 	
 	$('#shoppingCartButton > span').html(totalQuantity);
 
-	$('.field-total-value > div').html(totalPrice.asCurrency());
+	$('.field-total-number').html(totalPrice.asCurrency());
+	$('.field-total-string i').html(totalPrice.docSo());
 }
 
 function deleteProduct(product) {
@@ -163,7 +177,7 @@ function addProduct(product) {
 	html += '		<li class=\"field-price\" data-value=\"' + product.price + '\"><div>' + product.price.asCurrency() + '</div></li>';
 	html += '		<li class=\"field-quantity\">';
 	html += '			<div class=\"text-center\">';
-	html += '				<input type=\"number\" class=\"text-box input-xsmall text-center\" value=\"' + product.quantity + '\">';
+	html += '				<input type=\"number\" class=\"text-box input-xsmall text-center\" data-id=\"' + product.id + '\" value=\"' + product.quantity + '\">';
 	html += '			</div>';
 	html += '		</li>';
 	html += '		<li class=\"field-total-price\" data-value=\"' + product.totalPrice + '\"><div>' + product.totalPrice.asCurrency() + '</div></li>';
@@ -171,6 +185,7 @@ function addProduct(product) {
 	html += '</div>';
 	
 	$('.shopping-cart-list').append(html);
+	$('.shopping-cart-list .shopping-cart-table-row .field-quantity input').numeric();
 }
 ", View::POS_END);
 ?>
@@ -230,7 +245,7 @@ function addProduct(product) {
 						<li class="field-price" data-value="<?= $price ?>"><div><?= Yii::$app->utility->asCurrency($price) ?></div></li>
 						<li class="field-quantity">
 							<div class="text-center">
-								<input type="number" class="text-box input-xsmall text-center" value="<?= $quantity ?>"/>
+								<input type="number" class="text-box input-xsmall text-center" data-id="<?= $product->id ?>" value="<?= $quantity ?>"/>
 							</div>
 						</li>
 						<li class="field-total-price" data-value="<?= $totalItemPrice ?>"><div><?= Yii::$app->utility->asCurrency($totalItemPrice) ?></div></li>
@@ -248,7 +263,12 @@ function addProduct(product) {
 							(Chưa bao gồm phí vận chuyển)
 						</div>
 					</li>
-					<li class="field-total-value"><div class="font-18 color-warning text-right margin-vertical-top"><?= Yii::$app->utility->asCurrency($totalPrice) ?></div></li>
+					<li class="field-total-value">
+						<div class="text-right">
+							<p class="font-18 color-warning field-total-number"><?= Yii::$app->utility->asCurrency($totalPrice) ?></p>
+							<p class="field-total-string">(<i><?= Yii::$app->utility->docSo($totalPrice) ?></i>)</p>
+						</div>
+					</li>
 				</ul>
 			</div><!-- /.shopping-cart-table-row -->
 			

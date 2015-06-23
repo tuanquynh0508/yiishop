@@ -1320,10 +1320,10 @@ body#errorLayout {
 	width: 17%;
 }
 .shopping-cart-table-row ul>li.field-total-text {
-	width: 73%;
+	width: 40%;
 }
 .shopping-cart-table-row ul>li.field-total-value {
-	width: 27%;
+	width: 60%;
 }
 
 .shopping-cart-table-row.row-head {
@@ -1348,7 +1348,7 @@ body#errorLayout {
 	height: 500px;
 }
 #shoppingCartPopup .shopping-cart-list {
-	height: 340px;
+	height: 325px;
 }
 
 .scrollbar-content {
